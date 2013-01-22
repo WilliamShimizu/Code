@@ -19,8 +19,7 @@ namespace LetsMakeAGame
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        public Game_Main()
-            : base()
+        public Game_Main() : base()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
