@@ -11,7 +11,7 @@ namespace LetsMakeAGame
     /// </summary>
     public static class Program
     {
-        private static Game_Main game;
+        private static Game1 game;
 
         /// <summary>
         /// The main entry point for the application.
@@ -19,7 +19,7 @@ namespace LetsMakeAGame
         [STAThread]
         static void Main()
         {
-            game = new Game_Main();
+            game = new Game1();
             game.Run();
         }
     }

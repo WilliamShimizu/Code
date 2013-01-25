@@ -9,8 +9,8 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyProduct("LetsMakeAGame")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyDescription("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyCopyright("Copyright © 2012")]
+[assembly: AssemblyCompany("Hewlett-Packard Company")]
+[assembly: AssemblyCopyright("Copyright © Hewlett-Packard Company 2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("e6c973a8-9db7-4af3-bb9d-7c7572c2a7e4")]
+[assembly: Guid("40321b43-6458-4e82-88ae-a9ac633ebadf")]
 
 // Version information for an assembly consists of the following four values:
 //

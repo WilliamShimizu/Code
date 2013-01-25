@@ -1,0 +1,19 @@
+C:\Users\Will Conrardy\AppData\Local\Temporary Projects\LetsMakeAGame\bin\WindowsGL\Debug\LetsMakeAGame.exe
+C:\Users\Will Conrardy\AppData\Local\Temporary Projects\LetsMakeAGame\bin\WindowsGL\Debug\LetsMakeAGame.pdb
+C:\Users\Will Conrardy\AppData\Local\Temporary Projects\LetsMakeAGame\bin\WindowsGL\Debug\Lidgren.Network.dll
+C:\Users\Will Conrardy\AppData\Local\Temporary Projects\LetsMakeAGame\bin\WindowsGL\Debug\MonoGame.Framework.dll
+C:\Users\Will Conrardy\AppData\Local\Temporary Projects\LetsMakeAGame\bin\WindowsGL\Debug\OpenTK.dll
+C:\Users\Will Conrardy\AppData\Local\Temporary Projects\LetsMakeAGame\bin\WindowsGL\Debug\Tao.Sdl.dll
+C:\Users\Will Conrardy\AppData\Local\Temporary Projects\LetsMakeAGame\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Will Conrardy\AppData\Local\Temporary Projects\LetsMakeAGame\obj\x86\Debug\LetsMakeAGame.exe
+C:\Users\Will Conrardy\AppData\Local\Temporary Projects\LetsMakeAGame\obj\x86\Debug\LetsMakeAGame.pdb
+C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LetsMakeAGame\obj\x86\Debug\LetsMakeAGame.exe
+C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LetsMakeAGame\obj\x86\Debug\LetsMakeAGame.pdb
+C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LetsMakeAGame\bin\WindowsGL\Debug\LetsMakeAGame.exe
+C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LetsMakeAGame\bin\WindowsGL\Debug\LetsMakeAGame.pdb
+C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LetsMakeAGame\bin\WindowsGL\Debug\Lidgren.Network.dll
+C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LetsMakeAGame\bin\WindowsGL\Debug\MonoGame.Framework.dll
+C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LetsMakeAGame\bin\WindowsGL\Debug\OpenTK.dll
+C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LetsMakeAGame\bin\WindowsGL\Debug\Tao.Sdl.dll
+C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LetsMakeAGame\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LetsMakeAGame\bin\WindowsGL\Debug\Content\Block.xnb
