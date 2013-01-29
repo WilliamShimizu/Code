@@ -15,8 +15,14 @@ C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\Let
 C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LetsMakeAGame\bin\WindowsGL\Debug\MonoGame.Framework.dll
 C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LetsMakeAGame\bin\WindowsGL\Debug\OpenTK.dll
 C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LetsMakeAGame\bin\WindowsGL\Debug\Tao.Sdl.dll
-C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LetsMakeAGame\obj\x86\Debug\ResolveAssemblyReference.cache
 C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LetsMakeAGame\bin\WindowsGL\Debug\Content\Block.xnb
 C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LetsMakeAGame\bin\WindowsGL\Debug\Content\background.xnb
 C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LetsMakeAGame\bin\WindowsGL\Debug\Content\foreground.xnb
 C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LetsMakeAGame\bin\WindowsGL\Debug\Content\myFont.xnb
+C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LetsMakeAGame\obj\x86\Debug\LetsMakeAGame.ResolutionChooser.resources
+C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LetsMakeAGame\obj\x86\Debug\LetsMakeAGame.csproj.GenerateResource.Cache
+C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LetsMakeAGame\bin\WindowsGL\Debug\Content\Maps\testMap.txt
+C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LetsMakeAGame\bin\WindowsGL\Debug\Content\rockTile.xnb
+C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LetsMakeAGame\bin\WindowsGL\Debug\Content\starsTile.xnb
+C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LetsMakeAGame\bin\WindowsGL\Debug\Content\leopardTile.xnb
+C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LetsMakeAGame\obj\x86\Debug\LetsMakeAGame.csprojResolveAssemblyReference.cache

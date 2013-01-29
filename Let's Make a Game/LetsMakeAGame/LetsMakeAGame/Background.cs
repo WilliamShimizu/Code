@@ -7,42 +7,45 @@ namespace LetsMakeAGame
     class Background
     {
         Texture2D texture;
-        //Rectangle destRect;
+        Rectangle sourceRect;
+        Rectangle destRect;
         Vector2 position;
-        Viewport view;
-        private float scale;
 
-        public void Initialize(Texture2D texture, Vector2 position, Viewport view, float scale)
+        public void Initialize(Texture2D texture)
         {
-            this.position = position;
+            position = new Vector2(0,(int)(-1*((texture.Height * Game1.scale) - (Game1.center.Y * 2))));
             this.texture = texture;
-            this.view = view;
-            this.scale = scale;
+            sourceRect = new Rectangle(0, 0, (int)texture.Width, (int)texture.Height);
+            destRect = new Rectangle((int)position.X, (int)position.Y, (int)(texture.Width * Game1.scale), (int)(texture.Height * Game1.scale));
         }
 
         public void Update(Vector2 playerPosition, int speedX, int speedY)
         {
-            if (view.TitleSafeArea.Width - playerPosition.X <= 100)
-            {
-                position.X -= speedX;
-            }
-            if (playerPosition.X <= 60)
-            {
-                position.X -= speedX;
-            }
-            if (playerPosition.Y <= 60)
-            {
-                position.Y -= speedY;
-            }
-            if (playerPosition.Y >= (view.TitleSafeArea.Height - 60))
-            {
-                position.Y -= speedY;
-            }
+            if (playerPosition.X >= Game1.center.X + 200) destRect.X -= speedX;
+            if (playerPosition.X <= Game1.center.X - 200) destRect.X -= speedX;
+            if (playerPosition.Y >= Game1.center.Y + 200) destRect.Y -= speedY;
+            if (playerPosition.Y <= Game1.center.Y - 200) destRect.Y -= speedY;
+            //if (view.TitleSafeArea.Width - playerPosition.X <= 100)
+            //{
+            //    destRect.X -= speedX;
+            //}
+            //if (playerPosition.X <= 60)
+            //{
+            //    destRect.X -= speedX;
+            //}
+            //if (playerPosition.Y <= 60)
+            //{
+            //    destRect.Y -= speedY;
+            //}
+            //if (playerPosition.Y >= (view.TitleSafeArea.Height - 60))
+            //{
+            //    destRect.Y -= speedY;
+            //}
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, position, Color.White);
+            spriteBatch.Draw(texture, destRect, sourceRect, Color.White);
         }
     }
 }

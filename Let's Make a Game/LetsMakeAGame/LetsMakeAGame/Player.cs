@@ -13,7 +13,6 @@ namespace LetsMakeAGame
         private int ground;
         public int speedX { get; set; }
         public int speedY { get; set; }
-        private float scale;
 
         public bool jumped { get; set; }
 
@@ -26,18 +25,17 @@ namespace LetsMakeAGame
 
         private Viewport view;
        
-        public void Initialize(Texture2D texture, Vector2 position, Viewport view, float scale)
+        public void Initialize(Texture2D texture, Vector2 position, Viewport view)
         {
             this.texture = texture;
             this.position = position;
             this.view = view;
-            this.scale = scale;
             //set collision rectangle
-            boundary = new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height);
+            boundary = new Rectangle((int)position.X, (int)position.Y, (int)(texture.Width * Game1.scale), (int)(texture.Height * Game1.scale));
             //set source of texture rectangle
-            sourceRectangle = new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height);
+            sourceRectangle = new Rectangle(0, 0, texture.Width, texture.Height);
             jumped = false;
-            ground = view.TitleSafeArea.Height - boundary.Height;
+            ground = (int)Game1.center.Y + 200;
         }
 
         public void Update()
@@ -58,22 +56,26 @@ namespace LetsMakeAGame
                 }
             }
             //Check in-game boundaries
-            if (view.TitleSafeArea.Width - position.X <= 100)
-            {
-                position.X = view.TitleSafeArea.Width - 100;
-            }
-            if (position.X <= 60)
-            {
-                position.X = 60;
-            }
-            if (position.Y + boundary.Height >= view.TitleSafeArea.Height)
-            {
-                position.Y = view.TitleSafeArea.Height - boundary.Height;
-            }
-            if (position.Y <= 60)
-            {
-                position.Y = 60;
-            }
+            if (position.X >= Game1.center.X + 200) position.X = Game1.center.X + 200;
+            if (position.X <= Game1.center.X - 200) position.X = Game1.center.X - 200;
+            if (position.Y >= Game1.center.Y + 200) position.Y = Game1.center.Y + 200;
+            if (position.Y <= Game1.center.Y - 200) position.Y = Game1.center.Y - 200;
+            //if (view.TitleSafeArea.Width - position.X <= 100)
+            //{
+            //    position.X = view.TitleSafeArea.Width - 100;
+            //}
+            //if (position.X <= 60)
+            //{
+            //    position.X = 60;
+            //}
+            //if (position.Y + boundary.Height >= view.TitleSafeArea.Height)
+            //{
+            //    position.Y = view.TitleSafeArea.Height - boundary.Height;
+            //}
+            //if (position.Y <= 60)
+            //{
+            //    position.Y = 60;
+            //}
             //Set Collision Boundary
             boundary.X = (int)position.X;
             boundary.Y = (int)position.Y;
@@ -83,7 +85,7 @@ namespace LetsMakeAGame
         {
             //using the overload of Draw that requires a destination and source rectangle. We can keep the source as is
             //and scale the destination rectangle as needed (once we implement scaling).
-            spriteBatch.Draw(texture, boundary, sourceRectangle, Color.Gray);
+            spriteBatch.Draw(texture, boundary, sourceRectangle, Color.White);
         }
 
         public void Jump(int moveSpeed)

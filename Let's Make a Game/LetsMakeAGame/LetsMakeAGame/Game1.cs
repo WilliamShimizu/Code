@@ -26,13 +26,18 @@ namespace LetsMakeAGame
 
         SpriteFont font;
         Player player;
+        public static Vector2 center;
+
+        public static Texture2D leopard;
+        public static Texture2D stone;
+        public static Texture2D stars;
 
         int tsaX;
         int tsaY;
         const int PLAYER_MOVE_SPEED = 6;
         int ground;
 
-        float scale;
+        public static float scale;
 
         KeyboardState currentKeyboardState;
         KeyboardState previousKeyboardState;
@@ -42,7 +47,21 @@ namespace LetsMakeAGame
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-            Window.AllowUserResizing = true;
+            Window.AllowUserResizing = false;
+            //ResolutionChooser r = new ResolutionChooser();
+            //r.Show();
+            graphics.PreferredBackBufferWidth = 1600;
+            graphics.PreferredBackBufferHeight = 900;
+            center = new Vector2((int)graphics.PreferredBackBufferWidth / 2, (int)graphics.PreferredBackBufferHeight / 2);
+            //List<string> MBOPTIONS = new List<string>();
+            //MBOPTIONS.Add("OK");
+            //string msg = "Text that was typed on the keyboard will be displayed here.\nClick OK to continue...";
+            //IAsyncResult result = Guide.BeginShowMessageBox(
+            //        "hello", msg, MBOPTIONS, 0,
+            //        MessageBoxIcon.Alert, null, null);
+            
+            //Guide.EndShowMessageBox(result);
+            graphics.ToggleFullScreen();
         }
 
         /// <summary>
@@ -58,6 +77,7 @@ namespace LetsMakeAGame
             background = new Background();
             foreground = new Background();
             ground = GraphicsDevice.Viewport.TitleSafeArea.Height - 40;
+            scale = (float)((double)(1600 * 900) / (double)(1600 * 900));
             base.Initialize();
         }
 
@@ -73,9 +93,13 @@ namespace LetsMakeAGame
             bg1 = Content.Load<Texture2D>("background");
             bg2 = Content.Load<Texture2D>("foreground");
             font = Content.Load<SpriteFont>("myFont");
-            background.Initialize(bg1, new Vector2(0, -1 * (bg1.Height - GraphicsDevice.Viewport.TitleSafeArea.Height)), graphics.GraphicsDevice.Viewport, scale);
-            foreground.Initialize(bg2, new Vector2(0, -1 * (bg2.Height - GraphicsDevice.Viewport.TitleSafeArea.Height)), graphics.GraphicsDevice.Viewport, scale);
-            player.Initialize(playerTexture, new Vector2(60, GraphicsDevice.Viewport.TitleSafeArea.Height - playerTexture.Height), GraphicsDevice.Viewport, scale);
+            stars = Content.Load<Texture2D>("starsTile");
+            leopard = Content.Load<Texture2D>("leopardTile");
+            stone = Content.Load<Texture2D>("rockTile");
+            background.Initialize(bg1);
+            foreground.Initialize(bg2);
+            Level l = new Level();
+            player.Initialize(playerTexture, new Vector2(60, GraphicsDevice.Viewport.TitleSafeArea.Height - playerTexture.Height), GraphicsDevice.Viewport);
             // TODO: use this.Content to load your game content here
         }
 
@@ -102,10 +126,11 @@ namespace LetsMakeAGame
             // TODO: Add your update logic here
             GetInput();
             player.Update();
-            background.Update(player.position, player.speedX/2, player.speedY/2);
-            foreground.Update(player.position, player.speedX, player.speedY);
+            background.Update(player.position, player.speedX/3, player.speedY/3);
+            foreground.Update(player.position, player.speedX/2, player.speedY/2);
             tsaX = graphics.GraphicsDevice.Viewport.TitleSafeArea.Width;
             tsaY = graphics.GraphicsDevice.Viewport.TitleSafeArea.Height;
+            foreach (Tile t in Level.tiles) t.Update(player);
             base.Update(gameTime);
         }
 
@@ -123,6 +148,10 @@ namespace LetsMakeAGame
             spriteBatch.DrawString(font, "TSArea Y: " + tsaY, new Vector2(0, 20), Color.Gray);
             spriteBatch.DrawString(font, "Player X: " + player.position.X, new Vector2(0, 40), Color.Gray);
             spriteBatch.DrawString(font, "Player Y: " + player.position.Y, new Vector2(0, 60), Color.Gray);
+            foreach (Tile t in Level.tiles)
+            {
+                spriteBatch.Draw(t.texture, t.boundary, null, Color.White);
+            }
             player.Draw(spriteBatch);
             spriteBatch.End();
             // TODO: Add your drawing code here

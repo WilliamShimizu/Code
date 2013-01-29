@@ -8,7 +8,7 @@
       <Processor>MGTextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LMAG\LMAG\bin\PSM\Content\Block.xnb</Output>
-      <Time>2013-01-24T23:30:57.0805473-08:00</Time>
+      <Time>2013-01-26T21:32:11.5812241-08:00</Time>
     </Item>
     <Item>
       <Source>foreground.png</Source>
@@ -36,6 +36,15 @@
       <Options>None</Options>
       <Output>C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LMAG\LMAG\bin\PSM\Content\myFont.xnb</Output>
       <Time>2013-01-25T21:24:27.6466911-08:00</Time>
+    </Item>
+    <Item>
+      <Source>test.png</Source>
+      <Name>test</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>MGTextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LMAG\LMAG\bin\PSM\Content\test.xnb</Output>
+      <Time>2013-01-26T21:45:33.2855276-08:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
