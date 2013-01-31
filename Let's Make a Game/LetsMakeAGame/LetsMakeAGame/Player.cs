@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace LetsMakeAGame
 {
-    class Player
+    public class Player
     {
         private const int JUMP_HEIGHT = 80;
         private const int PLAYER_MOVE_SPEED = 6;
@@ -20,7 +20,11 @@ namespace LetsMakeAGame
         private Vector2 jumpPoint;
 
         public Rectangle boundary;
-        private Rectangle sourceRectangle;
+        public Rectangle top;
+        public Rectangle bottom;
+        public Rectangle left;
+        public Rectangle right;
+
         private Texture2D texture;
 
         private Viewport view;
@@ -33,7 +37,11 @@ namespace LetsMakeAGame
             //set collision rectangle
             boundary = new Rectangle((int)position.X, (int)position.Y, (int)(texture.Width * Game1.scale), (int)(texture.Height * Game1.scale));
             //set source of texture rectangle
-            sourceRectangle = new Rectangle(0, 0, texture.Width, texture.Height);
+            //sourceRectangle = new Rectangle(0, 0, texture.Width, texture.Height);
+            top = new Rectangle(boundary.X + 1, boundary.Y - 1, boundary.Width - 2, 1);
+            bottom = new Rectangle(boundary.X + 1, boundary.Y + boundary.Height + 1, boundary.Width - 2, 1);
+            left = new Rectangle(boundary.X - 1, boundary.Y + 1, 1, boundary.Height - 2);
+            right = new Rectangle(boundary.X + boundary.Width + 1, boundary.Y + 1, 1, boundary.Height - 2);
             jumped = false;
             ground = (int)Game1.center.Y + 200;
         }
@@ -41,6 +49,7 @@ namespace LetsMakeAGame
         public void Update()
         {
             //Update Position
+            
             position.X += speedX;
             position.Y += speedY;
             if (jumped)
@@ -49,43 +58,36 @@ namespace LetsMakeAGame
                 {
                     speedY = PLAYER_MOVE_SPEED;
                 }
-                if (position.Y >= ground)
-                {
-                    position.Y = ground;
-                    jumped = false;
-                }
             }
-            //Check in-game boundaries
+            else speedY = 6;
+            //Make sure the player stays within a certain part of the screen.
             if (position.X >= Game1.center.X + 200) position.X = Game1.center.X + 200;
             if (position.X <= Game1.center.X - 200) position.X = Game1.center.X - 200;
             if (position.Y >= Game1.center.Y + 200) position.Y = Game1.center.Y + 200;
             if (position.Y <= Game1.center.Y - 200) position.Y = Game1.center.Y - 200;
-            //if (view.TitleSafeArea.Width - position.X <= 100)
-            //{
-            //    position.X = view.TitleSafeArea.Width - 100;
-            //}
-            //if (position.X <= 60)
-            //{
-            //    position.X = 60;
-            //}
-            //if (position.Y + boundary.Height >= view.TitleSafeArea.Height)
-            //{
-            //    position.Y = view.TitleSafeArea.Height - boundary.Height;
-            //}
-            //if (position.Y <= 60)
-            //{
-            //    position.Y = 60;
-            //}
             //Set Collision Boundary
             boundary.X = (int)position.X;
             boundary.Y = (int)position.Y;
+            top.X = boundary.X + 1;
+            top.Y = boundary.Y - 1;
+            left.X = boundary.X - 1;
+            left.Y = boundary.Y + 1;
+            bottom.X = boundary.X + 1;
+            bottom.Y = boundary.Y + boundary.Height + 1;
+            right.X = boundary.X + boundary.Width + 1;
+            right.Y = boundary.Y + 1;
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
             //using the overload of Draw that requires a destination and source rectangle. We can keep the source as is
             //and scale the destination rectangle as needed (once we implement scaling).
-            spriteBatch.Draw(texture, boundary, sourceRectangle, Color.White);
+            spriteBatch.Draw(texture, boundary, null, Color.White);
+            spriteBatch.Draw(new Texture2D(Game1.gd, top.Width, top.Height), top, null, Color.Red);
+            spriteBatch.Draw(new Texture2D(Game1.gd, bottom.Width, bottom.Height), bottom, null, Color.Red);
+            spriteBatch.Draw(new Texture2D(Game1.gd, left.Width, left.Height), left, null, Color.Red);
+            spriteBatch.Draw(new Texture2D(Game1.gd, right.Width, right.Height), right, null, Color.Red);
+            
         }
 
         public void Jump(int moveSpeed)

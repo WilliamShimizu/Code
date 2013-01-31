@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace LetsMakeAGame
 {
-    class Tile
+    public class Tile
     {
         public Texture2D texture;
         int width { get; set; }
@@ -42,7 +42,6 @@ namespace LetsMakeAGame
             if (player.position.Y <= Game1.center.Y - 200) position.Y -= player.speedY;
             boundary.X = (int)position.X;
             boundary.Y = (int)position.Y;
-
         }
     }
 }

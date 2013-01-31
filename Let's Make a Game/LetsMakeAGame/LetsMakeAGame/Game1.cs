@@ -21,16 +21,18 @@ namespace LetsMakeAGame
         Texture2D playerTexture;
         Texture2D bg1;
         Texture2D bg2;
-        Background background;
-        Background foreground;
 
         SpriteFont font;
-        Player player;
+        public static Player player;
         public static Vector2 center;
 
         public static Texture2D leopard;
         public static Texture2D stone;
         public static Texture2D stars;
+
+        public static GraphicsDevice gd;
+
+        public static Level level;
 
         int tsaX;
         int tsaY;
@@ -46,6 +48,7 @@ namespace LetsMakeAGame
             : base()
         {
             graphics = new GraphicsDeviceManager(this);
+            gd = this.GraphicsDevice;
             Content.RootDirectory = "Content";
             Window.AllowUserResizing = false;
             //ResolutionChooser r = new ResolutionChooser();
@@ -74,8 +77,6 @@ namespace LetsMakeAGame
         {
             // TODO: Add your initialization logic here
             player = new Player();
-            background = new Background();
-            foreground = new Background();
             ground = GraphicsDevice.Viewport.TitleSafeArea.Height - 40;
             scale = (float)((double)(1600 * 900) / (double)(1600 * 900));
             base.Initialize();
@@ -92,14 +93,15 @@ namespace LetsMakeAGame
             playerTexture = Content.Load<Texture2D>("Block");
             bg1 = Content.Load<Texture2D>("background");
             bg2 = Content.Load<Texture2D>("foreground");
+            //DEBUG
             font = Content.Load<SpriteFont>("myFont");
             stars = Content.Load<Texture2D>("starsTile");
             leopard = Content.Load<Texture2D>("leopardTile");
             stone = Content.Load<Texture2D>("rockTile");
-            background.Initialize(bg1);
-            foreground.Initialize(bg2);
-            Level l = new Level();
+            
             player.Initialize(playerTexture, new Vector2(60, GraphicsDevice.Viewport.TitleSafeArea.Height - playerTexture.Height), GraphicsDevice.Viewport);
+            level = new Level(bg1, bg2);
+            
             // TODO: use this.Content to load your game content here
         }
 
@@ -125,12 +127,11 @@ namespace LetsMakeAGame
             currentKeyboardState = Keyboard.GetState();
             // TODO: Add your update logic here
             GetInput();
-            player.Update();
-            background.Update(player.position, player.speedX/3, player.speedY/3);
-            foreground.Update(player.position, player.speedX/2, player.speedY/2);
+            level.Update(gameTime);
+            //DEBUG
             tsaX = graphics.GraphicsDevice.Viewport.TitleSafeArea.Width;
             tsaY = graphics.GraphicsDevice.Viewport.TitleSafeArea.Height;
-            foreach (Tile t in Level.tiles) t.Update(player);
+            
             base.Update(gameTime);
         }
 
@@ -142,16 +143,12 @@ namespace LetsMakeAGame
         {
             GraphicsDevice.Clear(Color.White);
             spriteBatch.Begin();
-            background.Draw(spriteBatch);
-            foreground.Draw(spriteBatch);
+            level.Draw(spriteBatch);
+            //DEBUG
             spriteBatch.DrawString(font, "TSArea X: " + tsaX, new Vector2(0, 0), Color.Gray);
             spriteBatch.DrawString(font, "TSArea Y: " + tsaY, new Vector2(0, 20), Color.Gray);
             spriteBatch.DrawString(font, "Player X: " + player.position.X, new Vector2(0, 40), Color.Gray);
             spriteBatch.DrawString(font, "Player Y: " + player.position.Y, new Vector2(0, 60), Color.Gray);
-            foreach (Tile t in Level.tiles)
-            {
-                spriteBatch.Draw(t.texture, t.boundary, null, Color.White);
-            }
             player.Draw(spriteBatch);
             spriteBatch.End();
             // TODO: Add your drawing code here

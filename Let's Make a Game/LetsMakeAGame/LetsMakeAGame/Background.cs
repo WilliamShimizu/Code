@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace LetsMakeAGame
 {
-    class Background
+    public class Background
     {
         Texture2D texture;
         Rectangle sourceRect;
@@ -25,22 +25,6 @@ namespace LetsMakeAGame
             if (playerPosition.X <= Game1.center.X - 200) destRect.X -= speedX;
             if (playerPosition.Y >= Game1.center.Y + 200) destRect.Y -= speedY;
             if (playerPosition.Y <= Game1.center.Y - 200) destRect.Y -= speedY;
-            //if (view.TitleSafeArea.Width - playerPosition.X <= 100)
-            //{
-            //    destRect.X -= speedX;
-            //}
-            //if (playerPosition.X <= 60)
-            //{
-            //    destRect.X -= speedX;
-            //}
-            //if (playerPosition.Y <= 60)
-            //{
-            //    destRect.Y -= speedY;
-            //}
-            //if (playerPosition.Y >= (view.TitleSafeArea.Height - 60))
-            //{
-            //    destRect.Y -= speedY;
-            //}
         }
 
         public void Draw(SpriteBatch spriteBatch)
