@@ -25,6 +25,8 @@ namespace LetsMakeAGame
         public Rectangle left;
         public Rectangle right;
 
+        public bool gravityIsOn = true;
+
         private Texture2D texture;
 
         private Viewport view;
@@ -54,6 +56,7 @@ namespace LetsMakeAGame
                     speedY = PLAYER_MOVE_SPEED;
                 }
             }
+            else if (gravityIsOn) speedY = PLAYER_MOVE_SPEED;
             boundary.X += speedX;
             boundary.Y += speedY;
             //Make sure the player stays within a certain part of the screen.

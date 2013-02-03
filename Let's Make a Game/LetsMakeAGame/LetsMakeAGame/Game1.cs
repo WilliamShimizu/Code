@@ -179,6 +179,11 @@ namespace LetsMakeAGame
             {
                 player.Jump(PLAYER_MOVE_SPEED);
             }
+            if(currentKeyboardState.IsKeyDown(Keys.G))
+            {
+                if(player.gravityIsOn) player.gravityIsOn = false;
+                else player.gravityIsOn = true;
+            }
         }
     }
 }

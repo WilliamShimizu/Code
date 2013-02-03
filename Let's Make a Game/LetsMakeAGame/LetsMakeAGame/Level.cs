@@ -45,9 +45,8 @@ namespace LetsMakeAGame
 
         public void Update(GameTime gameTime)
         {
-            
-            foreach (Tile t in tiles) t.Update(player);
             player.Update();
+            foreach (Tile t in tiles) t.Update(player);
             CheckCollision();
             background.Update(player.boundary, player.speedX / 3, player.speedY / 3);
             foreground.Update(player.boundary, player.speedX / 2, player.speedY / 2);
