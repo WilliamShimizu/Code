@@ -175,7 +175,7 @@ namespace LetsMakeAGame
                 player.speedY = PLAYER_MOVE_SPEED;
             }
             else if(!player.jumped) player.speedY = 0;
-            if (currentKeyboardState.IsKeyDown(Keys.Space) && !player.jumped)
+            if (currentKeyboardState.IsKeyDown(Keys.Space) && !player.jumped && player.canJump)
             {
                 player.Jump(PLAYER_MOVE_SPEED);
             }

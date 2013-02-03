@@ -71,18 +71,20 @@ namespace LetsMakeAGame
                         player.boundary.Y = t.boundary.Top - player.boundary.Height;
                         player.jumped = false;
                         player.speedY = 0;
+                        player.canJump = true;
                     }
-                    else if (player.top.Intersects(t.boundary))
+                    else player.canJump = false;
+                    if (player.top.Intersects(t.boundary))
                     {
                         player.boundary.Y = t.boundary.Bottom;
                         player.speedY = 6;
                     }
-                    else if (player.left.Intersects(t.boundary))
+                    if (player.left.Intersects(t.boundary))
                     {
                         player.boundary.X = t.boundary.Right;
                         player.speedX = 0;
                     }
-                    else if (player.right.Intersects(t.boundary))
+                    if (player.right.Intersects(t.boundary))
                     {
                         player.boundary.X = t.boundary.Left - player.boundary.Width;
                         player.speedX = 0;

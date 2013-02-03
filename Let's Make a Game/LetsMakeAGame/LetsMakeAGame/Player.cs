@@ -26,6 +26,7 @@ namespace LetsMakeAGame
         public Rectangle right;
 
         public bool gravityIsOn = true;
+        public bool canJump;
 
         private Texture2D texture;
 
