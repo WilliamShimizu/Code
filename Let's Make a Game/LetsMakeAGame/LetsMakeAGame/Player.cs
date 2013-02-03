@@ -36,12 +36,10 @@ namespace LetsMakeAGame
             this.view = view;
             //set collision rectangle
             boundary = new Rectangle((int)position.X, (int)position.Y, (int)(texture.Width * Game1.scale), (int)(texture.Height * Game1.scale));
-            //set source of texture rectangle
-            //sourceRectangle = new Rectangle(0, 0, texture.Width, texture.Height);
-            top = new Rectangle(boundary.X + 1, boundary.Y - 1, boundary.Width - 2, 1);
-            bottom = new Rectangle(boundary.X + 1, boundary.Y + boundary.Height + 1, boundary.Width - 2, 1);
-            left = new Rectangle(boundary.X - 1, boundary.Y + 1, 1, boundary.Height - 2);
-            right = new Rectangle(boundary.X + boundary.Width + 1, boundary.Y + 1, 1, boundary.Height - 2);
+            top = new Rectangle(boundary.X + 7, boundary.Y - 7, boundary.Width - 14, 1);
+            bottom = new Rectangle(boundary.X + 7, boundary.Y + boundary.Height + 7, boundary.Width - 14, 1);
+            left = new Rectangle(boundary.X - 7, boundary.Y + 7, 1, boundary.Height - 14);
+            right = new Rectangle(boundary.X + boundary.Width + 7, boundary.Y + 7, 1, boundary.Height - 14);
             jumped = false;
             ground = (int)Game1.center.Y + 200;
         }
@@ -64,14 +62,14 @@ namespace LetsMakeAGame
             if (boundary.Y >= Game1.center.Y + 200) boundary.Y = (int)Game1.center.Y + 200;
             if (boundary.Y <= Game1.center.Y - 200) boundary.Y = (int)Game1.center.Y - 200;
             //Set Collision Boundaries
-            top.X = boundary.X + 1;
-            top.Y = boundary.Y - 1;
-            left.X = boundary.X - 1;
-            left.Y = boundary.Y + 1;
-            bottom.X = boundary.X + 1;
-            bottom.Y = boundary.Y + boundary.Height + 1;
-            right.X = boundary.X + boundary.Width + 1;
-            right.Y = boundary.Y + 1;
+            top.X = boundary.X + 7;
+            top.Y = boundary.Y - 7;
+            left.X = boundary.X - 7;
+            left.Y = boundary.Y + 7;
+            bottom.X = boundary.X + 7;
+            bottom.Y = boundary.Y + boundary.Height + 7;
+            right.X = boundary.X + boundary.Width + 7;
+            right.Y = boundary.Y + 7;
         }
 
         public void Draw(SpriteBatch spriteBatch)
