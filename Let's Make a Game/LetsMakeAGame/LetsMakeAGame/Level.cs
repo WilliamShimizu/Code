@@ -37,7 +37,7 @@ namespace LetsMakeAGame
                 {
                     String s = lines[i].Substring(j, 1);
                     if (s == " " || s == "\n") continue;
-                    Tile t = new Tile(Int16.Parse(s), new Vector2(j, i));
+                    Tile t = new Tile(s, new Vector2(j, i));
                     tiles.Add(t);
                 }
             }
@@ -45,9 +45,10 @@ namespace LetsMakeAGame
 
         public void Update(GameTime gameTime)
         {
+            
+            foreach (Tile t in tiles) t.Update(player);
             CheckCollision();
             player.Update();
-            foreach (Tile t in tiles) t.Update(player);
             background.Update(player.position, player.speedX / 3, player.speedY / 3);
             foreground.Update(player.position, player.speedX / 2, player.speedY / 2);
         }
@@ -56,10 +57,8 @@ namespace LetsMakeAGame
         {
             background.Draw(spriteBatch);
             foreground.Draw(spriteBatch);
-            foreach (Tile t in tiles)
-            {
-                spriteBatch.Draw(t.texture, t.boundary, null, Color.White);
-            }
+            foreach (Tile t in tiles) spriteBatch.Draw(t.texture, t.boundary, null, Color.White);
+            player.Draw(spriteBatch);
         }
 
         public void CheckCollision()
@@ -74,17 +73,17 @@ namespace LetsMakeAGame
                         player.jumped = false;
                         player.speedY = 0;
                     }
-                    else if (player.top.Intersects(t.boundary))
+                    if (player.top.Intersects(t.boundary))
                     {
                         player.position.Y = t.boundary.Bottom;
-                        player.speedY = 6;
+                        player.speedY = 0;
                     }
-                    else if (player.left.Intersects(t.boundary))
+                    if (player.left.Intersects(t.boundary))
                     {
                         player.position.X = t.boundary.Right;
                         player.speedX = 0;
                     }
-                    else if (player.right.Intersects(t.boundary))
+                    if (player.right.Intersects(t.boundary))
                     {
                         player.position.X = t.boundary.Left - player.boundary.Width;
                         player.speedX = 0;

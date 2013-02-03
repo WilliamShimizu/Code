@@ -147,9 +147,8 @@ namespace LetsMakeAGame
             //DEBUG
             spriteBatch.DrawString(font, "TSArea X: " + tsaX, new Vector2(0, 0), Color.Gray);
             spriteBatch.DrawString(font, "TSArea Y: " + tsaY, new Vector2(0, 20), Color.Gray);
-            spriteBatch.DrawString(font, "Player X: " + player.position.X, new Vector2(0, 40), Color.Gray);
-            spriteBatch.DrawString(font, "Player Y: " + player.position.Y, new Vector2(0, 60), Color.Gray);
-            player.Draw(spriteBatch);
+            spriteBatch.DrawString(font, "Player X: " + player.boundary.X, new Vector2(0, 40), Color.Gray);
+            spriteBatch.DrawString(font, "Player Y: " + player.boundary.Y, new Vector2(0, 60), Color.Gray);
             spriteBatch.End();
             // TODO: Add your drawing code here
 
@@ -178,7 +177,7 @@ namespace LetsMakeAGame
             else if(!player.jumped) player.speedY = 0;
             if (currentKeyboardState.IsKeyDown(Keys.Space) && !player.jumped)
             {
-                player.Jump(-PLAYER_MOVE_SPEED);
+                player.Jump(PLAYER_MOVE_SPEED);
             }
         }
     }

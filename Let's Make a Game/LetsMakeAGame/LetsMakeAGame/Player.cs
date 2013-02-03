@@ -50,8 +50,7 @@ namespace LetsMakeAGame
         {
             //Update Position
             
-            position.X += speedX;
-            position.Y += speedY;
+            
             if (jumped)
             {
                 if (position.Y <= jumpPoint.Y - JUMP_HEIGHT)
@@ -59,13 +58,15 @@ namespace LetsMakeAGame
                     speedY = PLAYER_MOVE_SPEED;
                 }
             }
-            else speedY = 6;
+            //else speedY = 6;
+            position.X += speedX;
+            position.Y += speedY;
             //Make sure the player stays within a certain part of the screen.
             if (position.X >= Game1.center.X + 200) position.X = Game1.center.X + 200;
             if (position.X <= Game1.center.X - 200) position.X = Game1.center.X - 200;
             if (position.Y >= Game1.center.Y + 200) position.Y = Game1.center.Y + 200;
             if (position.Y <= Game1.center.Y - 200) position.Y = Game1.center.Y - 200;
-            //Set Collision Boundary
+            //Set Collision Boundaries
             boundary.X = (int)position.X;
             boundary.Y = (int)position.Y;
             top.X = boundary.X + 1;
@@ -92,7 +93,7 @@ namespace LetsMakeAGame
 
         public void Jump(int moveSpeed)
         {
-            speedY = moveSpeed;
+            speedY = -moveSpeed;
             jumped = true;
             jumpPoint = position;
         }
