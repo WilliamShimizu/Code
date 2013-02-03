@@ -19,7 +19,7 @@ namespace LetsMakeAGame
             destRect = new Rectangle((int)position.X, (int)position.Y, (int)(texture.Width * Game1.scale), (int)(texture.Height * Game1.scale));
         }
 
-        public void Update(Vector2 playerPosition, int speedX, int speedY)
+        public void Update(Rectangle playerPosition, int speedX, int speedY)
         {
             if (playerPosition.X >= Game1.center.X + 200) destRect.X -= speedX;
             if (playerPosition.X <= Game1.center.X - 200) destRect.X -= speedX;

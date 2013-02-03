@@ -47,10 +47,10 @@ namespace LetsMakeAGame
         {
             
             foreach (Tile t in tiles) t.Update(player);
-            CheckCollision();
             player.Update();
-            background.Update(player.position, player.speedX / 3, player.speedY / 3);
-            foreground.Update(player.position, player.speedX / 2, player.speedY / 2);
+            CheckCollision();
+            background.Update(player.boundary, player.speedX / 3, player.speedY / 3);
+            foreground.Update(player.boundary, player.speedX / 2, player.speedY / 2);
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -69,23 +69,23 @@ namespace LetsMakeAGame
                 {
                     if (player.bottom.Intersects(t.boundary))
                     {
-                        player.position.Y = t.boundary.Top - player.boundary.Height;
+                        player.boundary.Y = t.boundary.Top - player.boundary.Height;
                         player.jumped = false;
                         player.speedY = 0;
                     }
-                    if (player.top.Intersects(t.boundary))
+                    else if (player.top.Intersects(t.boundary))
                     {
-                        player.position.Y = t.boundary.Bottom;
-                        player.speedY = 0;
+                        player.boundary.Y = t.boundary.Bottom;
+                        player.speedY = 6;
                     }
-                    if (player.left.Intersects(t.boundary))
+                    else if (player.left.Intersects(t.boundary))
                     {
-                        player.position.X = t.boundary.Right;
+                        player.boundary.X = t.boundary.Right;
                         player.speedX = 0;
                     }
-                    if (player.right.Intersects(t.boundary))
+                    else if (player.right.Intersects(t.boundary))
                     {
-                        player.position.X = t.boundary.Left - player.boundary.Width;
+                        player.boundary.X = t.boundary.Left - player.boundary.Width;
                         player.speedX = 0;
                     }
                 }

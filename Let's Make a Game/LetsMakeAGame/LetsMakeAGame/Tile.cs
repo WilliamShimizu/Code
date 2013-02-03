@@ -35,10 +35,10 @@ namespace LetsMakeAGame
 
         public void Update(Player player)
         {
-            if (player.position.X >= Game1.center.X + 200) boundary.X -= player.speedX;
-            if (player.position.X <= Game1.center.X - 200) boundary.X -= player.speedX;
-            if (player.position.Y >= Game1.center.Y + 200) boundary.Y -= player.speedY;
-            if (player.position.Y <= Game1.center.Y - 200) boundary.Y -= player.speedY;
+            if (player.boundary.X >= Game1.center.X + 200) boundary.X -= player.speedX;
+            if (player.boundary.X <= Game1.center.X - 200) boundary.X -= player.speedX;
+            if (player.boundary.Y >= Game1.center.Y + 200) boundary.Y -= player.speedY;
+            if (player.boundary.Y <= Game1.center.Y - 200) boundary.Y -= player.speedY;
         }
     }
 }

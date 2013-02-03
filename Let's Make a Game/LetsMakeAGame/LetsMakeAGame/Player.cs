@@ -16,7 +16,7 @@ namespace LetsMakeAGame
 
         public bool jumped { get; set; }
 
-        public Vector2 position;
+        //public Vector2 position;
         private Vector2 jumpPoint;
 
         public Rectangle boundary;
@@ -32,7 +32,7 @@ namespace LetsMakeAGame
         public void Initialize(Texture2D texture, Vector2 position, Viewport view)
         {
             this.texture = texture;
-            this.position = position;
+            //this.position = position;
             this.view = view;
             //set collision rectangle
             boundary = new Rectangle((int)position.X, (int)position.Y, (int)(texture.Width * Game1.scale), (int)(texture.Height * Game1.scale));
@@ -49,26 +49,21 @@ namespace LetsMakeAGame
         public void Update()
         {
             //Update Position
-            
-            
             if (jumped)
             {
-                if (position.Y <= jumpPoint.Y - JUMP_HEIGHT)
+                if (boundary.Y <= jumpPoint.Y - JUMP_HEIGHT)
                 {
                     speedY = PLAYER_MOVE_SPEED;
                 }
             }
-            //else speedY = 6;
-            position.X += speedX;
-            position.Y += speedY;
+            boundary.X += speedX;
+            boundary.Y += speedY;
             //Make sure the player stays within a certain part of the screen.
-            if (position.X >= Game1.center.X + 200) position.X = Game1.center.X + 200;
-            if (position.X <= Game1.center.X - 200) position.X = Game1.center.X - 200;
-            if (position.Y >= Game1.center.Y + 200) position.Y = Game1.center.Y + 200;
-            if (position.Y <= Game1.center.Y - 200) position.Y = Game1.center.Y - 200;
+            if (boundary.X >= Game1.center.X + 200) boundary.X = (int)Game1.center.X + 200;
+            if (boundary.X <= Game1.center.X - 200) boundary.X = (int)Game1.center.X - 200;
+            if (boundary.Y >= Game1.center.Y + 200) boundary.Y = (int)Game1.center.Y + 200;
+            if (boundary.Y <= Game1.center.Y - 200) boundary.Y = (int)Game1.center.Y - 200;
             //Set Collision Boundaries
-            boundary.X = (int)position.X;
-            boundary.Y = (int)position.Y;
             top.X = boundary.X + 1;
             top.Y = boundary.Y - 1;
             left.X = boundary.X - 1;
@@ -95,7 +90,7 @@ namespace LetsMakeAGame
         {
             speedY = -moveSpeed;
             jumped = true;
-            jumpPoint = position;
+            jumpPoint = new Vector2(boundary.X, boundary.Y);
         }
     }
 }
