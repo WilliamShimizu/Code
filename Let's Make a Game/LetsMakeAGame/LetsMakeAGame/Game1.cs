@@ -7,6 +7,8 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.GamerServices;
+using System.Collections;
+using System.IO;
 #endregion
 
 namespace LetsMakeAGame
@@ -17,22 +19,18 @@ namespace LetsMakeAGame
     public class Game1 : Game
     {
         GraphicsDeviceManager graphics;
+        public static ContentManager contentMgr;
         SpriteBatch spriteBatch;
         Texture2D playerTexture;
-        Texture2D bg1;
-        Texture2D bg2;
 
         SpriteFont font;
         public static Player player;
         public static Vector2 center;
 
-        public static Texture2D leopard;
-        public static Texture2D stone;
-        public static Texture2D stars;
-
         public static GraphicsDevice gd;
 
         public static Level level;
+        public static Hashtable textureLookupTable;
 
         int tsaX;
         int tsaY;
@@ -56,6 +54,18 @@ namespace LetsMakeAGame
             graphics.PreferredBackBufferWidth = 1600;
             graphics.PreferredBackBufferHeight = 900;
             center = new Vector2((int)graphics.PreferredBackBufferWidth / 2, (int)graphics.PreferredBackBufferHeight / 2);
+            contentMgr = this.Content;
+            textureLookupTable = new Hashtable();
+            StreamReader sr = new StreamReader("Content/textureRep.txt");
+            string line = sr.ReadLine();
+            while (line != null)
+            {
+                string key = line.Substring(0, line.IndexOf(" "));
+                string value = line.Substring(line.IndexOf(" ") + 1, line.Length - line.IndexOf(" ") - 1);
+                textureLookupTable.Add(key, value);
+                line = sr.ReadLine();
+            }
+            sr.Close();
             //List<string> MBOPTIONS = new List<string>();
             //MBOPTIONS.Add("OK");
             //string msg = "Text that was typed on the keyboard will be displayed here.\nClick OK to continue...";
@@ -91,16 +101,14 @@ namespace LetsMakeAGame
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             playerTexture = Content.Load<Texture2D>("Block");
-            bg1 = Content.Load<Texture2D>("background");
-            bg2 = Content.Load<Texture2D>("foreground");
             //DEBUG
             font = Content.Load<SpriteFont>("myFont");
-            stars = Content.Load<Texture2D>("starsTile");
-            leopard = Content.Load<Texture2D>("leopardTile");
-            stone = Content.Load<Texture2D>("rockTile");
+            ///////
             
             player.Initialize(playerTexture, new Vector2(60, GraphicsDevice.Viewport.TitleSafeArea.Height - playerTexture.Height), GraphicsDevice.Viewport);
-            level = new Level(bg1, bg2);
+            List<string> songNames = new List<string>();
+            List<string> sfxNames = new List<string>();
+            level = new Level("background", "foreground", "Content/Maps/impossibleMap.txt", songNames, sfxNames);
             
             // TODO: use this.Content to load your game content here
         }
@@ -179,11 +187,17 @@ namespace LetsMakeAGame
             {
                 player.Jump(PLAYER_MOVE_SPEED);
             }
+            //DEBUG
             if(currentKeyboardState.IsKeyDown(Keys.G))
             {
-                if(player.gravityIsOn) player.gravityIsOn = false;
+                if (player.gravityIsOn)
+                {
+                    player.gravityIsOn = false;
+                    player.speedY = 0;
+                }
                 else player.gravityIsOn = true;
             }
+            ////////
         }
     }
 }

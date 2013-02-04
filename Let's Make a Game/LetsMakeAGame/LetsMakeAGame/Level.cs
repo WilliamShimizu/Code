@@ -1,7 +1,13 @@
 ﻿using System;
 using System.IO;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Storage;
+using Microsoft.Xna.Framework.GamerServices;
+using Microsoft.Xna.Framework.Media;
 using System.Collections.Generic;
 
 namespace LetsMakeAGame
@@ -13,18 +19,29 @@ namespace LetsMakeAGame
         public static List<Tile> tiles;
         List<string> lines;
         Player player;
+        public List<Texture2D> textures;
+        HashSet<string> textureNames;
+        List<string> songNames;
+        List<string> soundEffectNames;
 
-        public Level(Texture2D background, Texture2D foreground)
+        public Level(string backgroundName, string foregroundName, string mapPath, List<string> songNames, List<string> soundEffects)
         {
-            this.background = new Background();
-            this.foreground = new Background();
-            this.background.Initialize(background);
-            this.foreground.Initialize(foreground);
+            this.textures = new List<Texture2D>();
+            this.textureNames = new HashSet<string>();
+            this.songNames = songNames;
+            this.soundEffectNames = soundEffects;
+            StreamReader sr = new StreamReader(mapPath);
+            string line = sr.ReadLine();
+            string[] names = line.Split(' ');
+            foreach (string textureName in names)
+            {
+                if (textureName == "!") continue;
+                this.textureNames.Add(textureName);
+            }
+            LoadContent(backgroundName, foregroundName);
             this.player = Game1.player;
             tiles = new List<Tile>();
             lines = new List<string>();
-            StreamReader sr = new StreamReader("Content/Maps/testMap.txt");
-            string line = sr.ReadLine();
             while (line != null)
             {
                 lines.Add(line);
@@ -33,14 +50,46 @@ namespace LetsMakeAGame
             sr.Close();
             for (int i = 0; i < lines.Count; i++)
             {
+                if (lines[i].Contains("!")) continue;
                 for (int j = 0; j < lines[i].Length; j++)
                 {
-                    String s = lines[i].Substring(j, 1);
+                    string s = lines[i].Substring(j, 1);
                     if (s == " " || s == "\n") continue;
-                    Tile t = new Tile(s, new Vector2(j, i));
+                    Tile t = new Tile(this, s, new Vector2(j, i));
                     tiles.Add(t);
                 }
             }
+        }
+
+        public void LoadContent(string bg, string fg)
+        {
+            if (bg != "null")
+            {
+                Texture2D bg1 = Game1.contentMgr.Load<Texture2D>(bg);
+                this.background = new Background(bg1);
+            }
+            if (fg != "null")
+            {
+                Texture2D fg1 = Game1.contentMgr.Load<Texture2D>(fg);
+                this.foreground = new Background(fg1);
+            }
+            if (textureNames != null && textureNames.Count > 0)
+            {
+                foreach (string texture in textureNames) textures.Add(Game1.contentMgr.Load<Texture2D>(texture));
+            }
+            if (songNames != null && songNames.Count > 0)
+            {
+                foreach (string song in songNames) Game1.contentMgr.Load<Song>(song);
+            }
+            if (soundEffectNames != null && soundEffectNames.Count > 0)
+            {
+                foreach (string sfx in soundEffectNames) Game1.contentMgr.Load<SoundEffect>(sfx);
+            }
+        }
+
+        public void UnloadContent()
+        {
+
         }
 
         public void Update(GameTime gameTime)
@@ -48,14 +97,14 @@ namespace LetsMakeAGame
             player.Update();
             foreach (Tile t in tiles) t.Update(player);
             CheckCollision();
-            background.Update(player.boundary, player.speedX / 3, player.speedY / 3);
-            foreground.Update(player.boundary, player.speedX / 2, player.speedY / 2);
+            if(background != null) background.Update(player.boundary, player.speedX / 3, player.speedY / 3);
+            if(foreground != null) foreground.Update(player.boundary, player.speedX / 2, player.speedY / 2);
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            background.Draw(spriteBatch);
-            foreground.Draw(spriteBatch);
+            if(background != null) background.Draw(spriteBatch);
+            if(foreground != null) foreground.Draw(spriteBatch);
             foreach (Tile t in tiles) spriteBatch.Draw(t.texture, t.boundary, null, Color.White);
             player.Draw(spriteBatch);
         }
@@ -66,6 +115,15 @@ namespace LetsMakeAGame
             {
                 if (player.boundary.Intersects(t.boundary))
                 {
+                    //If the player lands on the right or left hand side of the upper corner, do this, otherwise, they could get stuck.
+                    if (player.bottom.Intersects(t.boundary) && (player.left.Intersects(t.boundary) || player.right.Intersects(t.boundary)))
+                    {
+                        player.boundary.Y = t.boundary.Top - player.boundary.Height;
+                        player.jumped = false;
+                        player.speedY = 0;
+                        player.canJump = true;
+                        continue;
+                    }
                     if (player.bottom.Intersects(t.boundary))
                     {
                         player.boundary.Y = t.boundary.Top - player.boundary.Height;

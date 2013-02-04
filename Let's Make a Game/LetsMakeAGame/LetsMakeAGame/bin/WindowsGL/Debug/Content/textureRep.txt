@@ -1,0 +1,10 @@
+﻿1 rockTile
+rockTile 1
+2 leopardTile
+leopardTile 2
+3 starsTile
+starsTile 3
+4 tiles
+tiles 4
+5 spikes
+spikes 5

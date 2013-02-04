@@ -64,6 +64,24 @@
       <Output>C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LMAG\LMAG\bin\Windows\Content\myFont.xnb</Output>
       <Time>2013-01-25T21:24:27.6466911-08:00</Time>
     </Item>
+    <Item>
+      <Source>spikes.png</Source>
+      <Name>spikes</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>MGTextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LMAG\LMAG\bin\Windows\Content\spikes.xnb</Output>
+      <Time>2013-02-03T13:36:24.3125654-08:00</Time>
+    </Item>
+    <Item>
+      <Source>tiles.png</Source>
+      <Name>tiles</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>MGTextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LMAG\LMAG\bin\Windows\Content\tiles.xnb</Output>
+      <Time>2013-02-03T13:36:31.7692355-08:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <ContentProjectGUID>{99828554-2646-4732-B1A1-227A2FB01800}</ContentProjectGUID>

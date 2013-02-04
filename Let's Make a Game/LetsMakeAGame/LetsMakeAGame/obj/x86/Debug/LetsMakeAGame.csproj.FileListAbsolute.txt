@@ -26,3 +26,7 @@ C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\Let
 C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LetsMakeAGame\bin\WindowsGL\Debug\Content\starsTile.xnb
 C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LetsMakeAGame\bin\WindowsGL\Debug\Content\leopardTile.xnb
 C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LetsMakeAGame\obj\x86\Debug\LetsMakeAGame.csprojResolveAssemblyReference.cache
+C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LetsMakeAGame\bin\WindowsGL\Debug\Content\spikes.xnb
+C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LetsMakeAGame\bin\WindowsGL\Debug\Content\tiles.xnb
+C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LetsMakeAGame\bin\WindowsGL\Debug\Content\Maps\impossibleMap.txt
+C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LetsMakeAGame\bin\WindowsGL\Debug\Content\textureRep.txt
