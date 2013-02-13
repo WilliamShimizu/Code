@@ -7,5 +7,6 @@ Content\starsTile.xnb
 Content\myFont.xnb
 Content\spikes.xnb
 Content\tiles.xnb
-Content\foreground.png
+Content\Cloud.xnb
+Content\engineeringBlock.xnb
 Content\myFont.spritefont

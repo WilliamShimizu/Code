@@ -47,7 +47,7 @@ namespace LetsMakeAGame
             ground = (int)Game1.center.Y + 200;
         }
 
-        public void Update()
+        public virtual void Update(GameTime gameTime)
         {
             //Update Position
             if (jumped)
@@ -68,15 +68,15 @@ namespace LetsMakeAGame
             //Set Collision Boundaries
             top.X = boundary.X + 7;
             top.Y = boundary.Y - 7;
-            left.X = boundary.X - 7;
-            left.Y = boundary.Y + 7;
             bottom.X = boundary.X + 7;
             bottom.Y = boundary.Y + boundary.Height + 7;
+            left.X = boundary.X - 7;
+            left.Y = boundary.Y + 7;
             right.X = boundary.X + boundary.Width + 7;
             right.Y = boundary.Y + 7;
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public virtual void Draw(SpriteBatch spriteBatch)
         {
             //using the overload of Draw that requires a destination and source rectangle. We can keep the source as is
             //and scale the destination rectangle as needed (once we implement scaling).
@@ -93,6 +93,11 @@ namespace LetsMakeAGame
             speedY = -moveSpeed;
             jumped = true;
             jumpPoint = new Vector2(boundary.X, boundary.Y);
+        }
+
+        public virtual void Special()
+        {
+
         }
     }
 }

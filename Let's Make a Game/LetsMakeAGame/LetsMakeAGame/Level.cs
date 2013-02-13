@@ -23,6 +23,9 @@ namespace LetsMakeAGame
         HashSet<string> textureNames;
         List<string> songNames;
         List<string> soundEffectNames;
+        public List<EngineeringBlock> blocks;
+
+        public List<Player> players;
 
         public Level(string backgroundName, string foregroundName, string mapPath, List<string> songNames, List<string> soundEffects)
         {
@@ -94,7 +97,8 @@ namespace LetsMakeAGame
 
         public void Update(GameTime gameTime)
         {
-            player.Update();
+            //player.speedX = 5;
+            player.Update(gameTime);
             foreach (Tile t in tiles) t.Update(player);
             CheckCollision();
             if(background != null) background.Update(player.boundary, player.speedX / 3, player.speedY / 3);

@@ -82,6 +82,24 @@
       <Output>C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LMAG\LMAG\bin\Windows\Content\tiles.xnb</Output>
       <Time>2013-02-03T13:36:31.7692355-08:00</Time>
     </Item>
+    <Item>
+      <Source>Cloud.png</Source>
+      <Name>Cloud</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>MGTextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LMAG\LMAG\bin\Windows\Content\Cloud.xnb</Output>
+      <Time>2013-02-12T22:23:27.5222691-08:00</Time>
+    </Item>
+    <Item>
+      <Source>engineeringBlock.png</Source>
+      <Name>engineeringBlock</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>MGTextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LMAG\LMAG\bin\Windows\Content\engineeringBlock.xnb</Output>
+      <Time>2013-02-12T23:34:16.2317009-08:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <ContentProjectGUID>{99828554-2646-4732-B1A1-227A2FB01800}</ContentProjectGUID>

@@ -27,6 +27,11 @@ namespace LetsMakeAGame
         public static Player player;
         public static Vector2 center;
 
+        ////////////////////////////////////////TEST
+        public static Texture2D cloud;
+        public static Texture2D engineeringBlock;
+        ////////////////////////////////////////TEST
+
         public static GraphicsDevice gd;
 
         public static Level level;
@@ -86,7 +91,7 @@ namespace LetsMakeAGame
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            player = new Player();
+            player = new Engineer();
             ground = GraphicsDevice.Viewport.TitleSafeArea.Height - 40;
             scale = (float)((double)(1600 * 900) / (double)(1600 * 900));
             base.Initialize();
@@ -104,6 +109,10 @@ namespace LetsMakeAGame
             //DEBUG
             font = Content.Load<SpriteFont>("myFont");
             ///////
+            cloud = Content.Load<Texture2D>("Cloud");
+            engineeringBlock = Content.Load<Texture2D>("engineeringBlock");
+
+
             
             player.Initialize(playerTexture, new Vector2(60, GraphicsDevice.Viewport.TitleSafeArea.Height - playerTexture.Height), GraphicsDevice.Viewport);
             List<string> songNames = new List<string>();
@@ -183,10 +192,11 @@ namespace LetsMakeAGame
                 player.speedY = PLAYER_MOVE_SPEED;
             }
             else if(!player.jumped) player.speedY = 0;
-            if (currentKeyboardState.IsKeyDown(Keys.Space) && !player.jumped && player.canJump)
+            if (currentKeyboardState.IsKeyDown(Keys.Space) && !player.jumped && player.canJump && !previousKeyboardState.IsKeyDown(Keys.Space))
             {
                 player.Jump(PLAYER_MOVE_SPEED);
             }
+            if (currentKeyboardState.IsKeyDown(Keys.LeftShift) && !previousKeyboardState.IsKeyDown(Keys.LeftShift)) player.Special();
             //DEBUG
             if(currentKeyboardState.IsKeyDown(Keys.G))
             {
@@ -198,6 +208,7 @@ namespace LetsMakeAGame
                 else player.gravityIsOn = true;
             }
             ////////
+            previousKeyboardState = currentKeyboardState;
         }
     }
 }
