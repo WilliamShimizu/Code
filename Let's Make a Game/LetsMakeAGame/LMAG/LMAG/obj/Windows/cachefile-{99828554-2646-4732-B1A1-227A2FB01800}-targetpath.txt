@@ -9,4 +9,5 @@ Content\spikes.xnb
 Content\tiles.xnb
 Content\Cloud.xnb
 Content\engineeringBlock.xnb
+Content\dot.xnb
 Content\myFont.spritefont

@@ -9,6 +9,8 @@ using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.GamerServices;
 using System.Collections;
 using System.IO;
+
+using LetsMakeAGame.Players;
 #endregion
 
 namespace LetsMakeAGame
@@ -44,8 +46,11 @@ namespace LetsMakeAGame
 
         public static float scale;
 
-        KeyboardState currentKeyboardState;
-        KeyboardState previousKeyboardState;
+        public static KeyboardState currentKeyboardState;
+        public static KeyboardState previousKeyboardState;
+
+        public static MouseState currentMouseState;
+        public static MouseState previousMouseState;
 
         public Game1()
             : base()
@@ -91,7 +96,8 @@ namespace LetsMakeAGame
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            player = new Engineer();
+            this.IsMouseVisible = true;
+            player = new QA();
             ground = GraphicsDevice.Viewport.TitleSafeArea.Height - 40;
             scale = (float)((double)(1600 * 900) / (double)(1600 * 900));
             base.Initialize();
@@ -140,10 +146,12 @@ namespace LetsMakeAGame
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-            previousKeyboardState = currentKeyboardState;
             currentKeyboardState = Keyboard.GetState();
+            currentMouseState = Mouse.GetState();
             // TODO: Add your update logic here
-            GetInput();
+            level.GetInput(currentKeyboardState, previousKeyboardState, currentMouseState, previousMouseState, gameTime);
+            previousKeyboardState = currentKeyboardState;
+            previousMouseState = currentMouseState;
             level.Update(gameTime);
             //DEBUG
             tsaX = graphics.GraphicsDevice.Viewport.TitleSafeArea.Width;
@@ -170,45 +178,6 @@ namespace LetsMakeAGame
             // TODO: Add your drawing code here
 
             base.Draw(gameTime);
-        }
-
-        private void GetInput()
-        {
-            if (currentKeyboardState.IsKeyDown(Keys.A))
-            {
-                player.speedX = -PLAYER_MOVE_SPEED;
-            }
-            else if (currentKeyboardState.IsKeyDown(Keys.D))
-            {
-                player.speedX = PLAYER_MOVE_SPEED;
-            }
-            else player.speedX = 0;
-            if (currentKeyboardState.IsKeyDown(Keys.W))
-            {
-                player.speedY = -PLAYER_MOVE_SPEED;
-            }
-            else if (currentKeyboardState.IsKeyDown(Keys.S))
-            {
-                player.speedY = PLAYER_MOVE_SPEED;
-            }
-            else if(!player.jumped) player.speedY = 0;
-            if (currentKeyboardState.IsKeyDown(Keys.Space) && !player.jumped && player.canJump && !previousKeyboardState.IsKeyDown(Keys.Space))
-            {
-                player.Jump(PLAYER_MOVE_SPEED);
-            }
-            if (currentKeyboardState.IsKeyDown(Keys.LeftShift) && !previousKeyboardState.IsKeyDown(Keys.LeftShift)) player.Special();
-            //DEBUG
-            if(currentKeyboardState.IsKeyDown(Keys.G))
-            {
-                if (player.gravityIsOn)
-                {
-                    player.gravityIsOn = false;
-                    player.speedY = 0;
-                }
-                else player.gravityIsOn = true;
-            }
-            ////////
-            previousKeyboardState = currentKeyboardState;
         }
     }
 }

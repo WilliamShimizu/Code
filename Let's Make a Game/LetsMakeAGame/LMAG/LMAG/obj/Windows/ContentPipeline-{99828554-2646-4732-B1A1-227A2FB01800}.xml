@@ -100,6 +100,15 @@
       <Output>C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LMAG\LMAG\bin\Windows\Content\engineeringBlock.xnb</Output>
       <Time>2013-02-12T23:34:16.2317009-08:00</Time>
     </Item>
+    <Item>
+      <Source>dot.png</Source>
+      <Name>dot</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>MGTextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LMAG\LMAG\bin\Windows\Content\dot.xnb</Output>
+      <Time>2013-02-13T21:55:00.74971-08:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <ContentProjectGUID>{99828554-2646-4732-B1A1-227A2FB01800}</ContentProjectGUID>

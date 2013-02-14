@@ -4,12 +4,17 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-namespace LetsMakeAGame
+namespace LetsMakeAGame.Players
 {
     class Engineer : Player
     {
         public List<EngineeringBlock> blocks;
 
+        public Engineer()
+        {
+            blocks = new List<EngineeringBlock>();
+            blocks.Capacity = 5;
+        }
         public override void Special()
         {
             blocks.Add(new EngineeringBlock(this));
@@ -23,11 +28,6 @@ namespace LetsMakeAGame
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-            if (blocks == null)
-            {
-                blocks = new List<EngineeringBlock>();
-                blocks.Capacity = 5;
-            }
             foreach (EngineeringBlock block in blocks)
             {
                 block.Update(this);
@@ -61,7 +61,7 @@ namespace LetsMakeAGame
         {
             this.boundary.Y += 6;
             if (player.boundary.X >= Game1.center.X + 200 || player.boundary.X <= Game1.center.X - 200) boundary.X -= player.speedX;
-            if (player.boundary.Y >= Game1.center.Y + 200 || player.boundary.Y <= Game1.center.Y - 200) boundary.Y -= player.speedX;
+            if (player.boundary.Y >= Game1.center.Y + 200 || player.boundary.Y <= Game1.center.Y - 200) boundary.Y -= player.speedY;
         }
 
         public void Draw(SpriteBatch spriteBatch)

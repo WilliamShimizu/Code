@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-namespace LetsMakeAGame
+namespace LetsMakeAGame.Players
 {
     class Designer : Player
     {
@@ -32,6 +32,9 @@ namespace LetsMakeAGame
         }
     }
 
+    /// <summary>
+    /// Cloud that the designer can create.
+    /// </summary>
     public class Cloud
     {
         public Rectangle boundary;
@@ -42,6 +45,10 @@ namespace LetsMakeAGame
 
         public bool isActive;
 
+        /// <summary>
+        /// Constructs the cloud object
+        /// </summary>
+        /// <param name="player">uses the player's position as a reference for the spawn point.</param>
         public Cloud(Player player)
         {
             this.texture = Game1.cloud;

@@ -10,13 +10,15 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Media;
 using System.Collections.Generic;
 
+using LetsMakeAGame.Players;
+
 namespace LetsMakeAGame
 {
     public class Level
     {
         public Background background;
         public Background foreground;
-        public static List<Tile> tiles;
+        public List<Tile> tiles;
         List<string> lines;
         Player player;
         public List<Texture2D> textures;
@@ -24,9 +26,17 @@ namespace LetsMakeAGame
         List<string> songNames;
         List<string> soundEffectNames;
         public List<EngineeringBlock> blocks;
-
+        const int PLAYER_MOVE_SPEED = 6;
         public List<Player> players;
 
+        /// <summary>
+        /// Constructs the major things needed for the level
+        /// </summary>
+        /// <param name="backgroundName">Name of the background Image</param>
+        /// <param name="foregroundName">Name of the foreground Image</param>
+        /// <param name="mapPath">Name of the Map</param>
+        /// <param name="songNames">List of song names that will be played in the level</param>
+        /// <param name="soundEffects"></param>
         public Level(string backgroundName, string foregroundName, string mapPath, List<string> songNames, List<string> soundEffects)
         {
             this.textures = new List<Texture2D>();
@@ -42,7 +52,11 @@ namespace LetsMakeAGame
                 this.textureNames.Add(textureName);
             }
             LoadContent(backgroundName, foregroundName);
-            this.player = Game1.player;
+            player = Game1.player;
+            if (player is Engineer)
+            {
+                blocks = ((Engineer)player).blocks;
+            }
             tiles = new List<Tile>();
             lines = new List<string>();
             while (line != null)
@@ -64,6 +78,11 @@ namespace LetsMakeAGame
             }
         }
 
+        /// <summary>
+        /// Load Content such as textures, songs, sfx, etc.
+        /// </summary>
+        /// <param name="bg">Name of the background file</param>
+        /// <param name="fg">Name of the foreground file</param>
         public void LoadContent(string bg, string fg)
         {
             if (bg != "null")
@@ -90,11 +109,18 @@ namespace LetsMakeAGame
             }
         }
 
+        /// <summary>
+        /// Unload content when the level has been completed.
+        /// </summary>
         public void UnloadContent()
         {
 
         }
 
+        /// <summary>
+        /// Updates the position of everything in relation to the player.
+        /// </summary>
+        /// <param name="gameTime"></param>
         public void Update(GameTime gameTime)
         {
             //player.speedX = 5;
@@ -105,6 +131,10 @@ namespace LetsMakeAGame
             if(foreground != null) foreground.Update(player.boundary, player.speedX / 2, player.speedY / 2);
         }
 
+        /// <summary>
+        /// Draws the backgrounds, tiles, and player.
+        /// </summary>
+        /// <param name="spriteBatch">SpriteBatch used from the Game1</param>
         public void Draw(SpriteBatch spriteBatch)
         {
             if(background != null) background.Draw(spriteBatch);
@@ -113,13 +143,80 @@ namespace LetsMakeAGame
             player.Draw(spriteBatch);
         }
 
+        public void GetInput(KeyboardState currentKeyboardState, KeyboardState previousKeyboardState, MouseState currentMouseState, MouseState previousMouseState, GameTime gameTime)
+        {
+            //Mouse
+            if (currentMouseState.LeftButton == ButtonState.Pressed)
+            {
+                if (player is Artist)
+                {
+                    Artist art = (Artist)player;
+                    art.Special(new Vector2(currentMouseState.X, currentMouseState.Y));
+                }
+                if (player is QA && previousMouseState.LeftButton == ButtonState.Released)
+                {
+                    QA qa = (QA)player;
+                    qa.Special(new Vector2(currentMouseState.X, currentMouseState.Y), this);
+                }
+            }
+
+            if (currentMouseState.LeftButton == ButtonState.Released && previousMouseState.LeftButton == ButtonState.Pressed)
+            {
+                if (player is Artist)
+                {
+                    Artist art = (Artist)player;
+                    art.ReleaseSpecial();
+                }
+            }
+
+            //Keyboard
+            if (currentKeyboardState.IsKeyDown(Keys.A))
+            {
+                player.speedX = -PLAYER_MOVE_SPEED;
+            }
+            else if (currentKeyboardState.IsKeyDown(Keys.D))
+            {
+                player.speedX = PLAYER_MOVE_SPEED;
+            }
+            else player.speedX = 0;
+            if (currentKeyboardState.IsKeyDown(Keys.W))
+            {
+                player.speedY = -PLAYER_MOVE_SPEED;
+            }
+            else if (currentKeyboardState.IsKeyDown(Keys.S))
+            {
+                player.speedY = PLAYER_MOVE_SPEED;
+            }
+            else if (!player.jumped) player.speedY = 0;
+            if (currentKeyboardState.IsKeyDown(Keys.Space) && !player.jumped && player.canJump && !previousKeyboardState.IsKeyDown(Keys.Space))
+            {
+                player.Jump(PLAYER_MOVE_SPEED);
+            }
+            if (currentKeyboardState.IsKeyDown(Keys.LeftShift) && !previousKeyboardState.IsKeyDown(Keys.LeftShift)) player.Special();
+            //DEBUG
+            if (currentKeyboardState.IsKeyDown(Keys.G))
+            {
+                if (player.gravityIsOn)
+                {
+                    player.gravityIsOn = false;
+                    player.speedY = 0;
+                }
+                else player.gravityIsOn = true;
+            }
+            ////////
+            
+        }
+
+        /// <summary>
+        /// Updates collision for player and engineering blocks
+        /// </summary>
         public void CheckCollision()
         {
             foreach (Tile t in tiles)
             {
+                //If the player lands on the right or left hand side of the upper corner, do this, otherwise, they could get stuck.
                 if (player.boundary.Intersects(t.boundary))
                 {
-                    //If the player lands on the right or left hand side of the upper corner, do this, otherwise, they could get stuck.
                     if (player.bottom.Intersects(t.boundary) && (player.left.Intersects(t.boundary) || player.right.Intersects(t.boundary)))
                     {
                         player.boundary.Y = t.boundary.Top - player.boundary.Height;
@@ -152,6 +249,17 @@ namespace LetsMakeAGame
                         player.speedX = 0;
                     }
                 }
+                //foreach (EngineeringBlock block in blocks)
+                //{
+                //    /////////////////////////////////This is no good.
+                //    if (block.boundary.Intersects(t.boundary))
+                //    {
+                //        if (block.boundary.Y + block.boundary.Height >= t.boundary.Y) block.boundary.Y = t.boundary.Y - block.boundary.Height;
+                //        if (block.boundary.Y <= t.boundary.Y + t.boundary.Height) block.boundary.Y = t.boundary.Y + t.boundary.Height;
+                //        if (block.boundary.X + block.boundary.Width >= t.boundary.X) block.boundary.X = t.boundary.X + block.boundary.Width;
+                //        if (block.boundary.X <= t.boundary.X + t.boundary.Width) block.boundary.X = t.boundary.X + t.boundary.Width;
+                //    }
+                //}
             }
         }
     }
