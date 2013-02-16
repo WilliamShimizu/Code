@@ -188,12 +188,15 @@ namespace LetsMakeAGame
             {
                 player.speedY = PLAYER_MOVE_SPEED;
             }
-            else if (!player.jumped) player.speedY = 0;
-            if (currentKeyboardState.IsKeyDown(Keys.Space) && !player.jumped && player.canJump && !previousKeyboardState.IsKeyDown(Keys.Space))
+            if (currentKeyboardState.IsKeyDown(Keys.Space) && player.canJump && !previousKeyboardState.IsKeyDown(Keys.Space))
             {
                 player.Jump(PLAYER_MOVE_SPEED);
             }
             if (currentKeyboardState.IsKeyDown(Keys.LeftShift) && !previousKeyboardState.IsKeyDown(Keys.LeftShift)) player.Special();
+            if (player is Musician)
+            {
+                if (currentKeyboardState.IsKeyUp(Keys.LeftShift) && previousKeyboardState.IsKeyDown(Keys.LeftShift)) ((Musician)player).ReleaseSpecial();
+            }
             //DEBUG
             if (currentKeyboardState.IsKeyDown(Keys.G))
             {
@@ -220,6 +223,7 @@ namespace LetsMakeAGame
                 {
                     if (player.boundary.Intersects(dot.boundary))
                     {
+                        if (player.top.Intersects(dot.boundary)) continue;
                         BasicCollision(player, dot.boundary);
                     }
                 }
@@ -247,7 +251,6 @@ namespace LetsMakeAGame
                     }
                 }
             }
-            
         }
 
         private void BasicCollision(Player player, Rectangle other)
@@ -255,7 +258,6 @@ namespace LetsMakeAGame
             if (player.bottom.Intersects(other) && (player.left.Intersects(other) || player.right.Intersects(other)))
             {
                 player.boundary.Y = other.Top - player.boundary.Height;
-                player.jumped = false;
                 player.speedY = 0;
                 player.canJump = true;
                 return;
@@ -263,11 +265,9 @@ namespace LetsMakeAGame
             if (player.bottom.Intersects(other))
             {
                 player.boundary.Y = other.Top - player.boundary.Height;
-                player.jumped = false;
                 player.speedY = 0;
                 player.canJump = true;
             }
-            else player.canJump = false;
             if (player.top.Intersects(other))
             {
                 player.boundary.Y = other.Bottom;

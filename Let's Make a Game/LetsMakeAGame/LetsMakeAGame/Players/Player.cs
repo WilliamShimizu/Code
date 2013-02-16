@@ -14,7 +14,6 @@ namespace LetsMakeAGame.Players
         public int speedX { get; set; }
         public int speedY { get; set; }
 
-        public bool jumped { get; set; }
 
         //public Vector2 position;
         private Vector2 jumpPoint;
@@ -45,14 +44,14 @@ namespace LetsMakeAGame.Players
             bottom = new Rectangle(boundary.X + RECT_LEN, boundary.Y + boundary.Height + RECT_LEN, boundary.Width - RECT_LEN * 2, 1);
             left = new Rectangle(boundary.X - RECT_LEN, boundary.Y + RECT_LEN, 1, boundary.Height - RECT_LEN * 2);
             right = new Rectangle(boundary.X + boundary.Width + RECT_LEN, boundary.Y + RECT_LEN, 1, boundary.Height - RECT_LEN * 2);
-            jumped = false;
+            canJump = true;
             ground = (int)Game1.center.Y + 200;
         }
 
         public virtual void Update(GameTime gameTime)
         {
             //Update Position
-            if (jumped)
+            if (!canJump)
             {
                 if (boundary.Y <= jumpPoint.Y - JUMP_HEIGHT)
                 {
@@ -97,7 +96,7 @@ namespace LetsMakeAGame.Players
         public void Jump(int moveSpeed)
         {
             speedY = -moveSpeed;
-            jumped = true;
+            canJump = false;
             jumpPoint = new Vector2(boundary.X, boundary.Y);
         }
 

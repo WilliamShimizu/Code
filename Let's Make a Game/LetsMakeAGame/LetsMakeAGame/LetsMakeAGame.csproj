@@ -58,6 +58,7 @@
     <Compile Include="Game1.cs" />
     <Compile Include="Background.cs" />
     <Compile Include="Level.cs" />
+    <Compile Include="Players\Musician.cs" />
     <Compile Include="Players\Player.cs" />
     <Compile Include="Players\QA.cs" />
     <Compile Include="Program.cs" />

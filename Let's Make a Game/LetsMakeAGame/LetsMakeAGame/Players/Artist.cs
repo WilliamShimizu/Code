@@ -78,7 +78,7 @@ namespace LetsMakeAGame.Players
         private Rectangle textureBoundary;
         public Dot(int posX, int posY, int width, int height, Texture2D texture)
         {
-            textureBoundary = new Rectangle(posX, posY, width, height);
+            textureBoundary = new Rectangle(posX, posY, width + 10, height + 10);
             boundary = new Rectangle(posX, posY, width + 10, height + 10);
             this.texture = texture;
         }
@@ -100,6 +100,7 @@ namespace LetsMakeAGame.Players
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(texture, textureBoundary, null, Color.White);
+            //spriteBatch.Draw(texture, boundary, null, Color.White);
         }
     }
 }
