@@ -97,7 +97,7 @@ namespace LetsMakeAGame
         {
             // TODO: Add your initialization logic here
             this.IsMouseVisible = true;
-            player = new QA();
+            player = new Artist();
             ground = GraphicsDevice.Viewport.TitleSafeArea.Height - 40;
             scale = (float)((double)(1600 * 900) / (double)(1600 * 900));
             base.Initialize();

@@ -26,6 +26,7 @@ namespace LetsMakeAGame
         List<string> songNames;
         List<string> soundEffectNames;
         public List<EngineeringBlock> blocks;
+        public List<Dot> dots;
         const int PLAYER_MOVE_SPEED = 6;
         public List<Player> players;
 
@@ -56,6 +57,10 @@ namespace LetsMakeAGame
             if (player is Engineer)
             {
                 blocks = ((Engineer)player).blocks;
+            }
+            if (player is Artist)
+            {
+                dots = ((Artist)player).dots;
             }
             tiles = new List<Tile>();
             lines = new List<string>();
@@ -123,7 +128,6 @@ namespace LetsMakeAGame
         /// <param name="gameTime"></param>
         public void Update(GameTime gameTime)
         {
-            //player.speedX = 5;
             player.Update(gameTime);
             foreach (Tile t in tiles) t.Update(player);
             CheckCollision();
@@ -150,13 +154,11 @@ namespace LetsMakeAGame
             {
                 if (player is Artist)
                 {
-                    Artist art = (Artist)player;
-                    art.Special(new Vector2(currentMouseState.X, currentMouseState.Y));
+                    ((Artist)player).Special(new Vector2(currentMouseState.X, currentMouseState.Y));
                 }
                 if (player is QA && previousMouseState.LeftButton == ButtonState.Released)
                 {
-                    QA qa = (QA)player;
-                    qa.Special(new Vector2(currentMouseState.X, currentMouseState.Y), this);
+                    ((QA)player).Special(new Vector2(currentMouseState.X, currentMouseState.Y), this);
                 }
             }
 
@@ -164,8 +166,7 @@ namespace LetsMakeAGame
             {
                 if (player is Artist)
                 {
-                    Artist art = (Artist)player;
-                    art.ReleaseSpecial();
+                    ((Artist)player).ReleaseSpecial();
                 }
             }
 
@@ -212,54 +213,75 @@ namespace LetsMakeAGame
         /// </summary>
         public void CheckCollision()
         {
+            if (dots != null && dots.Count > 0)
+            {
+                player.UpdateCollisionBoundaries(false);
+                foreach (Dot dot in dots)
+                {
+                    if (player.boundary.Intersects(dot.boundary))
+                    {
+                        BasicCollision(player, dot.boundary);
+                    }
+                }
+            }
+            player.UpdateCollisionBoundaries(true);
             foreach (Tile t in tiles)
             {
                 //If the player lands on the right or left hand side of the upper corner, do this, otherwise, they could get stuck.
                 if (player.boundary.Intersects(t.boundary))
                 {
-                    if (player.bottom.Intersects(t.boundary) && (player.left.Intersects(t.boundary) || player.right.Intersects(t.boundary)))
+                    BasicCollision(player, t.boundary);
+                }
+                if (blocks != null && blocks.Count > 0)
+                {
+                    foreach (EngineeringBlock block in blocks)
                     {
-                        player.boundary.Y = t.boundary.Top - player.boundary.Height;
-                        player.jumped = false;
-                        player.speedY = 0;
-                        player.canJump = true;
-                        continue;
-                    }
-                    if (player.bottom.Intersects(t.boundary))
-                    {
-                        player.boundary.Y = t.boundary.Top - player.boundary.Height;
-                        player.jumped = false;
-                        player.speedY = 0;
-                        player.canJump = true;
-                    }
-                    else player.canJump = false;
-                    if (player.top.Intersects(t.boundary))
-                    {
-                        player.boundary.Y = t.boundary.Bottom;
-                        player.speedY = 6;
-                    }
-                    if (player.left.Intersects(t.boundary))
-                    {
-                        player.boundary.X = t.boundary.Right;
-                        player.speedX = 0;
-                    }
-                    if (player.right.Intersects(t.boundary))
-                    {
-                        player.boundary.X = t.boundary.Left - player.boundary.Width;
-                        player.speedX = 0;
+                        /////////////////////////////////This is no good.
+                        if (block.boundary.Intersects(t.boundary))
+                        {
+                            if (block.boundary.Y + block.boundary.Height >= t.boundary.Y) block.boundary.Y = t.boundary.Y - block.boundary.Height;
+                            if (block.boundary.Y <= t.boundary.Y + t.boundary.Height) block.boundary.Y = t.boundary.Y + t.boundary.Height;
+                            if (block.boundary.X + block.boundary.Width >= t.boundary.X) block.boundary.X = t.boundary.X + block.boundary.Width;
+                            if (block.boundary.X <= t.boundary.X + t.boundary.Width) block.boundary.X = t.boundary.X + t.boundary.Width;
+                        }
                     }
                 }
-                //foreach (EngineeringBlock block in blocks)
-                //{
-                //    /////////////////////////////////This is no good.
-                //    if (block.boundary.Intersects(t.boundary))
-                //    {
-                //        if (block.boundary.Y + block.boundary.Height >= t.boundary.Y) block.boundary.Y = t.boundary.Y - block.boundary.Height;
-                //        if (block.boundary.Y <= t.boundary.Y + t.boundary.Height) block.boundary.Y = t.boundary.Y + t.boundary.Height;
-                //        if (block.boundary.X + block.boundary.Width >= t.boundary.X) block.boundary.X = t.boundary.X + block.boundary.Width;
-                //        if (block.boundary.X <= t.boundary.X + t.boundary.Width) block.boundary.X = t.boundary.X + t.boundary.Width;
-                //    }
-                //}
+            }
+            
+        }
+
+        private void BasicCollision(Player player, Rectangle other)
+        {
+            if (player.bottom.Intersects(other) && (player.left.Intersects(other) || player.right.Intersects(other)))
+            {
+                player.boundary.Y = other.Top - player.boundary.Height;
+                player.jumped = false;
+                player.speedY = 0;
+                player.canJump = true;
+                return;
+            }
+            if (player.bottom.Intersects(other))
+            {
+                player.boundary.Y = other.Top - player.boundary.Height;
+                player.jumped = false;
+                player.speedY = 0;
+                player.canJump = true;
+            }
+            else player.canJump = false;
+            if (player.top.Intersects(other))
+            {
+                player.boundary.Y = other.Bottom;
+                player.speedY = 6;
+            }
+            if (player.left.Intersects(other))
+            {
+                player.boundary.X = other.Right;
+                player.speedX = 0;
+            }
+            if (player.right.Intersects(other))
+            {
+                player.boundary.X = other.Left - player.boundary.Width;
+                player.speedX = 0;
             }
         }
     }
