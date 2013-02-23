@@ -10,4 +10,8 @@ Content\tiles.xnb
 Content\Cloud.xnb
 Content\engineeringBlock.xnb
 Content\dot.xnb
+Content\gridTexture.xnb
+Content\blankTile.xnb
+Content\selectedTile.xnb
+Content\crappyMenu.xnb
 Content\myFont.spritefont

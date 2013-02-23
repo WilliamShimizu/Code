@@ -77,7 +77,7 @@ namespace LetsMakeAGame
                 {
                     string s = lines[i].Substring(j, 1);
                     if (s == " " || s == "\n") continue;
-                    Tile t = new Tile(this, s, new Vector2(j, i));
+                    Tile t = new Tile(textures, s, new Vector2(j, i));
                     tiles.Add(t);
                 }
             }

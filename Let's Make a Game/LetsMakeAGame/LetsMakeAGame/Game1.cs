@@ -37,12 +37,16 @@ namespace LetsMakeAGame
         public static GraphicsDevice gd;
 
         public static Level level;
+        public static LevelEditor le;
+
         public static Hashtable textureLookupTable;
 
         int tsaX;
         int tsaY;
         const int PLAYER_MOVE_SPEED = 6;
         int ground;
+
+        public static Viewport viewport;
 
         public static float scale;
 
@@ -61,8 +65,14 @@ namespace LetsMakeAGame
             Window.AllowUserResizing = false;
             //ResolutionChooser r = new ResolutionChooser();
             //r.Show();
-            graphics.PreferredBackBufferWidth = 1600;
-            graphics.PreferredBackBufferHeight = 900;
+            viewport = this.GraphicsDevice.Viewport;
+            int width = 1600;
+            int height = 900;
+            graphics.PreferredBackBufferWidth = width;
+            graphics.PreferredBackBufferHeight = height;
+            viewport.Width = graphics.PreferredBackBufferWidth;
+            viewport.Height = graphics.PreferredBackBufferHeight;
+            scale = (float)((double)(width * height) / (double)(1600 * 900));
             center = new Vector2((int)graphics.PreferredBackBufferWidth / 2, (int)graphics.PreferredBackBufferHeight / 2);
             contentMgr = this.Content;
             textureLookupTable = new Hashtable();
@@ -99,7 +109,6 @@ namespace LetsMakeAGame
             this.IsMouseVisible = true;
             player = new Artist();
             ground = GraphicsDevice.Viewport.TitleSafeArea.Height - 40;
-            scale = (float)((double)(1600 * 900) / (double)(1600 * 900));
             base.Initialize();
         }
 
@@ -123,8 +132,8 @@ namespace LetsMakeAGame
             player.Initialize(playerTexture, new Vector2(60, GraphicsDevice.Viewport.TitleSafeArea.Height - playerTexture.Height), GraphicsDevice.Viewport);
             List<string> songNames = new List<string>();
             List<string> sfxNames = new List<string>();
-            level = new Level("background", "foreground", "Content/Maps/impossibleMap.txt", songNames, sfxNames);
-            
+            //level = new Level("background", "foreground", "Content/Maps/impossibleMap.txt", songNames, sfxNames);
+            le = new LevelEditor();
             // TODO: use this.Content to load your game content here
         }
 
@@ -149,10 +158,14 @@ namespace LetsMakeAGame
             currentKeyboardState = Keyboard.GetState();
             currentMouseState = Mouse.GetState();
             // TODO: Add your update logic here
-            level.GetInput(currentKeyboardState, previousKeyboardState, currentMouseState, previousMouseState, gameTime);
+            //level.GetInput(currentKeyboardState, previousKeyboardState, currentMouseState, previousMouseState, gameTime);
+            le.GetInput(currentKeyboardState, previousKeyboardState, currentMouseState, previousMouseState, gameTime);
+            
             previousKeyboardState = currentKeyboardState;
             previousMouseState = currentMouseState;
-            level.Update(gameTime);
+
+            le.Update(gameTime);
+            //level.Update(gameTime);
             //DEBUG
             tsaX = graphics.GraphicsDevice.Viewport.TitleSafeArea.Width;
             tsaY = graphics.GraphicsDevice.Viewport.TitleSafeArea.Height;
@@ -168,16 +181,32 @@ namespace LetsMakeAGame
         {
             GraphicsDevice.Clear(Color.White);
             spriteBatch.Begin();
-            level.Draw(spriteBatch);
+            //level.Draw(spriteBatch);
+            le.Draw(spriteBatch);
             //DEBUG
-            spriteBatch.DrawString(font, "TSArea X: " + tsaX, new Vector2(0, 0), Color.Gray);
-            spriteBatch.DrawString(font, "TSArea Y: " + tsaY, new Vector2(0, 20), Color.Gray);
-            spriteBatch.DrawString(font, "Player X: " + player.boundary.X, new Vector2(0, 40), Color.Gray);
-            spriteBatch.DrawString(font, "Player Y: " + player.boundary.Y, new Vector2(0, 60), Color.Gray);
+            //spriteBatch.DrawString(font, "TSArea X: " + tsaX, new Vector2(0, 0), Color.Gray);
+            //spriteBatch.DrawString(font, "TSArea Y: " + tsaY, new Vector2(0, 20), Color.Gray);
+            //spriteBatch.DrawString(font, "Player X: " + player.boundary.X, new Vector2(0, 40), Color.Gray);
+            //spriteBatch.DrawString(font, "Player Y: " + player.boundary.Y, new Vector2(0, 60), Color.Gray);
             spriteBatch.End();
             // TODO: Add your drawing code here
 
             base.Draw(gameTime);
+        }
+
+        public static Rectangle getRect(Vector2 position, Texture2D texture)
+        {
+            return new Rectangle((int)(position.X * scale), (int)(position.Y * scale), (int)(texture.Width * scale), (int)(texture.Height * scale));
+        }
+
+        public static Rectangle getRect(Texture2D texture)
+        {
+            return new Rectangle(0, 0, (int)(texture.Width * scale), (int)(texture.Height * scale));
+        }
+
+        public static Texture2D getTexture(string name)
+        {
+            return contentMgr.Load<Texture2D>(name);
         }
     }
 }

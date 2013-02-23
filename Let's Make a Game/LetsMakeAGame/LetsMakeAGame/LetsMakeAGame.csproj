@@ -52,12 +52,13 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Levels\LevelEditor.cs" />
     <Compile Include="Players\Artist.cs" />
     <Compile Include="Players\Designer.cs" />
     <Compile Include="Players\Engineer.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Background.cs" />
-    <Compile Include="Level.cs" />
+    <Compile Include="Levels\Level.cs" />
     <Compile Include="Players\Musician.cs" />
     <Compile Include="Players\Player.cs" />
     <Compile Include="Players\QA.cs" />
@@ -70,6 +71,7 @@
       <DependentUpon>ResolutionChooser.cs</DependentUpon>
     </Compile>
     <Compile Include="Tile.cs" />
+    <Compile Include="UI\Menu.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="OpenTK">
@@ -181,6 +183,26 @@
   <ItemGroup>
     <Content Include="Content\dot.xnb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\gridTexture.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\blankTile.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\selectedTile.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\crappyMenu.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
