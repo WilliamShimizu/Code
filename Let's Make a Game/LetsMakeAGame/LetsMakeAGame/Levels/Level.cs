@@ -77,7 +77,7 @@ namespace LetsMakeAGame
                 {
                     string s = lines[i].Substring(j, 1);
                     if (s == " " || s == "\n") continue;
-                    Tile t = new Tile(textures, s, new Vector2(j, i));
+                    Tile t = new Tile(textures, s, new Vector2(j * 40, i * 40));
                     tiles.Add(t);
                 }
             }
@@ -102,7 +102,7 @@ namespace LetsMakeAGame
             }
             if (textureNames != null && textureNames.Count > 0)
             {
-                foreach (string texture in textureNames) textures.Add(Game1.contentMgr.Load<Texture2D>(texture));
+                foreach (string texture in textureNames) textures.Add(Game1.contentMgr.Load<Texture2D>("Tiles/" + texture));
             }
             if (songNames != null && songNames.Count > 0)
             {

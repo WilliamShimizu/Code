@@ -1,0 +1,1 @@
+﻿This is where the user created maps are saved to.

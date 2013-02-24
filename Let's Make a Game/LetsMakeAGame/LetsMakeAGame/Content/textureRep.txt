@@ -8,3 +8,7 @@ starsTile 3
 tiles 4
 5 spikes
 spikes 5
+6 Block
+Block 6
+7 engineeringBlock
+engineeringBlock 7

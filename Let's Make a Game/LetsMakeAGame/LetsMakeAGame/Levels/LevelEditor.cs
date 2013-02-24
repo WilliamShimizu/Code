@@ -21,31 +21,35 @@ namespace LetsMakeAGame
         private Texture2D selectedTexture;
         private Texture2D menuTexture;
         private Vector2 mousePos;
-        private Tile selectedTilePos;
+        private Tile highlightTile;
         SpriteFont font;
         private Tile replacement;
         private int tileIndex;
         private bool highlightSelection;
         Menu menu;
+        List<string> textureNames;
+        Level testLevel;
 
         private int speedX;
         private int speedY;
 
         public LevelEditor()
         {
-            highlightSelection = true;
+            
             menuTexture = Game1.contentMgr.Load<Texture2D>("crappyMenu");
-            replacement = new Tile(Game1.contentMgr.Load<Texture2D>("engineeringBlock"), new Vector2(0, 0));
+            replacement = new Tile(Game1.contentMgr.Load<Texture2D>("Tiles/engineeringBlock"), new Vector2(0, 0));
             font = Game1.contentMgr.Load<SpriteFont>("myFont");
-            selectedTexture = Game1.contentMgr.Load<Texture2D>("selectedTile");
-            blankTile = Game1.contentMgr.Load<Texture2D>("blankTile");
+            selectedTexture = Game1.contentMgr.Load<Texture2D>("Tiles/selectedTile");
+            blankTile = Game1.contentMgr.Load<Texture2D>("Tiles/blankTile");
+            highlightSelection = true;
+            textureNames = new List<string>();
             menu = new Menu(menuTexture);
             tiles = new List<Tile>();
             mousePos = new Vector2();
-            selectedTilePos = new Tile(selectedTexture, new Vector2(0,0));
+            highlightTile = new Tile(selectedTexture, new Vector2(0,0));
             int height = Game1.viewport.Height;
             int width = Game1.viewport.Width;
-            int textureWidth = selectedTilePos.boundary.Width;
+            int textureWidth = highlightTile.boundary.Width;
             for (int i = 0; i < height; i += 40)
             {
                 for (int j = 0; j < width; j += 40)
@@ -55,28 +59,54 @@ namespace LetsMakeAGame
             }
         }
 
+        private void updateHighlightTexture(Rectangle boundary)
+        {
+            highlightTile.boundary.X = boundary.X - 5;
+            highlightTile.boundary.Y = boundary.Y - 5;
+            highlightTile.boundary.Width = boundary.Width + 10;
+            highlightTile.boundary.Height = boundary.Height + 10;
+        }
+
         public void Update(GameTime gameTime)
         {
+            //GetInput(Game1.currentKeyboardState, Game1.previousKeyboardState, Game1.currentMouseState, Game1.previousMouseState, gameTime);
             if (isWithin(mousePos, menu.position, menuTexture)) highlightSelection = false;
             else highlightSelection = true;
-            for(int i = 0; i < tiles.Count; i++)
+            if (testLevel != null)
             {
-                if (isWithin(mousePos, tiles[i].boundary))
+                testLevel.GetInput(Game1.currentKeyboardState, Game1.previousKeyboardState, Game1.currentMouseState, Game1.previousMouseState, gameTime);
+                testLevel.Update(gameTime);
+            }
+            else
+            {
                 {
-                    selectedTilePos.boundary.X = tiles[i].boundary.X - 5;
-                    selectedTilePos.boundary.Y = tiles[i].boundary.Y - 5;
-                    tileIndex = i;
-                    replacement.boundary.X = tiles[i].boundary.X;
-                    replacement.boundary.Y = tiles[i].boundary.Y;
+                    for (int i = 0; i < tiles.Count; i++)
+                    {
+                        if (isWithin(mousePos, tiles[i].boundary))
+                        {
+                            updateHighlightTexture(tiles[i].boundary);
+                            tileIndex = i;
+                            replacement.boundary.X = tiles[i].boundary.X;
+                            replacement.boundary.Y = tiles[i].boundary.Y;
+                        }
+                        tiles[i].Update(speedX, speedY);
+                    }
                 }
-                tiles[i].Update(speedX, speedY);
             }
             for (int i = 0; i < menu.tiles.Count; i++)
             {
                 if (isWithin(mousePos, menu.tiles[i].boundary))
                 {
-                    selectedTilePos.boundary.X = menu.tiles[i].boundary.X - 5;
-                    selectedTilePos.boundary.Y = menu.tiles[i].boundary.Y - 5;
+                    updateHighlightTexture(menu.tiles[i].boundary);
+                    highlightSelection = true;
+                }
+            }
+            for (int i = 0; i < menu.buttons.Count; i++)
+            {
+                if (isWithin(mousePos, menu.buttons[i].boundary))
+                {
+                    highlightTile.boundary = menu.buttons[i].boundary;
+                    updateHighlightTexture(menu.buttons[i].boundary);
                     highlightSelection = true;
                 }
             }
@@ -85,27 +115,60 @@ namespace LetsMakeAGame
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            foreach (Tile t in tiles) spriteBatch.Draw(t.texture, t.boundary, null, Color.White);
-            spriteBatch.DrawString(font, "mouse X: " + mousePos.X, new Vector2(0, 0), Color.Gray);
-            spriteBatch.DrawString(font, "mouse Y: " + mousePos.Y, new Vector2(0, 20), Color.Gray);
-            spriteBatch.DrawString(font, "tilePos X: " + selectedTilePos.boundary.X, new Vector2(0, 40), Color.Gray);
-            spriteBatch.DrawString(font, "tilePos Y: " + selectedTilePos.boundary.Y, new Vector2(0, 60), Color.Gray);
-            if (highlightSelection) spriteBatch.Draw(selectedTilePos.texture, selectedTilePos.boundary, null, Color.White);
+            if (testLevel != null)
+            {
+                testLevel.Draw(spriteBatch);
+            }
+            else
+            {
+                foreach (Tile t in tiles) spriteBatch.Draw(t.texture, t.boundary, null, Color.White);
+                spriteBatch.DrawString(font, "mouse X: " + mousePos.X, new Vector2(0, 0), Color.Gray);
+                spriteBatch.DrawString(font, "mouse Y: " + mousePos.Y, new Vector2(0, 20), Color.Gray);
+                spriteBatch.DrawString(font, "tilePos X: " + highlightTile.boundary.X, new Vector2(0, 40), Color.Gray);
+                spriteBatch.DrawString(font, "tilePos Y: " + highlightTile.boundary.Y, new Vector2(0, 60), Color.Gray);
+                if (highlightSelection)
+                {
+                    spriteBatch.Draw(replacement.texture, replacement.boundary, null, Color.White);
+                    spriteBatch.Draw(highlightTile.texture, highlightTile.boundary, null, Color.White);
+                }
+                //foreach (gridLine g in gridLines)
+                //{
+                //    g.Draw(spriteBatch);
+                //}
+            }
             menu.Draw(spriteBatch);
             if (highlightSelection && isWithin(mousePos, menu.position, menuTexture))
             {
-                spriteBatch.Draw(selectedTilePos.texture, selectedTilePos.boundary, null, Color.White);
+                spriteBatch.Draw(highlightTile.texture, highlightTile.boundary, null, Color.White);
             }
-            //foreach (gridLine g in gridLines)
-            //{
-            //    g.Draw(spriteBatch);
-            //}
         }
 
-        public void addObject()
+        private void Save()
         {
-
+            HashSet<string> set = new HashSet<string>(textureNames);
+            StreamWriter sw = new StreamWriter("Content/Maps/User Created Content/test.txt");
+            sw.Write("!");
+            foreach (string name in set)
+            {
+                sw.Write(" " + name);
+            }
+            sw.WriteLine();
+            
+            for (int i = 0; i < tiles.Count; i++)
+            {
+                if (i % 40 == 0) sw.WriteLine();
+                string textureName = tiles[i].texture.Name.ToString();
+                if (textureName == "Tiles/blankTile") sw.Write(" ");
+                else
+                {
+                    string number = Game1.textureLookupTable[textureName.Replace("Tiles/","")].ToString();
+                    sw.Write(number);
+                }
+            }
+            sw.Close();
         }
+
+
 
         private bool isWithin(Vector2 mouse, Vector2 obj, Texture2D txtr)
         {
@@ -121,12 +184,46 @@ namespace LetsMakeAGame
         {
             mousePos.X = currentMouseState.X;
             mousePos.Y = currentMouseState.Y;
+            if (testLevel != null)
+            {
+                if (currentMouseState.LeftButton == ButtonState.Released && previousMouseState.LeftButton == ButtonState.Pressed)
+                {
+                    if (isWithin(mousePos, menu.position, menuTexture))
+                    {
+                        bool isOverButton = false;
+                        foreach (Button b in menu.buttons)
+                        {
+                            if (isWithin(mousePos, b.boundary))
+                            {
+                                switch (b.texture.Name.Replace("Buttons/", ""))
+                                {
+                                    case "playMapButton":
+                                        //Do Stuff
+                                        break;
+                                    default:
+                                        break;
+                                }
+                                isOverButton = true;
+                                break;
+                            }
+                        }
+                        if (!isOverButton)
+                        {
+                            if (menu.isHidden) menu.isHidden = false;
+                            else menu.isHidden = true;
+                        }
+                    }
+                }
+                return;
+            }
             //Mouse
             if (currentMouseState.LeftButton == ButtonState.Pressed)
             {
                 if (!isWithin(mousePos, menu.position, menu.background) && tiles[tileIndex].texture.Name != replacement.texture.Name)
                 {
                     tiles[tileIndex] = replacement.Copy(tiles[tileIndex].position);
+                    string name = tiles[tileIndex].texture.Name.ToString();
+                    if (name != "Tiles/blankTile") textureNames.Add(name.Replace("Tiles/",""));
                     highlightSelection = false;
                 }
             }
@@ -141,6 +238,27 @@ namespace LetsMakeAGame
                     {
                         tileIndex = i;
                         isOverButton = true;
+                        break;
+                    }
+                }
+                for (int i = 0; i < menu.buttons.Count; i++)
+                {
+                    if (isWithin(mousePos, menu.buttons[i].boundary))
+                    {
+                        switch (menu.buttons[i].texture.Name.Replace("Buttons/",""))
+                        {
+                            case "playMapButton":
+                                tiles.Clear();
+                                testLevel = new Level("null", "null", "Content/Maps/User Created Content/test.txt", null, null);
+                                break;
+                            case "saveMapButton":
+                                Save();
+                                break;
+                            default:
+                                break;
+                        }
+                        isOverButton = true;
+                        break;
                     }
                 }
                 if (isWithin(mousePos, menu.position, menu.background) && !isOverButton)
@@ -157,8 +275,11 @@ namespace LetsMakeAGame
 
             if (currentMouseState.RightButton == ButtonState.Pressed)
             {
-                if (tiles[tileIndex].texture.Name != "blankTile")
+                string name = tiles[tileIndex].texture.Name.ToString();
+                if (name != "Tiles/blankTile")
                 {
+                    //replacement = new Tile(blankTile, tiles[tileIndex].position);
+                    textureNames.Remove(name);
                     tiles[tileIndex] = new Tile(blankTile, tiles[tileIndex].position);
                     highlightSelection = false;
                 }
@@ -174,7 +295,7 @@ namespace LetsMakeAGame
             {
                 for (int i = 0; i < tiles.Count; i++)
                 {
-                    if (tiles[i].texture.Name != "blankTile") tiles[i] = new Tile(blankTile, tiles[i].position);
+                    if (tiles[i].texture.Name != "Tiles/blankTile") tiles[i] = new Tile(blankTile, tiles[i].position);
                 }
             }
 

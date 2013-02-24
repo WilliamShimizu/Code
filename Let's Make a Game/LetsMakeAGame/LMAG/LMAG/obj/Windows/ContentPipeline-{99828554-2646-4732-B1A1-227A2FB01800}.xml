@@ -145,6 +145,24 @@
       <Output>C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LMAG\LMAG\bin\Windows\Content\crappyMenu.xnb</Output>
       <Time>2013-02-22T20:36:43.3824583-08:00</Time>
     </Item>
+    <Item>
+      <Source>playMapButton.png</Source>
+      <Name>playMapButton</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>MGTextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LMAG\LMAG\bin\Windows\Content\playMapButton.xnb</Output>
+      <Time>2013-02-23T14:24:27.6023786-08:00</Time>
+    </Item>
+    <Item>
+      <Source>saveMapButton.png</Source>
+      <Name>saveMapButton</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>MGTextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LMAG\LMAG\bin\Windows\Content\saveMapButton.xnb</Output>
+      <Time>2013-02-23T14:24:27.6033691-08:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <ContentProjectGUID>{99828554-2646-4732-B1A1-227A2FB01800}</ContentProjectGUID>

@@ -14,6 +14,7 @@ namespace LetsMakeAGame.UI
         public Vector2 position;
         public bool isHidden { get; set; }
         public List<Tile> tiles;
+        public List<Button> buttons;
 
         public Menu(Texture2D background)
         {
@@ -22,13 +23,20 @@ namespace LetsMakeAGame.UI
             position.Y = 0;
             isHidden = true;
             tiles = new List<Tile>();
-            tiles.Add(new Tile(Game1.getTexture("engineeringBlock"), new Vector2(1,1)));
-            tiles.Add(new Tile(Game1.getTexture("rockTile"), new Vector2(1, 1)));
-            tiles.Add(new Tile(Game1.getTexture("leopardTile"), new Vector2(1, 1)));
-            tiles.Add(new Tile(Game1.getTexture("starsTile"), new Vector2(1, 1)));
-            tiles.Add(new Tile(Game1.getTexture("spikes"), new Vector2(1, 1)));
-            tiles.Add(new Tile(Game1.getTexture("tiles"), new Vector2(1, 1)));
-            tiles.Add(new Tile(Game1.getTexture("Block"), new Vector2(1, 1)));
+            tiles.Add(new Tile(Game1.getTexture("Tiles/engineeringBlock"), new Vector2(1,1)));
+            tiles.Add(new Tile(Game1.getTexture("Tiles/rockTile"), new Vector2(1, 1)));
+            tiles.Add(new Tile(Game1.getTexture("Tiles/leopardTile"), new Vector2(1, 1)));
+            tiles.Add(new Tile(Game1.getTexture("Tiles/starsTile"), new Vector2(1, 1)));
+            tiles.Add(new Tile(Game1.getTexture("Tiles/spikes"), new Vector2(1, 1)));
+            tiles.Add(new Tile(Game1.getTexture("Tiles/tiles"), new Vector2(1, 1)));
+            tiles.Add(new Tile(Game1.getTexture("Tiles/Block"), new Vector2(1, 1)));
+            buttons = new List<Button>();
+            buttons.Add(new Button(Game1.getTexture("Buttons/playMapButton")));
+            buttons[0].boundary.Y = background.Height + (int)position.Y - 10 - buttons[0].texture.Height;
+            buttons[0].boundary.X = (int)position.X + 20;
+            buttons.Add(new Button(Game1.getTexture("Buttons/saveMapButton")));
+            buttons[1].boundary.Y = buttons[0].boundary.Y;
+            buttons[1].boundary.X = (int)buttons[0].boundary.X + 20;
         }
 
         public void Update(GameTime gameTime, int speedX, int speedY)
@@ -45,6 +53,14 @@ namespace LetsMakeAGame.UI
                 tiles[i].boundary.Y = y + ((i / 6) * 80);
                 tiles[i].Update(speedX, speedY);
             }
+            buttons[0].boundary.Y = background.Height + (int)position.Y - 10 - buttons[0].texture.Height;
+            buttons[0].boundary.X = (int)position.X + 20;
+            buttons[1].boundary.Y = buttons[0].boundary.Y;
+            buttons[1].boundary.X = (int)buttons[0].boundary.X + buttons[0].texture.Width + 20;
+            foreach (Button b in buttons)
+            {
+                b.Update(gameTime, speedX, speedY);
+            }
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -54,6 +70,10 @@ namespace LetsMakeAGame.UI
             {
                 t.Draw(spriteBatch);
             }
+            foreach (Button b in buttons)
+            {
+                b.Draw(spriteBatch);
+            }
         }
     }
 }
@@ -62,6 +82,7 @@ public class Button
 {
     public Texture2D texture;
     public Rectangle boundary;
+    public string text;
 
     public Button(Texture2D texture)
     {

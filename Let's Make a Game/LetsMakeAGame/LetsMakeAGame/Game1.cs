@@ -120,19 +120,20 @@ namespace LetsMakeAGame
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            playerTexture = Content.Load<Texture2D>("Block");
+            playerTexture = Content.Load<Texture2D>("Tiles/Block");
             //DEBUG
             font = Content.Load<SpriteFont>("myFont");
             ///////
             cloud = Content.Load<Texture2D>("Cloud");
-            engineeringBlock = Content.Load<Texture2D>("engineeringBlock");
+            engineeringBlock = Content.Load<Texture2D>("Tiles/engineeringBlock");
 
 
             
             player.Initialize(playerTexture, new Vector2(60, GraphicsDevice.Viewport.TitleSafeArea.Height - playerTexture.Height), GraphicsDevice.Viewport);
             List<string> songNames = new List<string>();
             List<string> sfxNames = new List<string>();
-            //level = new Level("background", "foreground", "Content/Maps/impossibleMap.txt", songNames, sfxNames);
+            string mapName = "Content/Maps/User Created Content/test.txt";
+            //level = new Level("background", "foreground", mapName, songNames, sfxNames);
             le = new LevelEditor();
             // TODO: use this.Content to load your game content here
         }
@@ -158,9 +159,7 @@ namespace LetsMakeAGame
             currentKeyboardState = Keyboard.GetState();
             currentMouseState = Mouse.GetState();
             // TODO: Add your update logic here
-            //level.GetInput(currentKeyboardState, previousKeyboardState, currentMouseState, previousMouseState, gameTime);
             le.GetInput(currentKeyboardState, previousKeyboardState, currentMouseState, previousMouseState, gameTime);
-            
             previousKeyboardState = currentKeyboardState;
             previousMouseState = currentMouseState;
 

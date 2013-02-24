@@ -30,7 +30,11 @@ namespace LetsMakeAGame
         {
             foreach (Texture2D txtr in textures)
             {
-                if ((string)Game1.textureLookupTable[txtr.Name] == tileNumRep) this.texture = txtr;
+                if ((string)(Game1.textureLookupTable[txtr.Name.Replace("Tiles/","")]) == tileNumRep)
+                {
+                    this.texture = txtr;
+                    break;
+                }
             }
             Vector2 pos = new Vector2((int)(position.X * texture.Width * Game1.scale), (int)(position.Y * texture.Height * Game1.scale));
             this.position = pos;
