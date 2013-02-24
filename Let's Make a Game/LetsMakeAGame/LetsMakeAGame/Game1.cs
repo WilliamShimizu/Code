@@ -159,12 +159,10 @@ namespace LetsMakeAGame
             currentKeyboardState = Keyboard.GetState();
             currentMouseState = Mouse.GetState();
             // TODO: Add your update logic here
-            le.GetInput(currentKeyboardState, previousKeyboardState, currentMouseState, previousMouseState, gameTime);
-            previousKeyboardState = currentKeyboardState;
-            previousMouseState = currentMouseState;
-
             le.Update(gameTime);
             //level.Update(gameTime);
+            previousKeyboardState = currentKeyboardState;
+            previousMouseState = currentMouseState;
             //DEBUG
             tsaX = graphics.GraphicsDevice.Viewport.TitleSafeArea.Width;
             tsaY = graphics.GraphicsDevice.Viewport.TitleSafeArea.Height;

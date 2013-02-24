@@ -69,7 +69,7 @@ namespace LetsMakeAGame
 
         public void Update(GameTime gameTime)
         {
-            //GetInput(Game1.currentKeyboardState, Game1.previousKeyboardState, Game1.currentMouseState, Game1.previousMouseState, gameTime);
+            GetInput(Game1.currentKeyboardState, Game1.previousKeyboardState, Game1.currentMouseState, Game1.previousMouseState, gameTime);
             if (isWithin(mousePos, menu.position, menuTexture)) highlightSelection = false;
             else highlightSelection = true;
             if (testLevel != null)
