@@ -14,6 +14,5 @@ Content\gridTexture.xnb
 Content\blankTile.xnb
 Content\selectedTile.xnb
 Content\crappyMenu.xnb
-Content\playMapButton.xnb
-Content\saveMapButton.xnb
+Content\Button.xnb
 Content\myFont.spritefont

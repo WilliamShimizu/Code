@@ -31,10 +31,10 @@ namespace LetsMakeAGame.UI
             tiles.Add(new Tile(Game1.getTexture("Tiles/tiles"), new Vector2(1, 1)));
             tiles.Add(new Tile(Game1.getTexture("Tiles/Block"), new Vector2(1, 1)));
             buttons = new List<Button>();
-            buttons.Add(new Button(Game1.getTexture("Buttons/playMapButton")));
+            buttons.Add(new Button(Game1.getTexture("Buttons/Button"), "Play Map"));
             buttons[0].boundary.Y = background.Height + (int)position.Y - 10 - buttons[0].texture.Height;
             buttons[0].boundary.X = (int)position.X + 20;
-            buttons.Add(new Button(Game1.getTexture("Buttons/saveMapButton")));
+            buttons.Add(new Button(Game1.getTexture("Buttons/Button"), "Save Map"));
             buttons[1].boundary.Y = buttons[0].boundary.Y;
             buttons[1].boundary.X = (int)buttons[0].boundary.X + 20;
         }
@@ -83,16 +83,24 @@ public class Button
     public Texture2D texture;
     public Rectangle boundary;
     public string text;
+    private Vector2 textCenter;
+    private Vector2 position;
 
-    public Button(Texture2D texture)
+    public Button(Texture2D texture, string text)
     {
         this.texture = texture;
+        this.text = text;
+        this.position = new Vector2();
+        textCenter = Game1.font.MeasureString(text) / 2;
         boundary = Game1.getRect(texture);
     }
 
-    public Button(Vector2 position, Texture2D texture)
+    public Button(Vector2 position, Texture2D texture, string text)
     {
         this.texture = texture;
+        this.text = text;
+        this.position = new Vector2();
+        textCenter = Game1.font.MeasureString(text) / 2;
         boundary = Game1.getRect(position, texture);
     }
 
@@ -100,10 +108,14 @@ public class Button
     {
         boundary.X -= speedX;
         boundary.Y -= speedY;
+        position.X = boundary.X;
+        position.Y = boundary.Y;
+        textCenter = position + (Game1.font.MeasureString(text) / 2);
     }
 
     public void Draw(SpriteBatch spriteBatch)
     {
         spriteBatch.Draw(texture, boundary, null, Color.White);
+        spriteBatch.DrawString(Game1.font, text, textCenter, Color.White);
     }
 }

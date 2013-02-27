@@ -25,7 +25,7 @@ namespace LetsMakeAGame
         SpriteBatch spriteBatch;
         Texture2D playerTexture;
 
-        SpriteFont font;
+        public static SpriteFont font;
         public static Player player;
         public static Vector2 center;
 
@@ -132,7 +132,7 @@ namespace LetsMakeAGame
             player.Initialize(playerTexture, new Vector2(60, GraphicsDevice.Viewport.TitleSafeArea.Height - playerTexture.Height), GraphicsDevice.Viewport);
             List<string> songNames = new List<string>();
             List<string> sfxNames = new List<string>();
-            string mapName = "Content/Maps/User Created Content/test.txt";
+            //string mapName = "Content/Maps/User Created Content/test.txt";
             //level = new Level("background", "foreground", mapName, songNames, sfxNames);
             le = new LevelEditor();
             // TODO: use this.Content to load your game content here

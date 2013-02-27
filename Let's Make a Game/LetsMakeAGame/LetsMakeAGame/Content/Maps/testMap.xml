@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Level>
+  <Textures>
+    <TextureName>"TextureName"</TextureName>
+  </Textures>
+  <Players>
+    <Player>
+      <Type>"Artist"</Type>
+      <PositionX>0</PositionX>
+      <PositionY>0</PositionY>
+    </Player>
+  </Players>
+  <Tiles>
+    <Tile>
+      <PositionX>0</PositionX>
+      <PositionY>40</PositionY>
+      <Length>40</Length>
+      <Width>40</Width>
+      <TextureName>"engineeringBlock"</TextureName>
+      <IsLethal>false</IsLethal>
+    </Tile>
+  </Tiles>
+</Level>

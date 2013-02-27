@@ -9,6 +9,8 @@ using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Media;
 using System.Collections.Generic;
+using System.Xml;
+
 using LetsMakeAGame.Players;
 using LetsMakeAGame.UI;
 
@@ -29,6 +31,8 @@ namespace LetsMakeAGame
         Menu menu;
         List<string> textureNames;
         Level testLevel;
+        List<Tile> tempTiles;
+        private Tile tempTile;
 
         private int speedX;
         private int speedY;
@@ -41,6 +45,7 @@ namespace LetsMakeAGame
             font = Game1.contentMgr.Load<SpriteFont>("myFont");
             selectedTexture = Game1.contentMgr.Load<Texture2D>("Tiles/selectedTile");
             blankTile = Game1.contentMgr.Load<Texture2D>("Tiles/blankTile");
+            tempTiles = new List<Tile>();
             highlightSelection = true;
             textureNames = new List<string>();
             menu = new Menu(menuTexture);
@@ -50,9 +55,9 @@ namespace LetsMakeAGame
             int height = Game1.viewport.Height;
             int width = Game1.viewport.Width;
             int textureWidth = highlightTile.boundary.Width;
-            for (int i = 0; i < height; i += 40)
+            for (int i = -height; i < height; i += 40)
             {
-                for (int j = 0; j < width; j += 40)
+                for (int j = -width; j < width; j += 40)
                 {
                     tiles.Add(new Tile(blankTile, new Vector2(j, i)));
                 }
@@ -143,10 +148,11 @@ namespace LetsMakeAGame
             }
         }
 
-        private void Save()
+        private void Save(bool temp)
         {
             HashSet<string> set = new HashSet<string>(textureNames);
-            StreamWriter sw = new StreamWriter("Content/Maps/User Created Content/test.txt");
+            string saveName = temp ? "$temp" : "temp";
+            StreamWriter sw = new StreamWriter("Content/Maps/User Created Content/" + saveName + ".txt");
             sw.Write("!");
             foreach (string name in set)
             {
@@ -156,7 +162,7 @@ namespace LetsMakeAGame
             
             for (int i = 0; i < tiles.Count; i++)
             {
-                if (i % 40 == 0) sw.WriteLine();
+                if (i % 80 == 0) sw.WriteLine();
                 string textureName = tiles[i].texture.Name.ToString();
                 if (textureName == "Tiles/blankTile") sw.Write(" ");
                 else
@@ -166,6 +172,16 @@ namespace LetsMakeAGame
                 }
             }
             sw.Close();
+        }
+
+        private void EditMap(string name)
+        {
+            foreach (Tile t in tempTiles)
+            {
+                tiles.Add(t);
+            }
+            testLevel = null;
+            tempTiles.Clear();
         }
 
 
@@ -195,10 +211,11 @@ namespace LetsMakeAGame
                         {
                             if (isWithin(mousePos, b.boundary))
                             {
-                                switch (b.texture.Name.Replace("Buttons/", ""))
+                                switch (b.text)
                                 {
-                                    case "playMapButton":
-                                        //Do Stuff
+                                    case "Edit Map":
+                                        EditMap("test");
+                                        b.text = "Play Map";
                                         break;
                                     default:
                                         break;
@@ -245,14 +262,20 @@ namespace LetsMakeAGame
                 {
                     if (isWithin(mousePos, menu.buttons[i].boundary))
                     {
-                        switch (menu.buttons[i].texture.Name.Replace("Buttons/",""))
+                        switch (menu.buttons[i].text)
                         {
-                            case "playMapButton":
+                            case "Play Map":
+                                foreach (Tile t in tiles)
+                                {
+                                    tempTiles.Add(t);
+                                }
+                                Save(true);
                                 tiles.Clear();
-                                testLevel = new Level("null", "null", "Content/Maps/User Created Content/test.txt", null, null);
+                                testLevel = new Level("null", "null", "Content/Maps/User Created Content/$temp.txt", null, null);
+                                menu.buttons[i].text = "Edit Map";
                                 break;
-                            case "saveMapButton":
-                                Save();
+                            case "Save Map":
+                                Save(false);
                                 break;
                             default:
                                 break;
@@ -279,6 +302,8 @@ namespace LetsMakeAGame
                 if (name != "Tiles/blankTile")
                 {
                     //replacement = new Tile(blankTile, tiles[tileIndex].position);
+                    if(replacement.texture.Name != "Tiles/blankTile") tempTile = replacement.Copy();
+                    replacement = new Tile(blankTile, tiles[tileIndex].position);
                     textureNames.Remove(name);
                     tiles[tileIndex] = new Tile(blankTile, tiles[tileIndex].position);
                     highlightSelection = false;
@@ -288,6 +313,7 @@ namespace LetsMakeAGame
             if (currentMouseState.RightButton == ButtonState.Released && previousMouseState.RightButton == ButtonState.Pressed)
             {
                 highlightSelection = true;
+                replacement = tempTile.Copy();
             }
 
             //Keyboard
@@ -296,6 +322,14 @@ namespace LetsMakeAGame
                 for (int i = 0; i < tiles.Count; i++)
                 {
                     if (tiles[i].texture.Name != "Tiles/blankTile") tiles[i] = new Tile(blankTile, tiles[i].position);
+                }
+            }
+
+            if (currentKeyboardState.IsKeyDown(Keys.LeftShift) && currentKeyboardState.IsKeyDown(Keys.D8))
+            {
+                for (int i = 0; i < tiles.Count; i++)
+                {
+                    if (tiles[i].texture.Name == "Tiles/blankTile") tiles[i] = replacement.Copy(tiles[i].position);
                 }
             }
 

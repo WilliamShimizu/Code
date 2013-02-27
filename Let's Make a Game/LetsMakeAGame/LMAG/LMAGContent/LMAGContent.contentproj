@@ -161,13 +161,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="playMapButton.png">
-      <Name>playMapButton</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>MGTextureProcessor</Processor>
-    </Compile>
-    <Compile Include="saveMapButton.png">
-      <Name>saveMapButton</Name>
+    <Compile Include="Button.png">
+      <Name>Button</Name>
       <Importer>TextureImporter</Importer>
       <Processor>MGTextureProcessor</Processor>
     </Compile>
