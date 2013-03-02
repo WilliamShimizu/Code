@@ -84,18 +84,25 @@ namespace LetsMakeAGame
             }
             else
             {
+                for (int i = 0; i < tiles.Count; i++)
                 {
-                    for (int i = 0; i < tiles.Count; i++)
+                    if (isWithin(mousePos, tiles[i].boundary))
                     {
-                        if (isWithin(mousePos, tiles[i].boundary))
-                        {
-                            updateHighlightTexture(tiles[i].boundary);
-                            tileIndex = i;
-                            replacement.boundary.X = tiles[i].boundary.X;
-                            replacement.boundary.Y = tiles[i].boundary.Y;
-                        }
-                        tiles[i].Update(speedX, speedY);
+                        updateHighlightTexture(tiles[i].boundary);
+                        tileIndex = i;
+                        replacement.boundary.X = tiles[i].boundary.X;
+                        replacement.boundary.Y = tiles[i].boundary.Y;
                     }
+                    tiles[i].Update(speedX, speedY);
+                }
+            }
+            //Lots of redundancy here. I'd like to try to combine these.
+            for (int i = 0; i < menu.buttons.Count; i++)
+            {
+                if (isWithin(mousePos, menu.buttons[i].boundary))
+                {
+                    updateHighlightTexture(menu.buttons[i].boundary);
+                    highlightSelection = true;
                 }
             }
             for (int i = 0; i < menu.tiles.Count; i++)
@@ -103,15 +110,6 @@ namespace LetsMakeAGame
                 if (isWithin(mousePos, menu.tiles[i].boundary))
                 {
                     updateHighlightTexture(menu.tiles[i].boundary);
-                    highlightSelection = true;
-                }
-            }
-            for (int i = 0; i < menu.buttons.Count; i++)
-            {
-                if (isWithin(mousePos, menu.buttons[i].boundary))
-                {
-                    highlightTile.boundary = menu.buttons[i].boundary;
-                    updateHighlightTexture(menu.buttons[i].boundary);
                     highlightSelection = true;
                 }
             }
@@ -136,10 +134,6 @@ namespace LetsMakeAGame
                     spriteBatch.Draw(replacement.texture, replacement.boundary, null, Color.White);
                     spriteBatch.Draw(highlightTile.texture, highlightTile.boundary, null, Color.White);
                 }
-                //foreach (gridLine g in gridLines)
-                //{
-                //    g.Draw(spriteBatch);
-                //}
             }
             menu.Draw(spriteBatch);
             if (highlightSelection && isWithin(mousePos, menu.position, menuTexture))
