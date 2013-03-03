@@ -9,17 +9,17 @@ using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.GamerServices;
 #endregion
 
-namespace Avatar
+namespace InputHandler
 {
     /// <summary>
     /// This is the main type for your game
     /// </summary>
-    public class Game1 : Game
+    public class inTouchPanel : Game
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        public Game1()
+        public inTouchPanel()
             : base()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -69,7 +69,7 @@ namespace Avatar
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-
+            
             // TODO: Add your update logic here
 
             base.Update(gameTime);

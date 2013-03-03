@@ -7,3 +7,4 @@ C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\Con
 C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\ContentManager\bin\WindowsGL\Debug\Tao.Sdl.dll
 C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\ContentManager\obj\x86\Debug\ContentManager.dll
 C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\ContentManager\obj\x86\Debug\ContentManager.pdb
+C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\ContentManager\obj\x86\Debug\ContentManager.csprojResolveAssemblyReference.cache

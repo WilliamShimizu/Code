@@ -46,9 +46,10 @@
     <Reference Include="mscorlib" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\LMAGContent\LMAGContent.contentproj">
-      <Name>LMAGContent</Name>
+    <ProjectReference Include="..\LMAGContent\xLMAGContent.contentproj">
+      <Name>xLMAGContent %28Content%29</Name>
       <XnaReferenceType>Content</XnaReferenceType>
+      <Project>{99828554-2646-4732-B1A1-227A2FB01800}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
