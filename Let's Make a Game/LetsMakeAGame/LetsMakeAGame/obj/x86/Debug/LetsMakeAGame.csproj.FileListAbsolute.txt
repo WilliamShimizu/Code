@@ -73,3 +73,5 @@ C:\Users\Ben\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LetsMakeAGame
 C:\Users\Ben\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LetsMakeAGame\obj\x86\Debug\LetsMakeAGame.csprojResolveAssemblyReference.cache
 C:\Users\Ben\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LetsMakeAGame\obj\x86\Debug\LetsMakeAGame.ResolutionChooser.resources
 C:\Users\Ben\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LetsMakeAGame\obj\x86\Debug\LetsMakeAGame.csproj.GenerateResource.Cache
+C:\Users\Will\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LetsMakeAGame\obj\x86\Debug\LetsMakeAGame.exe
+C:\Users\Will\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LetsMakeAGame\obj\x86\Debug\LetsMakeAGame.pdb
