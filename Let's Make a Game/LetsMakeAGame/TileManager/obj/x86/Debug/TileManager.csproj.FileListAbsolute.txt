@@ -1,0 +1,10 @@
+C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\TileManager\bin\WindowsGL\Debug\SDL.dll
+C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\TileManager\bin\WindowsGL\Debug\TileManager.dll
+C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\TileManager\bin\WindowsGL\Debug\TileManager.pdb
+C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\TileManager\bin\WindowsGL\Debug\Lidgren.Network.dll
+C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\TileManager\bin\WindowsGL\Debug\MonoGame.Framework.dll
+C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\TileManager\bin\WindowsGL\Debug\OpenTK.dll
+C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\TileManager\bin\WindowsGL\Debug\Tao.Sdl.dll
+C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\TileManager\obj\x86\Debug\TileManager.csprojResolveAssemblyReference.cache
+C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\TileManager\obj\x86\Debug\TileManager.dll
+C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\TileManager\obj\x86\Debug\TileManager.pdb

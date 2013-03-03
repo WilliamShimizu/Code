@@ -8,7 +8,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LMAG\LMAG\bin\Windows\Content\foreground.xnb</Output>
-      <Time>2013-01-25T20:17:48.7013895-08:00</Time>
+      <Time>2013-03-03T00:33:33.9517877-08:00</Time>
     </Item>
     <Item>
       <Source>background.png</Source>
@@ -17,7 +17,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LMAG\LMAG\bin\Windows\Content\background.xnb</Output>
-      <Time>2013-01-25T20:17:52.3928583-08:00</Time>
+      <Time>2013-03-03T00:33:33.9457871-08:00</Time>
     </Item>
     <Item>
       <Source>Block.png</Source>
@@ -26,7 +26,7 @@
       <Processor>MGTextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LMAG\LMAG\bin\Windows\Content\Block.xnb</Output>
-      <Time>2013-01-28T22:14:02.0374296-08:00</Time>
+      <Time>2013-03-03T00:33:33.9327866-08:00</Time>
     </Item>
     <Item>
       <Source>leopardrdTile.png</Source>
@@ -35,7 +35,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LMAG\LMAG\bin\Windows\Content\leopardrdTile.xnb</Output>
-      <Time>2013-01-28T22:36:08.4558634-08:00</Time>
+      <Time>2013-03-03T00:33:33.9537902-08:00</Time>
     </Item>
     <Item>
       <Source>rockTile.png</Source>
@@ -44,7 +44,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LMAG\LMAG\bin\Windows\Content\rockTile.xnb</Output>
-      <Time>2013-01-28T22:37:30.8828302-08:00</Time>
+      <Time>2013-03-03T00:33:33.9945205-08:00</Time>
     </Item>
     <Item>
       <Source>starsTile.png</Source>
@@ -53,7 +53,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LMAG\LMAG\bin\Windows\Content\starsTile.xnb</Output>
-      <Time>2013-01-28T22:37:35.5659249-08:00</Time>
+      <Time>2013-03-03T00:33:33.9975208-08:00</Time>
     </Item>
     <Item>
       <Source>myFont.spritefont</Source>
@@ -62,7 +62,7 @@
       <Processor>MGSpriteFontDescriptionProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LMAG\LMAG\bin\Windows\Content\myFont.xnb</Output>
-      <Time>2013-01-25T21:24:27.6466911-08:00</Time>
+      <Time>2013-03-03T00:33:33.9557903-08:00</Time>
     </Item>
     <Item>
       <Source>spikes.png</Source>
@@ -71,7 +71,7 @@
       <Processor>MGTextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LMAG\LMAG\bin\Windows\Content\spikes.xnb</Output>
-      <Time>2013-02-03T13:36:24.3125654-08:00</Time>
+      <Time>2013-03-03T00:33:33.9965225-08:00</Time>
     </Item>
     <Item>
       <Source>tiles.png</Source>
@@ -80,7 +80,7 @@
       <Processor>MGTextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LMAG\LMAG\bin\Windows\Content\tiles.xnb</Output>
-      <Time>2013-02-03T13:36:31.7692355-08:00</Time>
+      <Time>2013-03-03T00:33:33.9995214-08:00</Time>
     </Item>
     <Item>
       <Source>Cloud.png</Source>
@@ -89,7 +89,7 @@
       <Processor>MGTextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LMAG\LMAG\bin\Windows\Content\Cloud.xnb</Output>
-      <Time>2013-02-12T22:23:27.5222691-08:00</Time>
+      <Time>2013-03-03T00:33:33.9357986-08:00</Time>
     </Item>
     <Item>
       <Source>engineeringBlock.png</Source>
@@ -98,7 +98,7 @@
       <Processor>MGTextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LMAG\LMAG\bin\Windows\Content\engineeringBlock.xnb</Output>
-      <Time>2013-02-12T23:34:16.2317009-08:00</Time>
+      <Time>2013-03-03T00:33:33.9507943-08:00</Time>
     </Item>
     <Item>
       <Source>dot.png</Source>
@@ -107,7 +107,7 @@
       <Processor>MGTextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LMAG\LMAG\bin\Windows\Content\dot.xnb</Output>
-      <Time>2013-02-13T21:55:00.74971-08:00</Time>
+      <Time>2013-03-03T00:33:33.9497891-08:00</Time>
     </Item>
     <Item>
       <Source>gridTexture.png</Source>
@@ -116,7 +116,7 @@
       <Processor>MGTextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LMAG\LMAG\bin\Windows\Content\gridTexture.xnb</Output>
-      <Time>2013-02-21T22:40:36.5157156-08:00</Time>
+      <Time>2013-03-03T00:33:33.952788-08:00</Time>
     </Item>
     <Item>
       <Source>blankTile.png</Source>
@@ -125,7 +125,7 @@
       <Processor>MGTextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LMAG\LMAG\bin\Windows\Content\blankTile.xnb</Output>
-      <Time>2013-02-21T23:22:04.9854846-08:00</Time>
+      <Time>2013-03-03T00:33:33.9467888-08:00</Time>
     </Item>
     <Item>
       <Source>selectedTile.png</Source>
@@ -134,7 +134,7 @@
       <Processor>MGTextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LMAG\LMAG\bin\Windows\Content\selectedTile.xnb</Output>
-      <Time>2013-02-22T00:25:53.2883915-08:00</Time>
+      <Time>2013-03-03T00:33:33.9955242-08:00</Time>
     </Item>
     <Item>
       <Source>crappyMenu.png</Source>
@@ -143,7 +143,7 @@
       <Processor>MGTextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LMAG\LMAG\bin\Windows\Content\crappyMenu.xnb</Output>
-      <Time>2013-02-22T20:36:43.3824583-08:00</Time>
+      <Time>2013-03-03T00:33:33.9487874-08:00</Time>
     </Item>
     <Item>
       <Source>Button.png</Source>
@@ -152,7 +152,7 @@
       <Processor>MGTextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LMAG\LMAG\bin\Windows\Content\Button.xnb</Output>
-      <Time>2013-02-25T00:22:31.6425063-08:00</Time>
+      <Time>2013-03-03T00:33:33.9347856-08:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

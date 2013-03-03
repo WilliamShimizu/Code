@@ -106,3 +106,6 @@ C:\Users\Will\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LetsMakeAGam
 C:\Users\Will\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LetsMakeAGame\obj\x86\Debug\LetsMakeAGame.csprojResolveAssemblyReference.cache
 C:\Users\Will\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LetsMakeAGame\obj\x86\Debug\LetsMakeAGame.ResolutionChooser.resources
 C:\Users\Will\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LetsMakeAGame\obj\x86\Debug\LetsMakeAGame.csproj.GenerateResource.Cache
+C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LetsMakeAGame\bin\WindowsGL\Debug\SDL.dll
+C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LetsMakeAGame\bin\WindowsGL\Debug\Common.dll
+C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LetsMakeAGame\bin\WindowsGL\Debug\Common.pdb

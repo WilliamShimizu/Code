@@ -1,0 +1,9 @@
+C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\InputHandler\bin\WindowsGL\Debug\SDL.dll
+C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\InputHandler\bin\WindowsGL\Debug\InputHandler.dll
+C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\InputHandler\bin\WindowsGL\Debug\InputHandler.pdb
+C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\InputHandler\bin\WindowsGL\Debug\Lidgren.Network.dll
+C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\InputHandler\bin\WindowsGL\Debug\MonoGame.Framework.dll
+C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\InputHandler\bin\WindowsGL\Debug\OpenTK.dll
+C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\InputHandler\bin\WindowsGL\Debug\Tao.Sdl.dll
+C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\InputHandler\obj\x86\Debug\InputHandler.dll
+C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\InputHandler\obj\x86\Debug\InputHandler.pdb
