@@ -8,5 +8,6 @@ namespace Common
 {
     public class Class1
     {
+        //why won't this work!?!?
     }
 }
