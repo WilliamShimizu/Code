@@ -109,3 +109,15 @@ C:\Users\Will\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LetsMakeAGam
 C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LetsMakeAGame\bin\WindowsGL\Debug\SDL.dll
 C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LetsMakeAGame\bin\WindowsGL\Debug\Common.dll
 C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LetsMakeAGame\bin\WindowsGL\Debug\Common.pdb
+C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LetsMakeAGame\bin\WindowsGL\Debug\Avatar.dll
+C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LetsMakeAGame\bin\WindowsGL\Debug\ContentManager.dll
+C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LetsMakeAGame\bin\WindowsGL\Debug\InputHandler.dll
+C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LetsMakeAGame\bin\WindowsGL\Debug\LevelManager.dll
+C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LetsMakeAGame\bin\WindowsGL\Debug\TileManager.dll
+C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LetsMakeAGame\bin\WindowsGL\Debug\UI.dll
+C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LetsMakeAGame\bin\WindowsGL\Debug\Avatar.pdb
+C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LetsMakeAGame\bin\WindowsGL\Debug\ContentManager.pdb
+C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LetsMakeAGame\bin\WindowsGL\Debug\InputHandler.pdb
+C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LetsMakeAGame\bin\WindowsGL\Debug\LevelManager.pdb
+C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LetsMakeAGame\bin\WindowsGL\Debug\TileManager.pdb
+C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LetsMakeAGame\bin\WindowsGL\Debug\UI.pdb

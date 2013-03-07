@@ -218,9 +218,33 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Avatar\Avatar.csproj">
+      <Project>{52c2657a-ca17-46ca-b5fc-4af1fe0b936a}</Project>
+      <Name>Avatar</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Common\Common.csproj">
       <Project>{10650c93-4f4f-4b49-95ad-67d15d2f434f}</Project>
       <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ContentManager\ContentManager.csproj">
+      <Project>{8bf51761-40c1-4c67-8397-800c79d4035e}</Project>
+      <Name>ContentManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\InputHandler\InputHandler.csproj">
+      <Project>{a2e7d01a-98fe-46f9-9285-d8da467db340}</Project>
+      <Name>InputHandler</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LevelManager\LevelManager.csproj">
+      <Project>{421c7548-5aa2-4d23-8d30-ccbd6d81d55e}</Project>
+      <Name>LevelManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TileManager\TileManager.csproj">
+      <Project>{86b1491a-e045-45f7-aacb-6b47784e2673}</Project>
+      <Name>TileManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UI\UI.csproj">
+      <Project>{a6f0405d-3106-4eec-96f6-731cb6d7c566}</Project>
+      <Name>UI</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

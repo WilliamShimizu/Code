@@ -13,6 +13,7 @@ using System.Xml;
 
 using LetsMakeAGame.Players;
 using LetsMakeAGame.UI;
+using InputHandler;
 
 namespace LetsMakeAGame
 {
@@ -22,7 +23,7 @@ namespace LetsMakeAGame
         private Texture2D blankTile;
         private Texture2D selectedTexture;
         private Texture2D menuTexture;
-        private Vector2 mousePos;
+        private Vector2 cursorPos;
         private Tile highlightTile;
         SpriteFont font;
         private Tile replacement;
@@ -50,7 +51,7 @@ namespace LetsMakeAGame
             textureNames = new List<string>();
             menu = new Menu(menuTexture);
             tiles = new List<Tile>();
-            mousePos = new Vector2();
+            cursorPos = new Vector2();
             highlightTile = new Tile(selectedTexture, new Vector2(0,0));
             int height = Game1.viewport.Height;
             int width = Game1.viewport.Width;
@@ -74,8 +75,9 @@ namespace LetsMakeAGame
 
         public void Update(GameTime gameTime)
         {
-            GetInput(Game1.currentKeyboardState, Game1.previousKeyboardState, Game1.currentMouseState, Game1.previousMouseState, gameTime);
-            if (isWithin(mousePos, menu.position, menuTexture)) highlightSelection = false;
+            //GetInput(Game1.currentKeyboardState, Game1.previousKeyboardState, Game1.currentMouseState, Game1.previousMouseState, gameTime);
+            GetInput();
+            if (isWithin(cursorPos, menu.position, menuTexture)) highlightSelection = false;
             else highlightSelection = true;
             if (testLevel != null)
             {
@@ -86,7 +88,7 @@ namespace LetsMakeAGame
             {
                 for (int i = 0; i < tiles.Count; i++)
                 {
-                    if (isWithin(mousePos, tiles[i].boundary))
+                    if (isWithin(cursorPos, tiles[i].boundary))
                     {
                         updateHighlightTexture(tiles[i].boundary);
                         tileIndex = i;
@@ -99,7 +101,7 @@ namespace LetsMakeAGame
             //Lots of redundancy here. I'd like to try to combine these.
             for (int i = 0; i < menu.buttons.Count; i++)
             {
-                if (isWithin(mousePos, menu.buttons[i].boundary))
+                if (isWithin(cursorPos, menu.buttons[i].boundary))
                 {
                     updateHighlightTexture(menu.buttons[i].boundary);
                     highlightSelection = true;
@@ -107,7 +109,7 @@ namespace LetsMakeAGame
             }
             for (int i = 0; i < menu.tiles.Count; i++)
             {
-                if (isWithin(mousePos, menu.tiles[i].boundary))
+                if (isWithin(cursorPos, menu.tiles[i].boundary))
                 {
                     updateHighlightTexture(menu.tiles[i].boundary);
                     highlightSelection = true;
@@ -125,8 +127,8 @@ namespace LetsMakeAGame
             else
             {
                 foreach (Tile t in tiles) spriteBatch.Draw(t.texture, t.boundary, null, Color.White);
-                spriteBatch.DrawString(font, "mouse X: " + mousePos.X, new Vector2(0, 0), Color.Gray);
-                spriteBatch.DrawString(font, "mouse Y: " + mousePos.Y, new Vector2(0, 20), Color.Gray);
+                spriteBatch.DrawString(font, "mouse X: " + cursorPos.X, new Vector2(0, 0), Color.Gray);
+                spriteBatch.DrawString(font, "mouse Y: " + cursorPos.Y, new Vector2(0, 20), Color.Gray);
                 spriteBatch.DrawString(font, "tilePos X: " + highlightTile.boundary.X, new Vector2(0, 40), Color.Gray);
                 spriteBatch.DrawString(font, "tilePos Y: " + highlightTile.boundary.Y, new Vector2(0, 60), Color.Gray);
                 if (highlightSelection)
@@ -136,7 +138,7 @@ namespace LetsMakeAGame
                 }
             }
             menu.Draw(spriteBatch);
-            if (highlightSelection && isWithin(mousePos, menu.position, menuTexture))
+            if (highlightSelection && isWithin(cursorPos, menu.position, menuTexture))
             {
                 spriteBatch.Draw(highlightTile.texture, highlightTile.boundary, null, Color.White);
             }
@@ -190,20 +192,144 @@ namespace LetsMakeAGame
             return (mouse.X >= obj.X && mouse.X <= obj.X + obj.Width && mouse.Y >= obj.Y && mouse.Y <= obj.Y + obj.Height);
         }
 
+        public void GetInput()
+        {
+            HashSet<InputManager.ACTIONS> actions = InputManager.GetInput();
+            cursorPos = InputManager.cursorPosition;
+
+            if (!(actions.Contains(InputManager.ACTIONS.LEFT) || actions.Contains(InputManager.ACTIONS.RIGHT))) speedX = 0;
+            if (!(actions.Contains(InputManager.ACTIONS.UP) || actions.Contains(InputManager.ACTIONS.DOWN))) speedY = 0;
+            foreach (InputManager.ACTIONS a in actions)
+            {
+                switch (a)
+                {
+                    case InputManager.ACTIONS.LEFT:
+                        speedX = -6;
+                        break;
+                    case InputManager.ACTIONS.RIGHT:
+                        speedX = 6;
+                        break;
+                    case InputManager.ACTIONS.UP:
+                        speedY = -6;
+                        break;
+                    case InputManager.ACTIONS.DOWN:
+                        speedY = 6;
+                        break;
+                    case InputManager.ACTIONS.JUMP:
+                        break;
+                    case InputManager.ACTIONS.SPECIAL:
+                        break;
+                    case InputManager.ACTIONS.SELECT:
+                        break;
+                    case InputManager.ACTIONS.LEFT_CLICK_DOWN:
+                        replaceTiles();
+                        break;
+                    case InputManager.ACTIONS.RIGHT_CLICK_DOWN:
+                        eraseTiles();
+                        break;
+                    case InputManager.ACTIONS.LEFT_CLICK:
+                        clickMenuItem();
+                        break;
+                    case InputManager.ACTIONS.RIGHT_CLICK:
+                        highlightSelection = true;
+                        replacement = tempTile.Copy();
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
+        private void eraseTiles()
+        {
+            string name = tiles[tileIndex].texture.Name.ToString();
+            if (name != "Tiles/blankTile")
+            {
+                //replacement = new Tile(blankTile, tiles[tileIndex].position);
+                if (replacement.texture.Name != "Tiles/blankTile") tempTile = replacement.Copy();
+                replacement = new Tile(blankTile, tiles[tileIndex].position);
+                textureNames.Remove(name);
+                tiles[tileIndex] = new Tile(blankTile, tiles[tileIndex].position);
+                highlightSelection = false;
+            }
+        }
+
+        private void replaceTiles()
+        {
+            if (!isWithin(cursorPos, menu.position, menu.background) && tiles[tileIndex].texture.Name != replacement.texture.Name)
+            {
+                tiles[tileIndex] = replacement.Copy(tiles[tileIndex].position);
+                string name = tiles[tileIndex].texture.Name.ToString();
+                if (name != "Tiles/blankTile") textureNames.Add(name.Replace("Tiles/", ""));
+                highlightSelection = false;
+            }
+        }
+
+        private void clickMenuItem()
+        {
+            bool isOverButton = false;
+            int tileIndex = 0;
+            for (int i = 0; i < menu.tiles.Count; i++)
+            {
+                if (isWithin(cursorPos, menu.tiles[i].boundary))
+                {
+                    tileIndex = i;
+                    isOverButton = true;
+                    break;
+                }
+            }
+            for (int i = 0; i < menu.buttons.Count; i++)
+            {
+                if (isWithin(cursorPos, menu.buttons[i].boundary))
+                {
+                    switch (menu.buttons[i].text)
+                    {
+                        case "Play Map":
+                            foreach (Tile t in tiles)
+                            {
+                                tempTiles.Add(t);
+                            }
+                            Save(true);
+                            tiles.Clear();
+                            testLevel = new Level("null", "null", "Content/Maps/User Created Content/$temp.txt", null, null);
+                            menu.buttons[i].text = "Edit Map";
+                            break;
+                        case "Save Map":
+                            Save(false);
+                            break;
+                        default:
+                            break;
+                    }
+                    isOverButton = true;
+                    break;
+                }
+            }
+            if (isWithin(cursorPos, menu.position, menu.background) && !isOverButton)
+            {
+                if (menu.isHidden) menu.isHidden = false;
+                else menu.isHidden = true;
+            }
+            else if (isOverButton)
+            {
+                replacement = menu.tiles[tileIndex].Copy();
+            }
+            highlightSelection = true;
+        }
+
         public void GetInput(KeyboardState currentKeyboardState, KeyboardState previousKeyboardState, MouseState currentMouseState, MouseState previousMouseState, GameTime gameTime)
         {
-            mousePos.X = currentMouseState.X;
-            mousePos.Y = currentMouseState.Y;
+            cursorPos.X = currentMouseState.X;
+            cursorPos.Y = currentMouseState.Y;
             if (testLevel != null)
             {
                 if (currentMouseState.LeftButton == ButtonState.Released && previousMouseState.LeftButton == ButtonState.Pressed)
                 {
-                    if (isWithin(mousePos, menu.position, menuTexture))
+                    if (isWithin(cursorPos, menu.position, menuTexture))
                     {
                         bool isOverButton = false;
                         foreach (Button b in menu.buttons)
                         {
-                            if (isWithin(mousePos, b.boundary))
+                            if (isWithin(cursorPos, b.boundary))
                             {
                                 switch (b.text)
                                 {
@@ -230,78 +356,17 @@ namespace LetsMakeAGame
             //Mouse
             if (currentMouseState.LeftButton == ButtonState.Pressed)
             {
-                if (!isWithin(mousePos, menu.position, menu.background) && tiles[tileIndex].texture.Name != replacement.texture.Name)
-                {
-                    tiles[tileIndex] = replacement.Copy(tiles[tileIndex].position);
-                    string name = tiles[tileIndex].texture.Name.ToString();
-                    if (name != "Tiles/blankTile") textureNames.Add(name.Replace("Tiles/",""));
-                    highlightSelection = false;
-                }
+                replaceTiles();
             }
 
             if (currentMouseState.LeftButton == ButtonState.Released && previousMouseState.LeftButton == ButtonState.Pressed)
             {
-                bool isOverButton = false;
-                int tileIndex = 0;
-                for(int i = 0; i < menu.tiles.Count; i++)
-                {
-                    if (isWithin(mousePos, menu.tiles[i].boundary))
-                    {
-                        tileIndex = i;
-                        isOverButton = true;
-                        break;
-                    }
-                }
-                for (int i = 0; i < menu.buttons.Count; i++)
-                {
-                    if (isWithin(mousePos, menu.buttons[i].boundary))
-                    {
-                        switch (menu.buttons[i].text)
-                        {
-                            case "Play Map":
-                                foreach (Tile t in tiles)
-                                {
-                                    tempTiles.Add(t);
-                                }
-                                Save(true);
-                                tiles.Clear();
-                                testLevel = new Level("null", "null", "Content/Maps/User Created Content/$temp.txt", null, null);
-                                menu.buttons[i].text = "Edit Map";
-                                break;
-                            case "Save Map":
-                                Save(false);
-                                break;
-                            default:
-                                break;
-                        }
-                        isOverButton = true;
-                        break;
-                    }
-                }
-                if (isWithin(mousePos, menu.position, menu.background) && !isOverButton)
-                {
-                    if (menu.isHidden) menu.isHidden = false;
-                    else menu.isHidden = true;
-                }
-                else if (isOverButton)
-                {
-                    replacement = menu.tiles[tileIndex].Copy();
-                }
-                highlightSelection = true;
+                clickMenuItem();
             }
 
             if (currentMouseState.RightButton == ButtonState.Pressed)
             {
-                string name = tiles[tileIndex].texture.Name.ToString();
-                if (name != "Tiles/blankTile")
-                {
-                    //replacement = new Tile(blankTile, tiles[tileIndex].position);
-                    if(replacement.texture.Name != "Tiles/blankTile") tempTile = replacement.Copy();
-                    replacement = new Tile(blankTile, tiles[tileIndex].position);
-                    textureNames.Remove(name);
-                    tiles[tileIndex] = new Tile(blankTile, tiles[tileIndex].position);
-                    highlightSelection = false;
-                }
+                eraseTiles();
             }
 
             if (currentMouseState.RightButton == ButtonState.Released && previousMouseState.RightButton == ButtonState.Pressed)
