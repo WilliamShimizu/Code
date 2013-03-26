@@ -8,3 +8,13 @@ C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\Lev
 C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LevelManager\obj\x86\Debug\LevelManager.csprojResolveAssemblyReference.cache
 C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LevelManager\obj\x86\Debug\LevelManager.dll
 C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LevelManager\obj\x86\Debug\LevelManager.pdb
+C:\Users\Will\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LevelManager\bin\WindowsGL\Debug\SDL.dll
+C:\Users\Will\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LevelManager\bin\WindowsGL\Debug\LevelManager.dll
+C:\Users\Will\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LevelManager\bin\WindowsGL\Debug\LevelManager.pdb
+C:\Users\Will\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LevelManager\bin\WindowsGL\Debug\Lidgren.Network.dll
+C:\Users\Will\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LevelManager\bin\WindowsGL\Debug\MonoGame.Framework.dll
+C:\Users\Will\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LevelManager\bin\WindowsGL\Debug\OpenTK.dll
+C:\Users\Will\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LevelManager\bin\WindowsGL\Debug\Tao.Sdl.dll
+C:\Users\Will\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LevelManager\obj\x86\Debug\LevelManager.csprojResolveAssemblyReference.cache
+C:\Users\Will\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LevelManager\obj\x86\Debug\LevelManager.dll
+C:\Users\Will\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LevelManager\obj\x86\Debug\LevelManager.pdb

@@ -8,3 +8,13 @@ C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\Com
 C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\Common\obj\x86\Debug\Common.csprojResolveAssemblyReference.cache
 C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\Common\obj\x86\Debug\Common.dll
 C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\Common\obj\x86\Debug\Common.pdb
+C:\Users\Will\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\Common\obj\x86\Debug\Common.csprojResolveAssemblyReference.cache
+C:\Users\Will\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\Common\obj\x86\Debug\Common.dll
+C:\Users\Will\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\Common\obj\x86\Debug\Common.pdb
+C:\Users\Will\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\Common\bin\WindowsGL\Debug\SDL.dll
+C:\Users\Will\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\Common\bin\WindowsGL\Debug\Common.dll
+C:\Users\Will\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\Common\bin\WindowsGL\Debug\Common.pdb
+C:\Users\Will\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\Common\bin\WindowsGL\Debug\Lidgren.Network.dll
+C:\Users\Will\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\Common\bin\WindowsGL\Debug\MonoGame.Framework.dll
+C:\Users\Will\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\Common\bin\WindowsGL\Debug\OpenTK.dll
+C:\Users\Will\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\Common\bin\WindowsGL\Debug\Tao.Sdl.dll

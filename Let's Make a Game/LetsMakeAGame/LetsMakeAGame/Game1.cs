@@ -107,7 +107,7 @@ namespace LetsMakeAGame
         {
             // TODO: Add your initialization logic here
             this.IsMouseVisible = true;
-            player = new Artist();
+            //player = new QA();
             ground = GraphicsDevice.Viewport.TitleSafeArea.Height - 40;
             base.Initialize();
         }
@@ -129,7 +129,7 @@ namespace LetsMakeAGame
 
 
             
-            player.Initialize(playerTexture, new Vector2(60, GraphicsDevice.Viewport.TitleSafeArea.Height - playerTexture.Height), GraphicsDevice.Viewport);
+            //player.Initialize(playerTexture, new Vector2(60, GraphicsDevice.Viewport.TitleSafeArea.Height - playerTexture.Height), GraphicsDevice.Viewport);
             List<string> songNames = new List<string>();
             List<string> sfxNames = new List<string>();
             //string mapName = "Content/Maps/User Created Content/test.txt";

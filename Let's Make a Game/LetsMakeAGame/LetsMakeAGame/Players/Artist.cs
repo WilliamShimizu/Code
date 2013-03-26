@@ -13,7 +13,7 @@ namespace LetsMakeAGame.Players
         Texture2D dotTexture;
         bool releaseSpecial;
 
-        public Artist()
+        public Artist(Rectangle boundary, Texture2D texture) : base(boundary, texture, ENTITY.Artist)
         {
             dots = new List<Dot>();
             dotTexture = Game1.contentMgr.Load<Texture2D>("dot");
@@ -22,10 +22,10 @@ namespace LetsMakeAGame.Players
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-            for (int i = 0; i < dots.Count; i++)
-            {
-                dots[i].Update(this);
-            }
+            //for (int i = 0; i < dots.Count; i++)
+            //{
+            //    dots[i].Update(this);
+            //}
             //if (releaseSpecial && dots.Count > 0)
             //{
             //    dots[0] = null;
@@ -85,12 +85,12 @@ namespace LetsMakeAGame.Players
 
         public void Update(Player player)
         {
-            if (player.boundary.X >= Game1.center.X + 200 || player.boundary.X <= Game1.center.X - 200)
+            if (player.boundary.X >= Game1.center.X + 500 || player.boundary.X <= Game1.center.X - 500)
             {
                 boundary.X -= player.speedX;
                 textureBoundary.X -= player.speedX;
             }
-            if (player.boundary.Y >= Game1.center.Y + 200 || player.boundary.Y <= Game1.center.Y - 200)
+            if (player.boundary.Y >= Game1.center.Y + 500 || player.boundary.Y <= Game1.center.Y - 500)
             {
                 boundary.Y -= player.speedY;
                 textureBoundary.Y -= player.speedY;

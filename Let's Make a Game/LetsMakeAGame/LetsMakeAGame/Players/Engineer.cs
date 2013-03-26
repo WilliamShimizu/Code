@@ -10,7 +10,7 @@ namespace LetsMakeAGame.Players
     {
         public List<EngineeringBlock> blocks;
 
-        public Engineer()
+        public Engineer(Rectangle boundary, Texture2D texture) : base(boundary, texture, ENTITY.Engineer)
         {
             blocks = new List<EngineeringBlock>();
             blocks.Capacity = 5;

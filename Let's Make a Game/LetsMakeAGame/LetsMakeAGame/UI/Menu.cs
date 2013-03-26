@@ -5,6 +5,7 @@ using System.IO;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using LetsMakeAGame;
+using LetsMakeAGame.Players;
 
 namespace LetsMakeAGame.UI
 {
@@ -13,7 +14,7 @@ namespace LetsMakeAGame.UI
         public Texture2D background { get; set; }
         public Vector2 position;
         public bool isHidden { get; set; }
-        public List<Tile> tiles;
+        public List<Common.Entity> tiles;
         public List<Button> buttons;
 
         public Menu(Texture2D background)
@@ -21,14 +22,14 @@ namespace LetsMakeAGame.UI
             this.background = background;
             position = new Vector2();
             isHidden = true;
-            tiles = new List<Tile>();
-            tiles.Add(new Tile(Game1.getTexture("Tiles/engineeringBlock"), new Vector2(1,1)));
+            tiles = new List<Common.Entity>();
+            tiles.Add(new Artist(new Rectangle(1,1,40,40), Game1.getTexture("Tiles/engineeringBlock")));
             tiles.Add(new Tile(Game1.getTexture("Tiles/rockTile"), new Vector2(1, 1)));
             tiles.Add(new Tile(Game1.getTexture("Tiles/leopardTile"), new Vector2(1, 1)));
             tiles.Add(new Tile(Game1.getTexture("Tiles/starsTile"), new Vector2(1, 1)));
             tiles.Add(new Tile(Game1.getTexture("Tiles/spikes"), new Vector2(1, 1)));
-            tiles.Add(new Tile(Game1.getTexture("Tiles/tiles"), new Vector2(1, 1)));
-            tiles.Add(new Tile(Game1.getTexture("Tiles/Block"), new Vector2(1, 1)));
+            tiles.Add(new Designer(new Rectangle(1,1,40,40), Game1.getTexture("Tiles/tiles")));
+            tiles.Add(new QA(new Rectangle(1,1,40,40), Game1.getTexture("Tiles/Block")));
             buttons = new List<Button>();
             buttons.Add(new Button(Game1.getTexture("Buttons/Button"), "Play Map"));
             buttons.Add(new Button(Game1.getTexture("Buttons/Button"), "Save Map"));
@@ -64,9 +65,9 @@ namespace LetsMakeAGame.UI
             spriteBatch.Draw(background, position, Color.White);
             if (!isHidden)
             {
-                foreach (Tile t in tiles)
+                foreach (Common.Entity e in tiles)
                 {
-                    t.Draw(spriteBatch);
+                    e.Draw(spriteBatch);
                 }
                 foreach (Button b in buttons)
                 {

@@ -1,1 +1,2 @@
 C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LMAG\LMAGContent\obj\Windows\xLMAGContent.contentprojResolveAssemblyReference.cache
+C:\Users\Will\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LMAG\LMAGContent\obj\Windows\xLMAGContent.contentprojResolveAssemblyReference.cache

@@ -7,12 +7,20 @@ namespace LetsMakeAGame.Players
 {
     class Designer : Player
     {
+
+        public Designer(Rectangle boundary, Texture2D texture)
+            : base(boundary, texture, ENTITY.Designer)
+        {
+
+        }
         public Cloud cloud;
 
-        public override void Special()
+        public Tile Special()
         {
             if (cloud != null) cloud = null;
-            cloud = new Cloud(this);
+            Vector2 v = new Vector2((int)(boundary.X + (boundary.Width * 2)), (int)(boundary.Y - boundary.Height));
+            cloud = new Cloud(Game1.cloud, v,this);
+            return new Tile(cloud.texture, new Vector2(cloud.boundary.X, cloud.boundary.Y));
         }
 
         public override void Update(GameTime gameTime)
@@ -35,10 +43,10 @@ namespace LetsMakeAGame.Players
     /// <summary>
     /// Cloud that the designer can create.
     /// </summary>
-    public class Cloud
+    public class Cloud : Tile
     {
         public Rectangle boundary;
-        private Texture2D texture;
+        public Texture2D texture;
         public int endPointY;
         public const int MAX_HEIGHT = 200;
         public int start;
@@ -49,10 +57,10 @@ namespace LetsMakeAGame.Players
         /// Constructs the cloud object
         /// </summary>
         /// <param name="player">uses the player's position as a reference for the spawn point.</param>
-        public Cloud(Player player)
+        public Cloud(Texture2D texture, Vector2 position, Player player) : base(texture, position)
         {
-            this.texture = Game1.cloud;
-            this.boundary = new Rectangle((int)(player.boundary.X + (player.boundary.Width * 2)), (int)(player.boundary.Y - player.boundary.Height), texture.Width, texture.Height);
+            this.texture = texture;
+            this.boundary = new Rectangle((int)(position.X), (int)(position.Y), texture.Width, texture.Height);
             endPointY = this.boundary.Y - MAX_HEIGHT;
             isActive = true;
         }

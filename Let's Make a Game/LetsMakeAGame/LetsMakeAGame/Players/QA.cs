@@ -8,6 +8,12 @@ namespace LetsMakeAGame.Players
 {
     class QA : Player
     {
+
+        public QA(Rectangle boundary, Texture2D texture)
+            : base(boundary, texture, ENTITY.QA)
+        {
+
+        }
         public void Special(Vector2 pos, Level level)
         {
             for (int i = 0; i < level.tiles.Count; i++)

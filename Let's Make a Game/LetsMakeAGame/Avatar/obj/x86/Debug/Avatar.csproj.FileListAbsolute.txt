@@ -8,3 +8,13 @@ C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\Ava
 C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\Avatar\obj\x86\Debug\Avatar.csprojResolveAssemblyReference.cache
 C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\Avatar\obj\x86\Debug\Avatar.dll
 C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\Avatar\obj\x86\Debug\Avatar.pdb
+C:\Users\Will\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\Avatar\bin\WindowsGL\Debug\SDL.dll
+C:\Users\Will\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\Avatar\bin\WindowsGL\Debug\Avatar.dll
+C:\Users\Will\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\Avatar\bin\WindowsGL\Debug\Avatar.pdb
+C:\Users\Will\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\Avatar\bin\WindowsGL\Debug\Lidgren.Network.dll
+C:\Users\Will\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\Avatar\bin\WindowsGL\Debug\MonoGame.Framework.dll
+C:\Users\Will\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\Avatar\bin\WindowsGL\Debug\OpenTK.dll
+C:\Users\Will\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\Avatar\bin\WindowsGL\Debug\Tao.Sdl.dll
+C:\Users\Will\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\Avatar\obj\x86\Debug\Avatar.csprojResolveAssemblyReference.cache
+C:\Users\Will\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\Avatar\obj\x86\Debug\Avatar.dll
+C:\Users\Will\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\Avatar\obj\x86\Debug\Avatar.pdb

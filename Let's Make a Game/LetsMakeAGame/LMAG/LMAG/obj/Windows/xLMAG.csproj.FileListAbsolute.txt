@@ -20,3 +20,4 @@ C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LMA
 C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LMAG\LMAG\obj\Windows\Microsoft.Xna.Framework.RuntimeProfile.txt
 C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LMAG\LMAG\obj\Windows\IgnoreMe.dll
 C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LMAG\LMAG\obj\Windows\xLMAG.csprojResolveAssemblyReference.cache
+C:\Users\Will\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LMAG\LMAG\obj\Windows\IgnoreMe.dll

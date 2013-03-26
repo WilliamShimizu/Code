@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Media;
 using System.Collections.Generic;
+using System.Xml;
 
 using LetsMakeAGame.Players;
 
@@ -29,6 +30,8 @@ namespace LetsMakeAGame
         public List<Dot> dots;
         const int PLAYER_MOVE_SPEED = 6;
         public List<Player> players;
+        int activePlayerNumber;
+        Tile rep;
 
         /// <summary>
         /// Constructs the major things needed for the level
@@ -44,44 +47,173 @@ namespace LetsMakeAGame
             this.textureNames = new HashSet<string>();
             this.songNames = songNames;
             this.soundEffectNames = soundEffects;
-            StreamReader sr = new StreamReader(mapPath);
-            string line = sr.ReadLine();
-            string[] names = line.Split(' ');
-            foreach (string textureName in names)
+            loadXML();
+            player = players[0];
+            activePlayerNumber = 0;
+            player.isActive = true;
+            foreach (Player p in players)
             {
-                if (textureName == "!") continue;
-                this.textureNames.Add(textureName);
-            }
-            LoadContent(backgroundName, foregroundName);
-            player = Game1.player;
-            if (player is Engineer)
-            {
-                blocks = ((Engineer)player).blocks;
-            }
-            if (player is Artist)
-            {
-                dots = ((Artist)player).dots;
-            }
-            tiles = new List<Tile>();
-            lines = new List<string>();
-            while (line != null)
-            {
-                lines.Add(line);
-                line = sr.ReadLine();
-            }
-            sr.Close();
-            for (int i = 0; i < lines.Count; i++)
-            {
-                if (lines[i].Contains("!")) continue;
-                for (int j = 0; j < lines[i].Length; j++)
-                {
-                    string s = lines[i].Substring(j, 1);
-                    if (s == " " || s == "\n") continue;
-                    Tile t = new Tile(textures, s, new Vector2(j * 40, i * 40));
-                    tiles.Add(t);
-                }
+                if (p is Artist) dots = ((Artist)p).dots;
+                if (p is Engineer) blocks = ((Engineer)p).blocks;
             }
         }
+
+        //    loadTextFile(mapPath, backgroundName, foregroundName);
+        //}
+
+        //private void loadTextFile(string mapPath, string backgroundName, string foregroundName)
+        //{
+        //    StreamReader sr = new StreamReader(mapPath);
+        //    string line = sr.ReadLine();
+        //    string[] names = line.Split(' ');
+        //    foreach (string textureName in names)
+        //    {
+        //        if (textureName == "!") continue;
+        //        this.textureNames.Add(textureName);
+        //    }
+        //    LoadContent(backgroundName, foregroundName);
+        //    player = Game1.player;
+
+        //    if (player is Engineer)
+        //    {
+        //        blocks = ((Engineer)player).blocks;
+        //    }
+        //    if (player is Artist)
+        //    {
+        //        dots = ((Artist)player).dots;
+        //    }
+        //    tiles = new List<Tile>();
+        //    lines = new List<string>();
+        //    while (line != null)
+        //    {
+        //        lines.Add(line);
+        //        line = sr.ReadLine();
+        //    }
+        //    sr.Close();
+        //    for (int i = 0; i < lines.Count; i++)
+        //    {
+        //        if (lines[i].Contains("!")) continue;
+        //        for (int j = 0; j < lines[i].Length; j++)
+        //        {
+        //            string s = lines[i].Substring(j, 1);
+        //            if (s == " " || s == "\n") continue;
+        //            Tile t = new Tile(textures, s, new Vector2(j * 40, i * 40));
+        //            tiles.Add(t);
+        //        }
+        //    }
+        //}
+
+        private void loadXML()
+        {
+            tiles = new List<Tile>();
+            players = new List<Player>();
+            XmlReader reader = XmlReader.Create("serializeTest.xml");
+            while (reader.Read())
+            {
+                if (reader.IsStartElement())
+                {
+                    switch (reader.Name)
+                    {
+                        case "Players":
+                            reader.Read();
+                            loadPlayers(reader, players);
+                            break;
+                        case "Tiles":
+                            reader.ReadStartElement("Tiles");
+                            loadTiles(reader, tiles);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+            reader.Close();
+        }
+
+        private void loadTiles(XmlReader reader, List<Tile> tiles)
+        {
+            string name = "";
+            Rectangle boundary = new Rectangle();
+            while (reader.IsStartElement())
+            {
+                reader.ReadStartElement("Tile");
+                boundary.X = readInt(reader, "positionX");
+                boundary.Y = readInt(reader, "positionY");
+                boundary.Height = readInt(reader, "height");
+                boundary.Width = readInt(reader, "width");
+                name = readString(reader, "textureName");
+                reader.ReadEndElement();
+                tiles.Add(new Tile(Game1.getTexture(name), new Vector2(boundary.X, boundary.Y)));
+            }
+        }
+
+        private void loadPlayers(XmlReader reader, List<Player> p)
+        {
+            string name = "";
+            Rectangle boundary = new Rectangle();
+            while (reader.Value != "Tiles")
+            {
+                string type = "";
+                if (reader.IsStartElement())
+                {
+                    type = reader.Name.ToString();
+                    reader.ReadStartElement();
+                }
+                else return;
+                //try { reader.ReadStartElement("Player"); }
+                //catch
+                //{
+                //    return;
+                //}
+                boundary.X = readInt(reader, "positionX");
+                boundary.Y = readInt(reader, "positionY");
+                boundary.Height = readInt(reader, "height");
+                boundary.Width = readInt(reader, "width");
+                name = readString(reader, "textureName");
+                reader.ReadEndElement();
+                Player player;
+                Texture2D texture = Game1.getTexture(name);
+                switch (type)
+                {
+                    case "Engineer":
+                        player = new Engineer(boundary, texture);
+                        break;
+                    case "Designer":
+                        player = new Designer(boundary, texture);
+                        break;
+                    case "Artist":
+                        player = new Artist(boundary, texture);
+                        break;
+                    case "Musician":
+                        player = new Musician(boundary, texture);
+                        break;
+                    case "QA":
+                        player = new QA(boundary, texture);
+                        break;
+                    default:
+                        player = new Player(boundary, texture, Common.Entity.ENTITY.Player);
+                        break;
+                }
+                p.Add(player);
+            }
+        }
+
+        public static string readString(XmlReader reader, string nodeName)
+        {
+            reader.ReadStartElement(nodeName);
+            string s = reader.ReadContentAsString();
+            reader.ReadEndElement();
+            return s;
+        }
+
+        public static int readInt(XmlReader reader, string nodeName)
+        {
+            reader.ReadStartElement(nodeName);
+            int i = reader.ReadContentAsInt();
+            reader.ReadEndElement();
+            return i;
+        }
+
 
         /// <summary>
         /// Load Content such as textures, songs, sfx, etc.
@@ -128,11 +260,48 @@ namespace LetsMakeAGame
         /// <param name="gameTime"></param>
         public void Update(GameTime gameTime)
         {
-            player.Update(gameTime);
-            foreach (Tile t in tiles) t.Update(player);
+            //player.Update(gameTime);
+            string name = "";
+            foreach (Player p in players)
+            {
+                if (p.isActive)
+                {
+                    p.Update(gameTime);
+                    name = p.textureName;
+                }
+                else if (p is Designer && ((Designer)p).cloud != null) p.Update(gameTime);
+                else p.Update(player);
+            }
+            Tile temp = null;
+            foreach (Tile t in tiles)
+            {
+                if (t.boundary.Width > 40)
+                {
+                    foreach (Player p in players)
+                    {
+                        if (p is Designer)
+                        {
+                            if (((Designer)p).cloud == null) temp = t;
+                            else
+                            {
+                                t.boundary.Y -= 2;
+                                if (p.boundary.X >= Game1.center.X + 200 || p.boundary.X <= Game1.center.X - 200) t.boundary.X -= p.speedX;
+                                if (((Designer)p).cloud.boundary.Y <= ((Designer)p).cloud.endPointY) ((Designer)p).cloud.isActive = false;
+                            }
+                        }
+                    }
+                }
+                else t.Update(player);
+            }
+            foreach (Dot d in dots)
+            {
+                d.Update(player);
+            }
+            if(temp != null) tiles.Remove(temp);
             CheckCollision();
             if(background != null) background.Update(player.boundary, player.speedX / 3, player.speedY / 3);
             if(foreground != null) foreground.Update(player.boundary, player.speedX / 2, player.speedY / 2);
+            rep = new Tile(Game1.getTexture(name), new Vector2(0, 0));
         }
 
         /// <summary>
@@ -144,7 +313,12 @@ namespace LetsMakeAGame
             if(background != null) background.Draw(spriteBatch);
             if(foreground != null) foreground.Draw(spriteBatch);
             foreach (Tile t in tiles) spriteBatch.Draw(t.texture, t.boundary, null, Color.White);
-            player.Draw(spriteBatch);
+            foreach (Player p in players)
+            {
+                p.Draw(spriteBatch);
+            }
+            rep.Draw(spriteBatch);
+            //player.Draw(spriteBatch);
         }
 
         public void GetInput(KeyboardState currentKeyboardState, KeyboardState previousKeyboardState, MouseState currentMouseState, MouseState previousMouseState, GameTime gameTime)
@@ -192,10 +366,25 @@ namespace LetsMakeAGame
             {
                 player.Jump(PLAYER_MOVE_SPEED);
             }
-            if (currentKeyboardState.IsKeyDown(Keys.LeftShift) && !previousKeyboardState.IsKeyDown(Keys.LeftShift)) player.Special();
+            if (currentKeyboardState.IsKeyDown(Keys.LeftShift) && !previousKeyboardState.IsKeyDown(Keys.LeftShift))
+            {
+                if (player is Designer)
+                {
+                    ((Designer)player).Special();
+                    tiles.Add(((Designer)player).cloud);
+                }
+            }
             if (player is Musician)
             {
                 if (currentKeyboardState.IsKeyUp(Keys.LeftShift) && previousKeyboardState.IsKeyDown(Keys.LeftShift)) ((Musician)player).ReleaseSpecial();
+            }
+            if (previousKeyboardState.IsKeyDown(Keys.T) && currentKeyboardState.IsKeyUp(Keys.T))
+            {
+                player.isActive = false;
+                activePlayerNumber++;
+                if (activePlayerNumber > players.Count - 1) activePlayerNumber = 0;
+                player = players[activePlayerNumber];
+                player.isActive = true;
             }
             //DEBUG
             if (currentKeyboardState.IsKeyDown(Keys.G))
@@ -218,35 +407,45 @@ namespace LetsMakeAGame
         {
             if (dots != null && dots.Count > 0)
             {
-                player.UpdateCollisionBoundaries(false);
-                foreach (Dot dot in dots)
+                foreach (Player p in players)
                 {
-                    if (player.boundary.Intersects(dot.boundary))
+                    p.UpdateCollisionBoundaries(false);
+                    foreach (Dot dot in dots)
                     {
-                        if (player.top.Intersects(dot.boundary)) continue;
-                        BasicCollision(player, dot.boundary);
+                        if (p.boundary.Intersects(dot.boundary))
+                        {
+                            if (p.top.Intersects(dot.boundary)) continue;
+                            BasicCollision(p, dot.boundary);
+                        }
                     }
                 }
+                
             }
-            player.UpdateCollisionBoundaries(true);
+            foreach (Player p in players)
+            {
+                p.UpdateCollisionBoundaries(true);
+            }
             foreach (Tile t in tiles)
             {
                 //If the player lands on the right or left hand side of the upper corner, do this, otherwise, they could get stuck.
-                if (player.boundary.Intersects(t.boundary))
+                foreach (Player p in players)
                 {
-                    BasicCollision(player, t.boundary);
-                }
-                if (blocks != null && blocks.Count > 0)
-                {
-                    foreach (EngineeringBlock block in blocks)
+                    if (p.boundary.Intersects(t.boundary))
                     {
-                        /////////////////////////////////This is no good.
-                        if (block.boundary.Intersects(t.boundary))
+                        BasicCollision(p, t.boundary);
+                    }
+                    if (blocks != null && blocks.Count > 0)
+                    {
+                        foreach (EngineeringBlock block in blocks)
                         {
-                            if (block.boundary.Y + block.boundary.Height >= t.boundary.Y) block.boundary.Y = t.boundary.Y - block.boundary.Height;
-                            if (block.boundary.Y <= t.boundary.Y + t.boundary.Height) block.boundary.Y = t.boundary.Y + t.boundary.Height;
-                            if (block.boundary.X + block.boundary.Width >= t.boundary.X) block.boundary.X = t.boundary.X + block.boundary.Width;
-                            if (block.boundary.X <= t.boundary.X + t.boundary.Width) block.boundary.X = t.boundary.X + t.boundary.Width;
+                            /////////////////////////////////This is no good.
+                            if (block.boundary.Intersects(t.boundary))
+                            {
+                                if (block.boundary.Y + block.boundary.Height >= t.boundary.Y) block.boundary.Y = t.boundary.Y - block.boundary.Height;
+                                if (block.boundary.Y <= t.boundary.Y + t.boundary.Height) block.boundary.Y = t.boundary.Y + t.boundary.Height;
+                                if (block.boundary.X + block.boundary.Width >= t.boundary.X) block.boundary.X = t.boundary.X + block.boundary.Width;
+                                if (block.boundary.X <= t.boundary.X + t.boundary.Width) block.boundary.X = t.boundary.X + t.boundary.Width;
+                            }
                         }
                     }
                 }

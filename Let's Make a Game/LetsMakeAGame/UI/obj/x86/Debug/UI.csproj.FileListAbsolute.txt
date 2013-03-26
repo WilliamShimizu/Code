@@ -8,3 +8,13 @@ C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\UI\
 C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\UI\obj\x86\Debug\UI.dll
 C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\UI\obj\x86\Debug\UI.pdb
 C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\UI\obj\x86\Debug\UI.csprojResolveAssemblyReference.cache
+C:\Users\Will\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\UI\bin\WindowsGL\Debug\SDL.dll
+C:\Users\Will\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\UI\bin\WindowsGL\Debug\UI.dll
+C:\Users\Will\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\UI\bin\WindowsGL\Debug\UI.pdb
+C:\Users\Will\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\UI\bin\WindowsGL\Debug\Lidgren.Network.dll
+C:\Users\Will\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\UI\bin\WindowsGL\Debug\MonoGame.Framework.dll
+C:\Users\Will\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\UI\bin\WindowsGL\Debug\OpenTK.dll
+C:\Users\Will\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\UI\bin\WindowsGL\Debug\Tao.Sdl.dll
+C:\Users\Will\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\UI\obj\x86\Debug\UI.csprojResolveAssemblyReference.cache
+C:\Users\Will\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\UI\obj\x86\Debug\UI.dll
+C:\Users\Will\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\UI\obj\x86\Debug\UI.pdb

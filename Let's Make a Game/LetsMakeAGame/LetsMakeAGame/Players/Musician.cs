@@ -7,6 +7,12 @@ namespace LetsMakeAGame.Players
 {
     class Musician : Player
     {
+        public Musician(Rectangle boundary, Texture2D texture)
+            : base(boundary, texture, ENTITY.Musician)
+        {
+
+        }
+
         bool specialIsActive;
         public override void Special()
         {
