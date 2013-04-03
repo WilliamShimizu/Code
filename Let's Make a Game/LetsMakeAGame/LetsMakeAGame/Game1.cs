@@ -9,8 +9,10 @@ using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.GamerServices;
 using System.Collections;
 using System.IO;
-
+using LevelManager;
 using LetsMakeAGame.Players;
+using Common;
+using eContentManager;
 #endregion
 
 namespace LetsMakeAGame
@@ -56,6 +58,11 @@ namespace LetsMakeAGame
         public static MouseState currentMouseState;
         public static MouseState previousMouseState;
 
+        Camera camera;
+        LevelManager.Level lvl;
+        eContentManager.eContentManager contentManager;
+        Avatar.Player plyr;
+
         public Game1()
             : base()
         {
@@ -63,8 +70,6 @@ namespace LetsMakeAGame
             gd = this.GraphicsDevice;
             Content.RootDirectory = "Content";
             Window.AllowUserResizing = false;
-            //ResolutionChooser r = new ResolutionChooser();
-            //r.Show();
             viewport = this.GraphicsDevice.Viewport;
             int width = 1600;
             int height = 900;
@@ -75,25 +80,6 @@ namespace LetsMakeAGame
             scale = (float)((double)(width * height) / (double)(1600 * 900));
             center = new Vector2(graphics.PreferredBackBufferWidth / 2, graphics.PreferredBackBufferHeight / 2);
             contentMgr = this.Content;
-            textureLookupTable = new Hashtable();
-            StreamReader sr = new StreamReader("Content/textureRep.txt");
-            string line = sr.ReadLine();
-            while (line != null)
-            {
-                string key = line.Substring(0, line.IndexOf(" "));
-                string value = line.Substring(line.IndexOf(" ") + 1, line.Length - line.IndexOf(" ") - 1);
-                textureLookupTable.Add(key, value);
-                line = sr.ReadLine();
-            }
-            sr.Close();
-            //List<string> MBOPTIONS = new List<string>();
-            //MBOPTIONS.Add("OK");
-            //string msg = "Text that was typed on the keyboard will be displayed here.\nClick OK to continue...";
-            //IAsyncResult result = Guide.BeginShowMessageBox(
-            //        "hello", msg, MBOPTIONS, 0,
-            //        MessageBoxIcon.Alert, null, null);
-            
-            //Guide.EndShowMessageBox(result);
             graphics.ToggleFullScreen();
         }
 
@@ -105,10 +91,12 @@ namespace LetsMakeAGame
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
             this.IsMouseVisible = true;
-            //player = new QA();
             ground = GraphicsDevice.Viewport.TitleSafeArea.Height - 40;
+            camera = new Camera(GraphicsDevice.Viewport);
+            contentManager = new eContentManager.eContentManager(this.Content);
+            lvl = new LevelManager.Level(contentManager);
+            
             base.Initialize();
         }
 
@@ -123,19 +111,14 @@ namespace LetsMakeAGame
             playerTexture = Content.Load<Texture2D>("Tiles/Block");
             //DEBUG
             font = Content.Load<SpriteFont>("myFont");
-            ///////
-            cloud = Content.Load<Texture2D>("Cloud");
-            engineeringBlock = Content.Load<Texture2D>("Tiles/engineeringBlock");
-
-
             
-            //player.Initialize(playerTexture, new Vector2(60, GraphicsDevice.Viewport.TitleSafeArea.Height - playerTexture.Height), GraphicsDevice.Viewport);
-            List<string> songNames = new List<string>();
-            List<string> sfxNames = new List<string>();
-            //string mapName = "Content/Maps/User Created Content/test.txt";
-            //level = new Level("background", "foreground", mapName, songNames, sfxNames);
-            le = new LevelEditor();
-            // TODO: use this.Content to load your game content here
+            ///////
+            //cloud = Content.Load<Texture2D>("Cloud");
+            //engineeringBlock = Content.Load<Texture2D>("Tiles/engineeringBlock");
+            //List<string> songNames = new List<string>();
+            //List<string> sfxNames = new List<string>();
+            //le = new LevelEditor();
+
         }
 
         /// <summary>
@@ -158,14 +141,31 @@ namespace LetsMakeAGame
                 Exit();
             currentKeyboardState = Keyboard.GetState();
             currentMouseState = Mouse.GetState();
-            // TODO: Add your update logic here
-            le.Update(gameTime);
-            //level.Update(gameTime);
+            //le.Update(gameTime);
+            int speedX = 0;
+            int speedY = 0;
+
+            if (currentKeyboardState.IsKeyDown(Keys.D)) speedX = 6;
+            else if (currentKeyboardState.IsKeyDown(Keys.A)) speedX = -6;
+            else speedX = 0;
+
+            if (currentKeyboardState.IsKeyDown(Keys.W)) speedY = -6;
+            else if (currentKeyboardState.IsKeyDown(Keys.S)) speedY = 6;
+            else speedY = 0;
+
+            lvl.Update(gameTime, speedX, speedY);
+            plyr = lvl.getActivePlayer();
+
             previousKeyboardState = currentKeyboardState;
             previousMouseState = currentMouseState;
             //DEBUG
+
+            
+
             tsaX = graphics.GraphicsDevice.Viewport.TitleSafeArea.Width;
             tsaY = graphics.GraphicsDevice.Viewport.TitleSafeArea.Height;
+
+            camera.Update(gameTime, plyr.boundary);
             
             base.Update(gameTime);
         }
@@ -177,16 +177,12 @@ namespace LetsMakeAGame
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.White);
-            spriteBatch.Begin();
-            //level.Draw(spriteBatch);
-            le.Draw(spriteBatch);
-            //DEBUG
-            //spriteBatch.DrawString(font, "TSArea X: " + tsaX, new Vector2(0, 0), Color.Gray);
-            //spriteBatch.DrawString(font, "TSArea Y: " + tsaY, new Vector2(0, 20), Color.Gray);
-            //spriteBatch.DrawString(font, "Player X: " + player.boundary.X, new Vector2(0, 40), Color.Gray);
-            //spriteBatch.DrawString(font, "Player Y: " + player.boundary.Y, new Vector2(0, 60), Color.Gray);
+            //spriteBatch.Begin();
+            //le.Draw(spriteBatch);
+
+            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, null, null, null, camera.transform);
+            lvl.Draw(spriteBatch);
             spriteBatch.End();
-            // TODO: Add your drawing code here
 
             base.Draw(gameTime);
         }

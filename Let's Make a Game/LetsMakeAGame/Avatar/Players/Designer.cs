@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Avatar.Players
 {
-    class Designer
+    public class Designer
     {
     }
 }

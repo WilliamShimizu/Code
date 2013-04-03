@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Avatar.Players
 {
-    class QA
+    public class QA
     {
     }
 }

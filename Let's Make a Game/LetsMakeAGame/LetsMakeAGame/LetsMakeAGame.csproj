@@ -226,6 +226,10 @@
       <Project>{10650c93-4f4f-4b49-95ad-67d15d2f434f}</Project>
       <Name>Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\eContentManager\eContentManager.csproj">
+      <Project>{e7040209-b577-406c-b8ea-48b86ffbd43a}</Project>
+      <Name>eContentManager</Name>
+    </ProjectReference>
     <ProjectReference Include="..\InputHandler\InputHandler.csproj">
       <Project>{a2e7d01a-98fe-46f9-9285-d8da467db340}</Project>
       <Name>InputHandler</Name>

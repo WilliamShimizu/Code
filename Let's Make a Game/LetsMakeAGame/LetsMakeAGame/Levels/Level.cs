@@ -18,10 +18,7 @@ namespace LetsMakeAGame
 {
     public class Level
     {
-        public Background background;
-        public Background foreground;
         public List<Tile> tiles;
-        List<string> lines;
         Player player;
         public List<Texture2D> textures;
         HashSet<string> textureNames;
@@ -39,19 +36,17 @@ namespace LetsMakeAGame
         /// <summary>
         /// Constructs the major things needed for the level
         /// </summary>
-        /// <param name="backgroundName">Name of the background Image</param>
-        /// <param name="foregroundName">Name of the foreground Image</param>
         /// <param name="mapPath">Name of the Map</param>
         /// <param name="songNames">List of song names that will be played in the level</param>
         /// <param name="soundEffects"></param>
-        public Level(string backgroundName, string foregroundName, string mapPath, List<string> songNames, List<string> soundEffects)
+        public Level(string mapPath, List<string> songNames, List<string> soundEffects)
         {
             textureTable = new Hashtable();
             this.textures = new List<Texture2D>();
             this.textureNames = new HashSet<string>();
             this.songNames = songNames;
             this.soundEffectNames = soundEffects;
-            loadXML();
+            loadXML(mapPath);
             player = players[0];
             activePlayerNumber = 0;
             player.isActive = true;
@@ -62,56 +57,11 @@ namespace LetsMakeAGame
             }
         }
 
-        //    loadTextFile(mapPath, backgroundName, foregroundName);
-        //}
-
-        //private void loadTextFile(string mapPath, string backgroundName, string foregroundName)
-        //{
-        //    StreamReader sr = new StreamReader(mapPath);
-        //    string line = sr.ReadLine();
-        //    string[] names = line.Split(' ');
-        //    foreach (string textureName in names)
-        //    {
-        //        if (textureName == "!") continue;
-        //        this.textureNames.Add(textureName);
-        //    }
-        //    LoadContent(backgroundName, foregroundName);
-        //    player = Game1.player;
-
-        //    if (player is Engineer)
-        //    {
-        //        blocks = ((Engineer)player).blocks;
-        //    }
-        //    if (player is Artist)
-        //    {
-        //        dots = ((Artist)player).dots;
-        //    }
-        //    tiles = new List<Tile>();
-        //    lines = new List<string>();
-        //    while (line != null)
-        //    {
-        //        lines.Add(line);
-        //        line = sr.ReadLine();
-        //    }
-        //    sr.Close();
-        //    for (int i = 0; i < lines.Count; i++)
-        //    {
-        //        if (lines[i].Contains("!")) continue;
-        //        for (int j = 0; j < lines[i].Length; j++)
-        //        {
-        //            string s = lines[i].Substring(j, 1);
-        //            if (s == " " || s == "\n") continue;
-        //            Tile t = new Tile(textures, s, new Vector2(j * 40, i * 40));
-        //            tiles.Add(t);
-        //        }
-        //    }
-        //}
-
-        private void loadXML()
+        private void loadXML(string mapPath)
         {
             tiles = new List<Tile>();
             players = new List<Player>();
-            XmlReader reader = XmlReader.Create("serializeTest.xml");
+            XmlReader reader = XmlReader.Create(mapPath);
             while (reader.Read())
             {
                 if (reader.IsStartElement())
@@ -176,11 +126,6 @@ namespace LetsMakeAGame
                     reader.ReadStartElement();
                 }
                 else return;
-                //try { reader.ReadStartElement("Player"); }
-                //catch
-                //{
-                //    return;
-                //}
                 boundary.X = readInt(reader, "positionX");
                 boundary.Y = readInt(reader, "positionY");
                 boundary.Height = readInt(reader, "height");
@@ -234,20 +179,8 @@ namespace LetsMakeAGame
         /// <summary>
         /// Load Content such as textures, songs, sfx, etc.
         /// </summary>
-        /// <param name="bg">Name of the background file</param>
-        /// <param name="fg">Name of the foreground file</param>
-        public void LoadContent(string bg, string fg)
+        public void LoadContent()
         {
-            if (bg != "null")
-            {
-                Texture2D bg1 = Game1.contentMgr.Load<Texture2D>(bg);
-                this.background = new Background(bg1);
-            }
-            if (fg != "null")
-            {
-                Texture2D fg1 = Game1.contentMgr.Load<Texture2D>(fg);
-                this.foreground = new Background(fg1);
-            }
             if (textureNames != null && textureNames.Count > 0)
             {
                 foreach (string texture in textureNames) textures.Add(Game1.contentMgr.Load<Texture2D>("Tiles/" + texture));
@@ -298,7 +231,7 @@ namespace LetsMakeAGame
                         if (p is Designer)
                         {
                             if (((Designer)p).cloud == null) temp = t;
-                            else// if(((Designer)p).cloud.msElapsed >= 2000)
+                            else
                             {
                                 t.boundary.Y -= 2;
                                 if (p.boundary.X >= Game1.center.X + 200 || p.boundary.X <= Game1.center.X - 200) t.boundary.X -= p.speedX;
@@ -318,8 +251,6 @@ namespace LetsMakeAGame
             }
             if(temp != null) tiles.Remove(temp);
             CheckCollision();
-            if(background != null) background.Update(player.boundary, player.speedX / 3, player.speedY / 3);
-            if(foreground != null) foreground.Update(player.boundary, player.speedX / 2, player.speedY / 2);
             rep = new Tile(Game1.getTexture(name), new Vector2(0, 0));
         }
 
@@ -329,15 +260,12 @@ namespace LetsMakeAGame
         /// <param name="spriteBatch">SpriteBatch used from the Game1</param>
         public void Draw(SpriteBatch spriteBatch)
         {
-            if(background != null) background.Draw(spriteBatch);
-            if(foreground != null) foreground.Draw(spriteBatch);
             foreach (Tile t in tiles) spriteBatch.Draw(t.texture, t.boundary, null, Color.White);
             foreach (Player p in players)
             {
                 p.Draw(spriteBatch);
             }
             rep.Draw(spriteBatch);
-            //player.Draw(spriteBatch);
         }
 
         public void GetInput(KeyboardState currentKeyboardState, KeyboardState previousKeyboardState, MouseState currentMouseState, MouseState previousMouseState, GameTime gameTime)

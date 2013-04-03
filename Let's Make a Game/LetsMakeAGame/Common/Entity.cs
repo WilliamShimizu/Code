@@ -31,8 +31,8 @@ namespace Common
 
         public void Update(int speedX, int speedY)
         {
-            boundary.X -= speedX;
-            boundary.Y -= speedY;
+            boundary.X += speedX;
+            boundary.Y += speedY;
         }
 
         public void Draw(SpriteBatch spriteBatch)

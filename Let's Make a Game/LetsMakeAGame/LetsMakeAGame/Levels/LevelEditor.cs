@@ -338,7 +338,7 @@ namespace LetsMakeAGame
                             }
                             Save(true);
                             tiles.Clear();
-                            testLevel = new Level("null", "null", "Content/Maps/User Created Content/$temp.txt", null, null);
+                            testLevel = new Level("serializeTest.xml", null, null);
                             menu.buttons[i].text = "Edit Map";
                             break;
                         case "Save Map":

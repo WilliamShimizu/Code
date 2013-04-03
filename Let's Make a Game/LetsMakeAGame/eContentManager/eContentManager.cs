@@ -10,7 +10,7 @@ using System.Collections;
 
 namespace eContentManager
 {
-    class eContentManager
+    public class eContentManager
     {
         private ContentManager contentMgr;
         public Hashtable textureTable { get; set; }
@@ -19,6 +19,11 @@ namespace eContentManager
         {
             this.contentMgr = contentMgr;
             textureTable = new Hashtable();
+        }
+
+        public void loadContent(string[] fileNames)
+        {
+
         }
 
         public Texture2D getTexture(string fileName)

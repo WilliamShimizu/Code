@@ -6,7 +6,7 @@ using Common;
 
 namespace Avatar
 {
-    class Bug : Avatar
+    class Bug
     {
         
     }
