@@ -12,11 +12,11 @@ namespace Common
         public Rectangle boundary;
         public Texture2D texture;
 
-        public Entity(Rectangle boundary, string textureName, ENTITY type)
-            : base(boundary, textureName, type)
+        public Entity(Rectangle boundary, string fileName, ENTITY type)
+            : base(boundary, fileName, type)
         {
             this.boundary = boundary;
-            this.textureName = textureName;
+            this.fileName = fileName;
             this.type = type;
         }
 
@@ -24,10 +24,11 @@ namespace Common
             : base(boundary, texture.Name.ToString(), type)
         {
             this.boundary = boundary;
-            this.textureName = texture.Name.ToString();
+            this.fileName = texture.Name.ToString();
             this.type = type;
             this.texture = texture;
         }
+
         public void Update(int speedX, int speedY)
         {
             boundary.X -= speedX;
@@ -50,13 +51,8 @@ namespace Common
             Enemy,
             UI,
             Tile,
-            Background
+            Background,
+            Audio,
         }
-
-        //public Entity Copy()
-        //{
-        //    return new Entity(this.boundary, this.textureName, this.type);
-        //}
-
     }
 }

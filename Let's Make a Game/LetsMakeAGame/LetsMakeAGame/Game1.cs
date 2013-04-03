@@ -73,7 +73,7 @@ namespace LetsMakeAGame
             viewport.Width = graphics.PreferredBackBufferWidth;
             viewport.Height = graphics.PreferredBackBufferHeight;
             scale = (float)((double)(width * height) / (double)(1600 * 900));
-            center = new Vector2((int)graphics.PreferredBackBufferWidth / 2, (int)graphics.PreferredBackBufferHeight / 2);
+            center = new Vector2(graphics.PreferredBackBufferWidth / 2, graphics.PreferredBackBufferHeight / 2);
             contentMgr = this.Content;
             textureLookupTable = new Hashtable();
             StreamReader sr = new StreamReader("Content/textureRep.txt");

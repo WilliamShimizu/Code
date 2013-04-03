@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace InputHandler
 {
@@ -15,14 +16,14 @@ namespace InputHandler
             DOWN,
             JUMP,
             SPECIAL,
-            SELECT,
+            TOGGLE,
             LEFT_CLICK_DOWN,
             RIGHT_CLICK_DOWN,
             LEFT_CLICK,
             RIGHT_CLICK
         }
 
-        public static HashSet<ACTIONS> GetInput()
+        public HashSet<ACTIONS> GetInput()
         {
             cursorPosition = inMouse.cursorPos;
             HashSet<ACTIONS> actions = new HashSet<ACTIONS>();
@@ -44,5 +45,16 @@ namespace InputHandler
             }
             return actions;
         }
+
+        public bool isWithin(Vector2 obj, Texture2D txtr)
+        {
+            return (cursorPosition.X >= obj.X && cursorPosition.X <= obj.X + txtr.Width && cursorPosition.Y >= obj.Y && cursorPosition.Y <= obj.Y + txtr.Height);
+        }
+
+        public bool isWithin(Rectangle obj)
+        {
+            return (cursorPosition.X >= obj.X && cursorPosition.X <= obj.X + obj.Width && cursorPosition.Y >= obj.Y && cursorPosition.Y <= obj.Y + obj.Height);
+        }
+
     }
 }

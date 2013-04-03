@@ -39,6 +39,14 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Avatar.cs" />
+    <Compile Include="Bug.cs" />
+    <Compile Include="Player.cs" />
+    <Compile Include="Players\Artist.cs" />
+    <Compile Include="Players\Designer.cs" />
+    <Compile Include="Players\Engineer.cs" />
+    <Compile Include="Players\Musician.cs" />
+    <Compile Include="Players\QA.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -63,7 +71,15 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Enemies\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{10650c93-4f4f-4b49-95ad-67d15d2f434f}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -18,3 +18,5 @@ C:\Users\Will\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\Avatar\bin\W
 C:\Users\Will\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\Avatar\obj\x86\Debug\Avatar.csprojResolveAssemblyReference.cache
 C:\Users\Will\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\Avatar\obj\x86\Debug\Avatar.dll
 C:\Users\Will\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\Avatar\obj\x86\Debug\Avatar.pdb
+C:\Users\Will\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\Avatar\bin\WindowsGL\Debug\Common.dll
+C:\Users\Will\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\Avatar\bin\WindowsGL\Debug\Common.pdb

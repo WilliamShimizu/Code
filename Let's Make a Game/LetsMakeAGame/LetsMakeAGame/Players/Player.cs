@@ -30,7 +30,7 @@ namespace LetsMakeAGame.Players
         public bool gravityIsOn = true;
         public bool canJump;
 
-        private Texture2D texture;
+        public Texture2D texture;
 
         private Viewport view;
 
@@ -47,7 +47,7 @@ namespace LetsMakeAGame.Players
 
         public override bool Equals(object obj)
         {
-            if(!(obj is Player) || obj == null) return false;
+            if(obj == null || !(obj is Player)) return false;
             else
             {
                 Player p = (Player)obj;

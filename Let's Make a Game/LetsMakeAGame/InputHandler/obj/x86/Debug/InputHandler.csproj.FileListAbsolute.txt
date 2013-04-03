@@ -16,3 +16,4 @@ C:\Users\Will\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\InputHandler
 C:\Users\Will\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\InputHandler\bin\WindowsGL\Debug\Tao.Sdl.dll
 C:\Users\Will\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\InputHandler\obj\x86\Debug\InputHandler.dll
 C:\Users\Will\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\InputHandler\obj\x86\Debug\InputHandler.pdb
+C:\Users\Will\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\InputHandler\obj\x86\Debug\InputHandler.csprojResolveAssemblyReference.cache

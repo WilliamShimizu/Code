@@ -50,6 +50,7 @@ namespace LetsMakeAGame.Players
         public int endPointY;
         public const int MAX_HEIGHT = 200;
         public int start;
+        public int msElapsed;
 
         public bool isActive;
 
@@ -63,10 +64,12 @@ namespace LetsMakeAGame.Players
             this.boundary = new Rectangle((int)(position.X), (int)(position.Y), texture.Width, texture.Height);
             endPointY = this.boundary.Y - MAX_HEIGHT;
             isActive = true;
+            msElapsed = 0;
         }
 
         public void Update(Player player, GameTime gameTime)
         {
+            msElapsed += gameTime.ElapsedGameTime.Milliseconds;
             this.boundary.Y -= 2;
             if (player.boundary.X >= Game1.center.X + 200 || player.boundary.X <= Game1.center.X - 200) boundary.X -= player.speedX;
             if (this.boundary.Y <= endPointY) isActive = false;

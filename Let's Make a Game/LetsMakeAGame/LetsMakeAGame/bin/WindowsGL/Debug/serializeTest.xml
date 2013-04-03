@@ -1,179 +1,256 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Level>
   <Players>
-    <Designer>
-      <positionX>560</positionX>
-      <positionY>480</positionY>
-      <height>40</height>
-      <width>40</width>
-      <textureName>Tiles/tiles</textureName>
-    </Designer>
-    <QA>
-      <positionX>680</positionX>
-      <positionY>320</positionY>
-      <height>40</height>
-      <width>40</width>
-      <textureName>Tiles/Block</textureName>
-    </QA>
     <Artist>
-      <positionX>840</positionX>
-      <positionY>320</positionY>
-      <height>40</height>
-      <width>40</width>
+      <positionX>440</positionX>
+      <positionY>360</positionY>
+      <height>57</height>
+      <width>57</width>
       <textureName>Tiles/engineeringBlock</textureName>
     </Artist>
+    <QA>
+      <positionX>960</positionX>
+      <positionY>320</positionY>
+      <height>57</height>
+      <width>57</width>
+      <textureName>Tiles/Block</textureName>
+    </QA>
+    <Designer>
+      <positionX>1240</positionX>
+      <positionY>320</positionY>
+      <height>57</height>
+      <width>57</width>
+      <textureName>Tiles/tiles</textureName>
+    </Designer>
   </Players>
   <Tiles>
     <Tile>
-      <positionX>680</positionX>
-      <positionY>360</positionY>
-      <height>40</height>
-      <width>40</width>
-      <textureName>Tiles/rockTile</textureName>
-    </Tile>
-    <Tile>
-      <positionX>720</positionX>
-      <positionY>360</positionY>
-      <height>40</height>
-      <width>40</width>
-      <textureName>Tiles/rockTile</textureName>
-    </Tile>
-    <Tile>
-      <positionX>760</positionX>
-      <positionY>360</positionY>
-      <height>40</height>
-      <width>40</width>
-      <textureName>Tiles/rockTile</textureName>
-    </Tile>
-    <Tile>
-      <positionX>800</positionX>
-      <positionY>360</positionY>
-      <height>40</height>
-      <width>40</width>
-      <textureName>Tiles/rockTile</textureName>
-    </Tile>
-    <Tile>
-      <positionX>840</positionX>
-      <positionY>360</positionY>
-      <height>40</height>
-      <width>40</width>
-      <textureName>Tiles/rockTile</textureName>
-    </Tile>
-    <Tile>
-      <positionX>880</positionX>
-      <positionY>360</positionY>
-      <height>40</height>
-      <width>40</width>
-      <textureName>Tiles/rockTile</textureName>
-    </Tile>
-    <Tile>
-      <positionX>920</positionX>
-      <positionY>360</positionY>
-      <height>40</height>
-      <width>40</width>
-      <textureName>Tiles/rockTile</textureName>
-    </Tile>
-    <Tile>
-      <positionX>960</positionX>
-      <positionY>360</positionY>
-      <height>40</height>
-      <width>40</width>
-      <textureName>Tiles/rockTile</textureName>
-    </Tile>
-    <Tile>
-      <positionX>1000</positionX>
-      <positionY>360</positionY>
-      <height>40</height>
-      <width>40</width>
-      <textureName>Tiles/rockTile</textureName>
-    </Tile>
-    <Tile>
-      <positionX>1040</positionX>
-      <positionY>360</positionY>
-      <height>40</height>
-      <width>40</width>
-      <textureName>Tiles/rockTile</textureName>
-    </Tile>
-    <Tile>
-      <positionX>1080</positionX>
-      <positionY>360</positionY>
-      <height>40</height>
-      <width>40</width>
-      <textureName>Tiles/rockTile</textureName>
-    </Tile>
-    <Tile>
       <positionX>320</positionX>
-      <positionY>520</positionY>
+      <positionY>600</positionY>
       <height>40</height>
       <width>40</width>
       <textureName>Tiles/rockTile</textureName>
     </Tile>
     <Tile>
       <positionX>360</positionX>
-      <positionY>520</positionY>
+      <positionY>600</positionY>
       <height>40</height>
       <width>40</width>
       <textureName>Tiles/rockTile</textureName>
     </Tile>
     <Tile>
       <positionX>400</positionX>
-      <positionY>520</positionY>
+      <positionY>600</positionY>
       <height>40</height>
       <width>40</width>
       <textureName>Tiles/rockTile</textureName>
     </Tile>
     <Tile>
       <positionX>440</positionX>
-      <positionY>520</positionY>
+      <positionY>600</positionY>
       <height>40</height>
       <width>40</width>
       <textureName>Tiles/rockTile</textureName>
     </Tile>
     <Tile>
       <positionX>480</positionX>
-      <positionY>520</positionY>
+      <positionY>600</positionY>
       <height>40</height>
       <width>40</width>
       <textureName>Tiles/rockTile</textureName>
     </Tile>
     <Tile>
       <positionX>520</positionX>
-      <positionY>520</positionY>
+      <positionY>600</positionY>
       <height>40</height>
       <width>40</width>
       <textureName>Tiles/rockTile</textureName>
     </Tile>
     <Tile>
       <positionX>560</positionX>
-      <positionY>520</positionY>
+      <positionY>600</positionY>
       <height>40</height>
       <width>40</width>
       <textureName>Tiles/rockTile</textureName>
     </Tile>
     <Tile>
       <positionX>600</positionX>
-      <positionY>520</positionY>
+      <positionY>600</positionY>
       <height>40</height>
       <width>40</width>
       <textureName>Tiles/rockTile</textureName>
     </Tile>
     <Tile>
       <positionX>640</positionX>
-      <positionY>520</positionY>
+      <positionY>600</positionY>
       <height>40</height>
       <width>40</width>
       <textureName>Tiles/rockTile</textureName>
     </Tile>
     <Tile>
       <positionX>680</positionX>
-      <positionY>520</positionY>
+      <positionY>600</positionY>
       <height>40</height>
       <width>40</width>
       <textureName>Tiles/rockTile</textureName>
     </Tile>
     <Tile>
       <positionX>720</positionX>
-      <positionY>520</positionY>
+      <positionY>600</positionY>
+      <height>40</height>
+      <width>40</width>
+      <textureName>Tiles/rockTile</textureName>
+    </Tile>
+    <Tile>
+      <positionX>760</positionX>
+      <positionY>600</positionY>
+      <height>40</height>
+      <width>40</width>
+      <textureName>Tiles/rockTile</textureName>
+    </Tile>
+    <Tile>
+      <positionX>800</positionX>
+      <positionY>600</positionY>
+      <height>40</height>
+      <width>40</width>
+      <textureName>Tiles/rockTile</textureName>
+    </Tile>
+    <Tile>
+      <positionX>840</positionX>
+      <positionY>600</positionY>
+      <height>40</height>
+      <width>40</width>
+      <textureName>Tiles/rockTile</textureName>
+    </Tile>
+    <Tile>
+      <positionX>880</positionX>
+      <positionY>600</positionY>
+      <height>40</height>
+      <width>40</width>
+      <textureName>Tiles/rockTile</textureName>
+    </Tile>
+    <Tile>
+      <positionX>920</positionX>
+      <positionY>600</positionY>
+      <height>40</height>
+      <width>40</width>
+      <textureName>Tiles/rockTile</textureName>
+    </Tile>
+    <Tile>
+      <positionX>960</positionX>
+      <positionY>600</positionY>
+      <height>40</height>
+      <width>40</width>
+      <textureName>Tiles/rockTile</textureName>
+    </Tile>
+    <Tile>
+      <positionX>1000</positionX>
+      <positionY>600</positionY>
+      <height>40</height>
+      <width>40</width>
+      <textureName>Tiles/rockTile</textureName>
+    </Tile>
+    <Tile>
+      <positionX>1040</positionX>
+      <positionY>600</positionY>
+      <height>40</height>
+      <width>40</width>
+      <textureName>Tiles/rockTile</textureName>
+    </Tile>
+    <Tile>
+      <positionX>1080</positionX>
+      <positionY>600</positionY>
+      <height>40</height>
+      <width>40</width>
+      <textureName>Tiles/rockTile</textureName>
+    </Tile>
+    <Tile>
+      <positionX>1120</positionX>
+      <positionY>600</positionY>
+      <height>40</height>
+      <width>40</width>
+      <textureName>Tiles/rockTile</textureName>
+    </Tile>
+    <Tile>
+      <positionX>1160</positionX>
+      <positionY>600</positionY>
+      <height>40</height>
+      <width>40</width>
+      <textureName>Tiles/rockTile</textureName>
+    </Tile>
+    <Tile>
+      <positionX>1200</positionX>
+      <positionY>600</positionY>
+      <height>40</height>
+      <width>40</width>
+      <textureName>Tiles/rockTile</textureName>
+    </Tile>
+    <Tile>
+      <positionX>1240</positionX>
+      <positionY>600</positionY>
+      <height>40</height>
+      <width>40</width>
+      <textureName>Tiles/rockTile</textureName>
+    </Tile>
+    <Tile>
+      <positionX>1280</positionX>
+      <positionY>600</positionY>
+      <height>40</height>
+      <width>40</width>
+      <textureName>Tiles/rockTile</textureName>
+    </Tile>
+    <Tile>
+      <positionX>1320</positionX>
+      <positionY>600</positionY>
+      <height>40</height>
+      <width>40</width>
+      <textureName>Tiles/rockTile</textureName>
+    </Tile>
+    <Tile>
+      <positionX>1360</positionX>
+      <positionY>600</positionY>
+      <height>40</height>
+      <width>40</width>
+      <textureName>Tiles/rockTile</textureName>
+    </Tile>
+    <Tile>
+      <positionX>1400</positionX>
+      <positionY>600</positionY>
+      <height>40</height>
+      <width>40</width>
+      <textureName>Tiles/rockTile</textureName>
+    </Tile>
+    <Tile>
+      <positionX>1440</positionX>
+      <positionY>600</positionY>
+      <height>40</height>
+      <width>40</width>
+      <textureName>Tiles/rockTile</textureName>
+    </Tile>
+    <Tile>
+      <positionX>1480</positionX>
+      <positionY>600</positionY>
+      <height>40</height>
+      <width>40</width>
+      <textureName>Tiles/rockTile</textureName>
+    </Tile>
+    <Tile>
+      <positionX>1520</positionX>
+      <positionY>600</positionY>
+      <height>40</height>
+      <width>40</width>
+      <textureName>Tiles/rockTile</textureName>
+    </Tile>
+    <Tile>
+      <positionX>1560</positionX>
+      <positionY>600</positionY>
+      <height>40</height>
+      <width>40</width>
+      <textureName>Tiles/rockTile</textureName>
+    </Tile>
+    <Tile>
+      <positionX>1600</positionX>
+      <positionY>600</positionY>
       <height>40</height>
       <width>40</width>
       <textureName>Tiles/rockTile</textureName>

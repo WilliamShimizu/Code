@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Xml;
 
 using LetsMakeAGame.Players;
+using System.Collections;
 
 namespace LetsMakeAGame
 {
@@ -32,6 +33,8 @@ namespace LetsMakeAGame
         public List<Player> players;
         int activePlayerNumber;
         Tile rep;
+        Hashtable textureTable;
+
 
         /// <summary>
         /// Constructs the major things needed for the level
@@ -43,6 +46,7 @@ namespace LetsMakeAGame
         /// <param name="soundEffects"></param>
         public Level(string backgroundName, string foregroundName, string mapPath, List<string> songNames, List<string> soundEffects)
         {
+            textureTable = new Hashtable();
             this.textures = new List<Texture2D>();
             this.textureNames = new HashSet<string>();
             this.songNames = songNames;
@@ -143,8 +147,20 @@ namespace LetsMakeAGame
                 boundary.Width = readInt(reader, "width");
                 name = readString(reader, "textureName");
                 reader.ReadEndElement();
-                tiles.Add(new Tile(Game1.getTexture(name), new Vector2(boundary.X, boundary.Y)));
+                tiles.Add(new Tile(getTexture(name), new Vector2(boundary.X, boundary.Y)));
             }
+        }
+
+        private Texture2D getTexture(string name)
+        {
+            Texture2D texture;
+            if (textureTable[name] == null)
+            {
+                texture = Game1.getTexture(name);
+                textureTable.Add(name, texture);
+            }
+            else texture = (Texture2D)textureTable[name];
+            return texture;
         }
 
         private void loadPlayers(XmlReader reader, List<Player> p)
@@ -172,7 +188,7 @@ namespace LetsMakeAGame
                 name = readString(reader, "textureName");
                 reader.ReadEndElement();
                 Player player;
-                Texture2D texture = Game1.getTexture(name);
+                Texture2D texture = getTexture(name);
                 switch (type)
                 {
                     case "Engineer":
@@ -267,7 +283,7 @@ namespace LetsMakeAGame
                 if (p.isActive)
                 {
                     p.Update(gameTime);
-                    name = p.textureName;
+                    name = p.fileName;
                 }
                 else if (p is Designer && ((Designer)p).cloud != null) p.Update(gameTime);
                 else p.Update(player);
@@ -282,7 +298,7 @@ namespace LetsMakeAGame
                         if (p is Designer)
                         {
                             if (((Designer)p).cloud == null) temp = t;
-                            else
+                            else// if(((Designer)p).cloud.msElapsed >= 2000)
                             {
                                 t.boundary.Y -= 2;
                                 if (p.boundary.X >= Game1.center.X + 200 || p.boundary.X <= Game1.center.X - 200) t.boundary.X -= p.speedX;
@@ -293,9 +309,12 @@ namespace LetsMakeAGame
                 }
                 else t.Update(player);
             }
-            foreach (Dot d in dots)
+            if (dots != null)
             {
-                d.Update(player);
+                foreach (Dot d in dots)
+                {
+                    d.Update(player);
+                }
             }
             if(temp != null) tiles.Remove(temp);
             CheckCollision();
@@ -414,7 +433,7 @@ namespace LetsMakeAGame
                     {
                         if (p.boundary.Intersects(dot.boundary))
                         {
-                            if (p.top.Intersects(dot.boundary)) continue;
+                            //if (p.top.Intersects(dot.boundary)) continue;
                             BasicCollision(p, dot.boundary);
                         }
                     }

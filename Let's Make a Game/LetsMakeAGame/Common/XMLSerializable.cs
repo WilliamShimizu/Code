@@ -13,16 +13,16 @@ namespace Common
         public int positionY { get; set; }
         public int height { get; set; }
         public int width { get; set; }
-        public string textureName;
+        public string fileName;
         public Entity.ENTITY type;
 
-        public XMLSerializable(Rectangle rect, string textureName, Entity.ENTITY type)
+        public XMLSerializable(Rectangle rect, string fileName, Entity.ENTITY type)
         {
             positionX = rect.X;
             positionY = rect.Y;
             height = rect.Height;
             width = rect.Width;
-            this.textureName = textureName;
+            this.fileName = fileName;
             this.type = type;
         }
 
@@ -33,7 +33,7 @@ namespace Common
                 writer.WriteElementString("positionY", positionY.ToString());
                 writer.WriteElementString("height", height.ToString());
                 writer.WriteElementString("width", width.ToString());
-                writer.WriteElementString("textureName", textureName);
+                writer.WriteElementString("textureName", fileName);
             writer.WriteEndElement();
         }
     }

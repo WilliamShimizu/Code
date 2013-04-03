@@ -39,7 +39,11 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="FallingTile.cs" />
+    <Compile Include="LethalTile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PushableTile.cs" />
+    <Compile Include="Tile.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="OpenTK">

@@ -30,7 +30,7 @@ namespace InputHandler
 
             if (currentGamePadState.IsButtonUp(Buttons.Y) && previousGamePadState.IsButtonUp(Buttons.Y))
             {
-                actions.Add(InputManager.ACTIONS.SELECT);
+                actions.Add(InputManager.ACTIONS.TOGGLE);
             }
 
             previousGamePadState = currentGamePadState;

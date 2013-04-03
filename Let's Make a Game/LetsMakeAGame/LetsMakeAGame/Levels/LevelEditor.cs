@@ -195,7 +195,7 @@ namespace LetsMakeAGame
                 {
                     if (t is Tile)
                     {
-                        if (t.textureName != "Tiles/blankTile")
+                        if (t.fileName != "Tiles/blankTile")
                             ((Common.XMLSerializable)t).writeNode(writer);
                     }
                 }
@@ -430,6 +430,7 @@ namespace LetsMakeAGame
             ////Keyboard
             if (currentKeyboardState.IsKeyDown(Keys.LeftShift) && currentKeyboardState.IsKeyDown(Keys.D9))
             {
+                players.Clear();
                 for (int i = 0; i < tiles.Count; i++)
                 {
                     if (tiles[i].texture.Name != "Tiles/blankTile") tiles[i] = new Tile(blankTile, new Vector2(tiles[i].boundary.X, tiles[i].boundary.Y));

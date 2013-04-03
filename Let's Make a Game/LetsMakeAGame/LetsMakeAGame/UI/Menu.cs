@@ -19,17 +19,19 @@ namespace LetsMakeAGame.UI
 
         public Menu(Texture2D background)
         {
+            Rectangle r = Game1.getRect(new Vector2(1, 1), Game1.getTexture("Tiles/engineeringBlock"));
+            r = new Rectangle(1, 1, 40, 40);
             this.background = background;
             position = new Vector2();
             isHidden = true;
             tiles = new List<Common.Entity>();
-            tiles.Add(new Artist(new Rectangle(1,1,40,40), Game1.getTexture("Tiles/engineeringBlock")));
+            tiles.Add(new Artist(r, Game1.getTexture("Tiles/engineeringBlock")));
             tiles.Add(new Tile(Game1.getTexture("Tiles/rockTile"), new Vector2(1, 1)));
             tiles.Add(new Tile(Game1.getTexture("Tiles/leopardTile"), new Vector2(1, 1)));
             tiles.Add(new Tile(Game1.getTexture("Tiles/starsTile"), new Vector2(1, 1)));
             tiles.Add(new Tile(Game1.getTexture("Tiles/spikes"), new Vector2(1, 1)));
-            tiles.Add(new Designer(new Rectangle(1,1,40,40), Game1.getTexture("Tiles/tiles")));
-            tiles.Add(new QA(new Rectangle(1,1,40,40), Game1.getTexture("Tiles/Block")));
+            tiles.Add(new Designer(r, Game1.getTexture("Tiles/tiles")));
+            tiles.Add(new QA(r, Game1.getTexture("Tiles/Block")));
             buttons = new List<Button>();
             buttons.Add(new Button(Game1.getTexture("Buttons/Button"), "Play Map"));
             buttons.Add(new Button(Game1.getTexture("Buttons/Button"), "Save Map"));

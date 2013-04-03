@@ -39,7 +39,7 @@ namespace InputHandler
 
             if (currentKeyboardState.IsKeyDown(Keys.T) && !previousKeyboardState.IsKeyDown(Keys.T))
             {
-                actions.Add(InputManager.ACTIONS.SELECT);
+                actions.Add(InputManager.ACTIONS.TOGGLE);
             }
 
             if (currentKeyboardState.IsKeyDown(Keys.G))
