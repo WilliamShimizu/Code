@@ -63,6 +63,8 @@ namespace LetsMakeAGame
         eContentManager.eContentManager contentManager;
         Avatar.Player plyr;
 
+        InputHandler.InputManager inputManager;
+
         public Game1()
             : base()
         {
@@ -95,8 +97,8 @@ namespace LetsMakeAGame
             ground = GraphicsDevice.Viewport.TitleSafeArea.Height - 40;
             camera = new Camera(GraphicsDevice.Viewport);
             contentManager = new eContentManager.eContentManager(this.Content);
-            lvl = new LevelManager.Level(contentManager);
-            
+            lvl = new LevelManager.Level(contentManager, "serializeTest.xml");
+            inputManager = new InputHandler.InputManager();
             base.Initialize();
         }
 
@@ -139,25 +141,58 @@ namespace LetsMakeAGame
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-            currentKeyboardState = Keyboard.GetState();
-            currentMouseState = Mouse.GetState();
+            //currentKeyboardState = Keyboard.GetState();
+            //currentMouseState = Mouse.GetState();
             //le.Update(gameTime);
             int speedX = 0;
             int speedY = 0;
 
-            if (currentKeyboardState.IsKeyDown(Keys.D)) speedX = 6;
-            else if (currentKeyboardState.IsKeyDown(Keys.A)) speedX = -6;
-            else speedX = 0;
-
-            if (currentKeyboardState.IsKeyDown(Keys.W)) speedY = -6;
-            else if (currentKeyboardState.IsKeyDown(Keys.S)) speedY = 6;
-            else speedY = 0;
-
-            lvl.Update(gameTime, speedX, speedY);
             plyr = lvl.getActivePlayer();
 
-            previousKeyboardState = currentKeyboardState;
-            previousMouseState = currentMouseState;
+            HashSet<InputHandler.InputManager.ACTIONS> actions = inputManager.GetInput();
+
+            foreach (InputHandler.InputManager.ACTIONS action in actions)
+            {
+                switch (action)
+                {
+                    case InputHandler.InputManager.ACTIONS.LEFT:
+                        speedX = -6;
+                        break;
+                    case InputHandler.InputManager.ACTIONS.RIGHT:
+                        speedX = 6;
+                        break;
+                    case InputHandler.InputManager.ACTIONS.UP:
+                        speedY = -6;
+                        break;
+                    case InputHandler.InputManager.ACTIONS.DOWN:
+                        speedY = 6;
+                        break;
+                    case InputHandler.InputManager.ACTIONS.JUMP:
+                        plyr.Jump(6);
+                        break;
+                    case InputHandler.InputManager.ACTIONS.SPECIAL:
+                        plyr.Special();
+                        break;
+                    case InputHandler.InputManager.ACTIONS.TOGGLE:
+                        lvl.switchPlayers();
+                        break;
+                    case InputHandler.InputManager.ACTIONS.LEFT_CLICK_DOWN:
+                        break;
+                    case InputHandler.InputManager.ACTIONS.RIGHT_CLICK_DOWN:
+                        break;
+                    case InputHandler.InputManager.ACTIONS.LEFT_CLICK:
+                        break;
+                    case InputHandler.InputManager.ACTIONS.RIGHT_CLICK:
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            lvl.Update(speedX, speedY);
+            
+            //previousKeyboardState = currentKeyboardState;
+            //previousMouseState = currentMouseState;
             //DEBUG
 
             

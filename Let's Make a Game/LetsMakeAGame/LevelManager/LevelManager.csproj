@@ -77,6 +77,10 @@
       <Project>{e7040209-b577-406c-b8ea-48b86ffbd43a}</Project>
       <Name>eContentManager</Name>
     </ProjectReference>
+    <ProjectReference Include="..\TileManager\TileManager.csproj">
+      <Project>{86b1491a-e045-45f7-aacb-6b47784e2673}</Project>
+      <Name>TileManager</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

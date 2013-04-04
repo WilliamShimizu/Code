@@ -28,7 +28,7 @@ namespace InputHandler
                 actions.Add(InputManager.ACTIONS.LEFT);
             }
 
-            if (currentGamePadState.IsButtonUp(Buttons.Y) && previousGamePadState.IsButtonUp(Buttons.Y))
+            if (currentGamePadState.IsButtonUp(Buttons.Y) && previousGamePadState.IsButtonDown(Buttons.Y))
             {
                 actions.Add(InputManager.ACTIONS.TOGGLE);
             }

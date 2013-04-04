@@ -15,6 +15,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{10650C93-4F4F-4B49-95AD-67D15D2F434F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TileManager", "TileManager\TileManager.csproj", "{86B1491A-E045-45F7-AACB-6B47784E2673}"
+	ProjectSection(ProjectDependencies) = postProject
+		{10650C93-4F4F-4B49-95AD-67D15D2F434F} = {10650C93-4F4F-4B49-95AD-67D15D2F434F}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Avatar", "Avatar\Avatar.csproj", "{52C2657A-CA17-46CA-B5FC-4AF1FE0B936A}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -26,6 +29,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InputHandler", "InputHandler\InputHandler.csproj", "{A2E7D01A-98FE-46F9-9285-D8DA467DB340}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LevelManager", "LevelManager\LevelManager.csproj", "{421C7548-5AA2-4D23-8D30-CCBD6D81D55E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{86B1491A-E045-45F7-AACB-6B47784E2673} = {86B1491A-E045-45F7-AACB-6B47784E2673}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eContentManager", "eContentManager\eContentManager.csproj", "{E7040209-B577-406C-B8EA-48B86FFBD43A}"
 EndProject
