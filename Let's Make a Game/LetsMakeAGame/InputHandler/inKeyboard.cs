@@ -32,12 +32,12 @@ namespace InputHandler
                 actions.Add(InputManager.ACTIONS.DOWN);
             }
 
-            if (currentKeyboardState.IsKeyUp(Keys.Space) && previousKeyboardState.IsKeyDown(Keys.Space))
+            if (currentKeyboardState.IsKeyDown(Keys.Space) && !previousKeyboardState.IsKeyDown(Keys.Space))
             {
                 actions.Add(InputManager.ACTIONS.JUMP);
             }
 
-            if (currentKeyboardState.IsKeyUp(Keys.T) && previousKeyboardState.IsKeyDown(Keys.T))
+            if (currentKeyboardState.IsKeyDown(Keys.T) && !previousKeyboardState.IsKeyDown(Keys.T))
             {
                 actions.Add(InputManager.ACTIONS.TOGGLE);
             }

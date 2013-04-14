@@ -9,10 +9,40 @@ namespace Avatar.Players
 {
     public class Engineer : Player
     {
+        public List<EngineeringBlock> blocks;
+
         public Engineer(Rectangle boundary, Texture2D texture)
             : base(boundary, texture, ENTITY.Engineer)
         {
+            blocks = new List<EngineeringBlock>();
+        }
 
+        new public void Update(int x, int y)
+        {
+            base.Update(x, y);
+            foreach (EngineeringBlock b in blocks)
+            {
+                b.speedY = 6;
+            }
+        }
+
+        new public void Special()
+        {
+            Rectangle r = new Rectangle(boundary.X + 100, boundary.Y - 60, 40, 40);
+            EngineeringBlock b = new EngineeringBlock(r, texture);
+            blocks.Add(b);
+        }
+
+        public class EngineeringBlock : Common.Collidable
+        {
+
+            public bool collidesWithTile { get; set; }
+
+            public EngineeringBlock(Rectangle boundary, Texture2D texture)
+            : base(boundary, texture, ENTITY.Tile)
+            {
+
+            }
         }
     }
 }

@@ -1,29 +1,36 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Level>
   <Players>
+    <Engineer>
+      <positionX>960</positionX>
+      <positionY>320</positionY>
+      <height>40</height>
+      <width>40</width>
+      <textureName>Tiles/Block</textureName>
+    </Engineer>
     <Artist>
       <positionX>440</positionX>
       <positionY>360</positionY>
-      <height>57</height>
-      <width>57</width>
+      <height>40</height>
+      <width>40</width>
       <textureName>Tiles/engineeringBlock</textureName>
     </Artist>
-    <QA>
-      <positionX>960</positionX>
-      <positionY>320</positionY>
-      <height>57</height>
-      <width>57</width>
-      <textureName>Tiles/Block</textureName>
-    </QA>
     <Designer>
       <positionX>1240</positionX>
       <positionY>320</positionY>
-      <height>57</height>
-      <width>57</width>
+      <height>40</height>
+      <width>40</width>
       <textureName>Tiles/tiles</textureName>
     </Designer>
   </Players>
   <Tiles>
+    <Tile>
+      <positionX>360</positionX>
+      <positionY>560</positionY>
+      <height>40</height>
+      <width>40</width>
+      <textureName>Tiles/rockTile</textureName>
+    </Tile>
     <Tile>
       <positionX>320</positionX>
       <positionY>600</positionY>

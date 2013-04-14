@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Common
 {
-    public class Collidable : Entity
+    public abstract class Collidable : Entity
     {
         public Rectangle top;
         public Rectangle bottom;
@@ -27,18 +27,20 @@ namespace Common
             right = new Rectangle(boundary.X + boundary.Width + RECT_LEN, boundary.Y + RECT_LEN, 1, boundary.Height - RECT_LEN * 2);
         }
 
-        private void BasicCollision(Rectangle other)
+        public bool BasicCollision(Rectangle other)
         {
+            bool collidesWithBottom = false;
             if (bottom.Intersects(other) && (left.Intersects(other) || right.Intersects(other)))
             {
                 boundary.Y = other.Top - boundary.Height;
                 speedY = 0;
-                return;
+                return true;
             }
-            if (bottom.Intersects(other))
+            else if (bottom.Intersects(other))
             {
                 boundary.Y = other.Top - boundary.Height;
                 speedY = 0;
+                collidesWithBottom = true;
             }
             if (top.Intersects(other))
             {
@@ -55,6 +57,30 @@ namespace Common
                 boundary.X = other.Left - boundary.Width;
                 speedX = 0;
             }
+            Update(0, 0);
+            return collidesWithBottom;
+        }
+
+        public void Update(int x, int y)
+        {
+            base.Update(x, y);
+            top.X = boundary.X + RECT_LEN;
+            top.Y = boundary.Y - RECT_LEN;
+            bottom.X = boundary.X + RECT_LEN;
+            bottom.Y = boundary.Y + boundary.Height + RECT_LEN;
+            left.X = boundary.X - RECT_LEN;
+            left.Y = boundary.Y + RECT_LEN;
+            right.X = boundary.X + boundary.Width + RECT_LEN;
+            right.Y = boundary.Y + RECT_LEN;
+        }
+
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            base.Draw(spriteBatch);
+            spriteBatch.Draw(texture, top, null, Color.Red);
+            spriteBatch.Draw(texture, bottom, null, Color.Red);
+            spriteBatch.Draw(texture, left, null, Color.Red);
+            spriteBatch.Draw(texture, right, null, Color.Red);
         }
     }
 }

@@ -6,7 +6,7 @@ namespace InputHandler
 {
     public class InputManager
     {
-        public static Vector2 cursorPosition;
+        public Vector2 cursorPosition { get; set; }
 
         public enum ACTIONS
         {
@@ -35,14 +35,14 @@ namespace InputHandler
             {
                 actions.Add(a);
             }
-            foreach (ACTIONS a in inGamePad.GetInput())
-            {
-                actions.Add(a);
-            }
-            foreach (ACTIONS a in inTouchPanel.GetInput())
-            {
-                actions.Add(a);
-            }
+            //foreach (ACTIONS a in inGamePad.GetInput())
+            //{
+            //    actions.Add(a);
+            //}
+            //foreach (ACTIONS a in inTouchPanel.GetInput())
+            //{
+            //    actions.Add(a);
+            //}
             return actions;
         }
 

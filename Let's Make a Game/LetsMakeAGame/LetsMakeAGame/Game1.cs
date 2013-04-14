@@ -13,6 +13,7 @@ using LevelManager;
 using LetsMakeAGame.Players;
 using Common;
 using eContentManager;
+
 #endregion
 
 namespace LetsMakeAGame
@@ -95,7 +96,7 @@ namespace LetsMakeAGame
         {
             this.IsMouseVisible = true;
             ground = GraphicsDevice.Viewport.TitleSafeArea.Height - 40;
-            camera = new Camera(GraphicsDevice.Viewport);
+            camera = new Camera(viewport);
             contentManager = new eContentManager.eContentManager(this.Content);
             lvl = new LevelManager.Level(contentManager, "serializeTest.xml");
             inputManager = new InputHandler.InputManager();
@@ -115,11 +116,12 @@ namespace LetsMakeAGame
             font = Content.Load<SpriteFont>("myFont");
             
             ///////
-            //cloud = Content.Load<Texture2D>("Cloud");
-            //engineeringBlock = Content.Load<Texture2D>("Tiles/engineeringBlock");
-            //List<string> songNames = new List<string>();
-            //List<string> sfxNames = new List<string>();
+            cloud = Content.Load<Texture2D>("Cloud");
+            engineeringBlock = Content.Load<Texture2D>("Tiles/engineeringBlock");
+            List<string> songNames = new List<string>();
+            List<string> sfxNames = new List<string>();
             //le = new LevelEditor();
+            
 
         }
 
@@ -139,10 +141,9 @@ namespace LetsMakeAGame
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
-            //currentKeyboardState = Keyboard.GetState();
-            //currentMouseState = Mouse.GetState();
+            base.Update(gameTime);
+            if (Keyboard.GetState().IsKeyDown(Keys.Escape)) Exit();
+
             //le.Update(gameTime);
             int speedX = 0;
             int speedY = 0;
@@ -168,7 +169,7 @@ namespace LetsMakeAGame
                         speedY = 6;
                         break;
                     case InputHandler.InputManager.ACTIONS.JUMP:
-                        plyr.Jump(6);
+                        if(plyr.canJump) plyr.Jump();
                         break;
                     case InputHandler.InputManager.ACTIONS.SPECIAL:
                         plyr.Special();
@@ -181,8 +182,16 @@ namespace LetsMakeAGame
                     case InputHandler.InputManager.ACTIONS.RIGHT_CLICK_DOWN:
                         break;
                     case InputHandler.InputManager.ACTIONS.LEFT_CLICK:
+                        if (plyr is Avatar.Players.Engineer)
+                        {
+                            ((Avatar.Players.Engineer)plyr).Special();
+                        }
                         break;
                     case InputHandler.InputManager.ACTIONS.RIGHT_CLICK:
+                        if (plyr is Avatar.Players.QA)
+                        {
+                            ((Avatar.Players.QA)plyr).Special(camera.getWorldCoord(inputManager.cursorPosition), lvl.tiles);
+                        }
                         break;
                     default:
                         break;
@@ -190,19 +199,12 @@ namespace LetsMakeAGame
             }
 
             lvl.Update(speedX, speedY);
-            
-            //previousKeyboardState = currentKeyboardState;
-            //previousMouseState = currentMouseState;
-            //DEBUG
-
-            
 
             tsaX = graphics.GraphicsDevice.Viewport.TitleSafeArea.Width;
             tsaY = graphics.GraphicsDevice.Viewport.TitleSafeArea.Height;
 
             camera.Update(gameTime, plyr.boundary);
             
-            base.Update(gameTime);
         }
 
         /// <summary>
@@ -214,12 +216,12 @@ namespace LetsMakeAGame
             GraphicsDevice.Clear(Color.White);
             //spriteBatch.Begin();
             //le.Draw(spriteBatch);
-
+            base.Draw(gameTime);
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, null, null, null, camera.transform);
             lvl.Draw(spriteBatch);
             spriteBatch.End();
 
-            base.Draw(gameTime);
+            //base.Draw(gameTime);
         }
 
         public static Rectangle getRect(Vector2 position, Texture2D texture)

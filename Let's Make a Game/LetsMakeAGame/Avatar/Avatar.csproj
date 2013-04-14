@@ -79,6 +79,10 @@
       <Project>{10650c93-4f4f-4b49-95ad-67d15d2f434f}</Project>
       <Name>Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\TileManager\TileManager.csproj">
+      <Project>{86b1491a-e045-45f7-aacb-6b47784e2673}</Project>
+      <Name>TileManager</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

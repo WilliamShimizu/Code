@@ -10,11 +10,19 @@ namespace TileManager
 {
     public class Tile : Entity
     {
+        public bool isDestructable { get; set; }
+
         public Tile(Texture2D texture, Vector2 position)
             : base(new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height), texture, ENTITY.Tile)
         {
-            this.texture = texture;
-            this.boundary = new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height);
+
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null || !(obj is Tile)) return false;
+            Tile t = (Tile)obj;
+            return (t.boundary.X == boundary.X && t.boundary.Y == boundary.Y && t.fileName == fileName);
         }
     }
 }

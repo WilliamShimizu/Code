@@ -22,3 +22,5 @@ C:\Users\Will\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\Avatar\bin\W
 C:\Users\Will\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\Avatar\bin\WindowsGL\Debug\Common.pdb
 C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\Avatar\bin\WindowsGL\Debug\Common.dll
 C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\Avatar\bin\WindowsGL\Debug\Common.pdb
+C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\Avatar\bin\WindowsGL\Debug\TileManager.dll
+C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\Avatar\bin\WindowsGL\Debug\TileManager.pdb

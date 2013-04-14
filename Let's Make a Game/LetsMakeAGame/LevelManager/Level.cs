@@ -9,6 +9,7 @@ using eContentManager;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using TileManager;
+using Common;
 
 namespace LevelManager
 {
@@ -18,8 +19,10 @@ namespace LevelManager
         public eContentManager.eContentManager contentManager;
         Texture2D background;
         public List<Player> players;
-        List<Tile> tiles;
+        public List<Tile> tiles { get; set; }
         private int activePlayerNumber;
+
+        List<Engineer.EngineeringBlock> blocks;
 
         public Level(eContentManager.eContentManager cm, string mapPath)
         {
@@ -31,6 +34,11 @@ namespace LevelManager
             loadXML(mapPath);
             player = players[activePlayerNumber];
             player.isActive = true;
+            foreach (Player p in players)
+            {
+                //if (p is Artist) dots = ((Artist)p).dots;
+                if (p is Engineer) blocks = ((Engineer)p).blocks;
+            }
         }
 
         private void loadXML(string mapPath)
@@ -116,7 +124,7 @@ namespace LevelManager
                         player = new QA(boundary, texture);
                         break;
                     default:
-                        player = new Player(boundary, texture, Common.Entity.ENTITY.Player);
+                        player = new QA(boundary, texture);
                         break;
                 }
                 p.Add(player);
@@ -142,12 +150,61 @@ namespace LevelManager
         public void Update(int x, int y)
         {
             player.Update(x, y);
+            foreach (Player p in players)
+            {
+                if (!p.Equals(player)) p.Update(0, 0);
+            }
+            foreach (Engineer.EngineeringBlock block in blocks)
+            {
+                block.Update(0, 6);
+            }
+            bool canJump = false;
+            
+            foreach (Tile t in tiles)
+            {
+                foreach (Player p in players)
+                {
+                    if (p.boundary.Intersects(t.boundary))
+                    {
+                        bool b = p.BasicCollision(t.boundary);
+                        if (!canJump && p.Equals(player))
+                        {
+                            if (b) canJump = true;
+                        }
+                    }
+                }
+                foreach (Engineer.EngineeringBlock block in blocks)
+                {
+                    if (block.boundary.Intersects(t.boundary))
+                    {
+                        block.collidesWithTile = block.BasicCollision(t.boundary);
+                    }
+                }
+            }
+            foreach (Engineer.EngineeringBlock block in blocks)
+            {
+                foreach (Engineer.EngineeringBlock b in blocks)
+                {
+                    if (block.boundary.Intersects(b.boundary)) block.BasicCollision(b.boundary);
+                }
+                foreach (Player p in players)
+                {
+                    if (block.boundary.Intersects(p.boundary))
+                    {
+                        //if (!p.BasicCollision(block.boundary)) 
+                        block.BasicCollision(p.boundary);
+                    }
+                }
+            }
+            player.canJump = canJump;
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
             if(background != null) spriteBatch.Draw(background, new Vector2(0, 0), Color.White);
-            player.Draw(spriteBatch);
+            foreach (Tile t in tiles) t.Draw(spriteBatch);
+            foreach(Player p in players) p.Draw(spriteBatch);
+            foreach (Engineer.EngineeringBlock block in blocks) block.Draw(spriteBatch);
         }
 
         public Player getActivePlayer()
@@ -162,6 +219,11 @@ namespace LevelManager
             if (activePlayerNumber > players.Count - 1) activePlayerNumber = 0;
             player = players[activePlayerNumber];
             player.isActive = true;
+        }
+
+        public bool isWithin(Rectangle obj, Vector2 cursorPosition)
+        {
+            return (cursorPosition.X >= obj.X && cursorPosition.X <= obj.X + obj.Width && cursorPosition.Y >= obj.Y && cursorPosition.Y <= obj.Y + obj.Height);
         }
     }
 }

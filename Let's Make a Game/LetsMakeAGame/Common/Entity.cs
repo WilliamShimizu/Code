@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Common
 {
-    public class Entity : XMLSerializable
+    public abstract class Entity : XMLSerializable
     {
         public Rectangle boundary;
         public Texture2D texture;
@@ -29,15 +29,16 @@ namespace Common
             this.texture = texture;
         }
 
-        public void Update(int speedX, int speedY)
+        public virtual void Update(int speedX, int speedY)
         {
             boundary.X += speedX;
             boundary.Y += speedY;
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public virtual void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, boundary, null, Color.White);
+            spriteBatch.Draw(texture, new Vector2(boundary.X, boundary.Y), Color.White);
+            //spriteBatch.Draw(texture, boundary, null, Color.White);
         }
 
         public enum ENTITY

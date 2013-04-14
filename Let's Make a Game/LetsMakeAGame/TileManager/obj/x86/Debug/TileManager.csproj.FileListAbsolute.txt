@@ -18,3 +18,5 @@ C:\Users\Will\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\TileManager\
 C:\Users\Will\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\TileManager\obj\x86\Debug\TileManager.csprojResolveAssemblyReference.cache
 C:\Users\Will\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\TileManager\obj\x86\Debug\TileManager.dll
 C:\Users\Will\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\TileManager\obj\x86\Debug\TileManager.pdb
+C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\TileManager\bin\WindowsGL\Debug\Common.dll
+C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\TileManager\bin\WindowsGL\Debug\Common.pdb
