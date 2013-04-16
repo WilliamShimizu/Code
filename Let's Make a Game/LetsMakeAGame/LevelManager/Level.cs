@@ -147,19 +147,17 @@ namespace LevelManager
             return i;
         }
 
-        public void Update(int x, int y)
+        public void Update()
         {
-            player.Update(x, y);
             foreach (Player p in players)
             {
-                if (!p.Equals(player)) p.Update(0, 0);
+                p.Update();
             }
             foreach (Engineer.EngineeringBlock block in blocks)
             {
-                block.Update(0, 6);
+                block.Update();
             }
             bool canJump = false;
-            
             foreach (Tile t in tiles)
             {
                 foreach (Player p in players)
@@ -189,13 +187,14 @@ namespace LevelManager
                 }
                 foreach (Player p in players)
                 {
-                    if (block.boundary.Intersects(p.boundary))
+                    if (p.boundary.Intersects(block.boundary))
                     {
                         //if (!p.BasicCollision(block.boundary)) 
                         block.BasicCollision(p.boundary);
                     }
                 }
             }
+            
             player.canJump = canJump;
         }
 

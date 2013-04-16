@@ -8,11 +8,7 @@ namespace Avatar
 {
     public abstract class Avatar : Collidable
     {
-        private const int JUMP_HEIGHT = 80;
-        private const int PLAYER_MOVE_SPEED = 6;
         public bool canJump;
-        private Vector2 jumpPoint;
-        private bool jumped;
 
         public Avatar(Rectangle boundary, Texture2D texture, ENTITY type)
             : base(boundary, texture, type)
@@ -20,31 +16,23 @@ namespace Avatar
             canJump = true;
         }
 
-        new public void Update(int speedX, int speedY)
+        new public void Update()
         {
-            if (jumped)
+            if (!canJump)
             {
-                canJump = false;
-                if (!(jumpPoint.Y == 0 && jumpPoint.X == 0) && boundary.Y >= jumpPoint.Y - JUMP_HEIGHT)
-                {
-                    speedY = -PLAYER_MOVE_SPEED;
-                }
-                else
-                {
-                    speedY = PLAYER_MOVE_SPEED;
-                    jumped = false;
-                }
+                velocity.Y += 0.15f;
+                if (velocity.Y > 0) velocity.Y += 0.05f;
             }
-            else speedY = PLAYER_MOVE_SPEED;
-            base.Update(speedX, speedY);
+            else velocity.Y = 4f;
+            base.Update();
         }
 
         public void Jump()
          {
              if (canJump)
              {
-                 jumpPoint = new Vector2(boundary.X, boundary.Y);
-                 jumped = true;
+                 velocity.Y = -6f;
+                 canJump = false;
              }
         }
 

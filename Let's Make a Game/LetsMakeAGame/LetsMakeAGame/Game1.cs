@@ -145,28 +145,29 @@ namespace LetsMakeAGame
             if (Keyboard.GetState().IsKeyDown(Keys.Escape)) Exit();
 
             //le.Update(gameTime);
-            int speedX = 0;
-            int speedY = 0;
 
             plyr = lvl.getActivePlayer();
-
+            plyr.velocity.X = 0f;
             HashSet<InputHandler.InputManager.ACTIONS> actions = inputManager.GetInput();
 
+            float moveSpeed = 5f;
+            float friction = 1.5f;
+            if (plyr.canJump) moveSpeed -= friction;
             foreach (InputHandler.InputManager.ACTIONS action in actions)
             {
                 switch (action)
                 {
                     case InputHandler.InputManager.ACTIONS.LEFT:
-                        speedX = -6;
+                        plyr.velocity.X = -moveSpeed;
                         break;
                     case InputHandler.InputManager.ACTIONS.RIGHT:
-                        speedX = 6;
+                        plyr.velocity.X = moveSpeed;
                         break;
                     case InputHandler.InputManager.ACTIONS.UP:
-                        speedY = -6;
+                        plyr.velocity.Y = -moveSpeed;
                         break;
                     case InputHandler.InputManager.ACTIONS.DOWN:
-                        speedY = 6;
+                        plyr.velocity.Y = moveSpeed;
                         break;
                     case InputHandler.InputManager.ACTIONS.JUMP:
                         if(plyr.canJump) plyr.Jump();
@@ -198,7 +199,7 @@ namespace LetsMakeAGame
                 }
             }
 
-            lvl.Update(speedX, speedY);
+            lvl.Update();
 
             tsaX = graphics.GraphicsDevice.Viewport.TitleSafeArea.Width;
             tsaY = graphics.GraphicsDevice.Viewport.TitleSafeArea.Height;

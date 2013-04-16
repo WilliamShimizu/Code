@@ -13,8 +13,6 @@ namespace Common
         public Rectangle bottom;
         public Rectangle left;
         public Rectangle right;
-        public int speedX { get; set; }
-        public int speedY { get; set; }
 
         private const int RECT_LEN = 7;
 
@@ -32,38 +30,39 @@ namespace Common
             bool collidesWithBottom = false;
             if (bottom.Intersects(other) && (left.Intersects(other) || right.Intersects(other)))
             {
-                boundary.Y = other.Top - boundary.Height;
-                speedY = 0;
+                position.Y = other.Top - boundary.Height;
+                velocity.Y = 0;
+                Update();
                 return true;
             }
             else if (bottom.Intersects(other))
             {
-                boundary.Y = other.Top - boundary.Height;
-                speedY = 0;
+                position.Y = other.Top - boundary.Height;
+                velocity.Y = 0;
                 collidesWithBottom = true;
             }
-            if (top.Intersects(other))
+            else if (top.Intersects(other))
             {
-                boundary.Y = other.Bottom;
-                speedY = 6;
+                position.Y = other.Bottom;
+                velocity.Y = 4f;
             }
             if (left.Intersects(other))
             {
-                boundary.X = other.Right;
-                speedX = 0;
+                position.X = other.Right;
+                velocity.X = 0;
             }
-            if (right.Intersects(other))
+            else if (right.Intersects(other))
             {
-                boundary.X = other.Left - boundary.Width;
-                speedX = 0;
+                position.X = other.Left - boundary.Width;
+                velocity.X = 0;
             }
-            Update(0, 0);
+            Update();
             return collidesWithBottom;
         }
 
-        public void Update(int x, int y)
+        public void Update()
         {
-            base.Update(x, y);
+            base.Update();
             top.X = boundary.X + RECT_LEN;
             top.Y = boundary.Y - RECT_LEN;
             bottom.X = boundary.X + RECT_LEN;

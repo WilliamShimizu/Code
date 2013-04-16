@@ -100,7 +100,7 @@ namespace LetsMakeAGame
                         replacement.boundary.X = tiles[i].boundary.X;
                         replacement.boundary.Y = tiles[i].boundary.Y;
                     }
-                    tiles[i].Update(speedX, speedY);
+                    tiles[i].Update();
                 }
             }
             //Lots of redundancy here. I'd like to try to combine these.

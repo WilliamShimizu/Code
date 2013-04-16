@@ -17,12 +17,12 @@ namespace Avatar.Players
             blocks = new List<EngineeringBlock>();
         }
 
-        new public void Update(int x, int y)
+        new public void Update()
         {
-            base.Update(x, y);
+            base.Update();
             foreach (EngineeringBlock b in blocks)
             {
-                b.speedY = 6;
+                b.velocity.Y = 6f;
             }
         }
 
