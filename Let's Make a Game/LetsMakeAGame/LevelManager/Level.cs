@@ -183,7 +183,10 @@ namespace LevelManager
             {
                 foreach (Engineer.EngineeringBlock b in blocks)
                 {
-                    if (block.boundary.Intersects(b.boundary)) block.BasicCollision(b.boundary);
+                    if(b.position.X != block.position.X && b.position.Y != block.position.Y)
+                    {
+                        if (block.boundary.Intersects(b.boundary)) block.BasicCollision(b.boundary);
+                    }
                 }
                 foreach (Player p in players)
                 {

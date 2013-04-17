@@ -22,8 +22,9 @@ namespace Avatar
             {
                 velocity.Y += 0.15f;
                 if (velocity.Y > 0) velocity.Y += 0.05f;
+                //if (velocity.Y > 6.5f) velocity.Y = 6.5f;
             }
-            else velocity.Y = 4f;
+            else velocity.Y = 3f;
             base.Update();
         }
 

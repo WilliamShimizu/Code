@@ -23,6 +23,7 @@ namespace Avatar.Players
             foreach (EngineeringBlock b in blocks)
             {
                 b.velocity.Y = 6f;
+                b.Update();
             }
         }
 

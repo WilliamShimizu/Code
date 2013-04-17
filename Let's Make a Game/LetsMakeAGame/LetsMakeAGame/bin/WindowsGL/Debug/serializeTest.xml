@@ -25,8 +25,15 @@
   </Players>
   <Tiles>
     <Tile>
-      <positionX>360</positionX>
+      <positionX>710</positionX>
       <positionY>560</positionY>
+      <height>40</height>
+      <width>40</width>
+      <textureName>Tiles/rockTile</textureName>
+    </Tile>
+    <Tile>
+      <positionX>360</positionX>
+      <positionY>470</positionY>
       <height>40</height>
       <width>40</width>
       <textureName>Tiles/rockTile</textureName>
