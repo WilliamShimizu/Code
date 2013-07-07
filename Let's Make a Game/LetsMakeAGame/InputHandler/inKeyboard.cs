@@ -42,9 +42,9 @@ namespace InputHandler
                 actions.Add(InputManager.ACTIONS.TOGGLE);
             }
 
-            if (currentKeyboardState.IsKeyDown(Keys.G))
+            if (currentKeyboardState.IsKeyDown(Keys.Tab))
             {
-
+                actions.Add(InputManager.ACTIONS.SPECIAL);
             }
 
             previousKeyboardState = currentKeyboardState;

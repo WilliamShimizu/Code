@@ -19,7 +19,7 @@ namespace LetsMakeAGame.Players
         {
             if (cloud != null) cloud = null;
             Vector2 v = new Vector2((int)(boundary.X + (boundary.Width * 2)), (int)(boundary.Y - boundary.Height));
-            cloud = new Cloud(Game1.cloud, v,this);
+            cloud = new Cloud(Game1.cloud, v, this);
             return new Tile(cloud.texture, new Vector2(cloud.boundary.X, cloud.boundary.Y));
         }
 
@@ -45,8 +45,6 @@ namespace LetsMakeAGame.Players
     /// </summary>
     public class Cloud : Tile
     {
-        public Rectangle boundary;
-        public Texture2D texture;
         public int endPointY;
         public const int MAX_HEIGHT = 200;
         public int start;
@@ -73,11 +71,6 @@ namespace LetsMakeAGame.Players
             this.boundary.Y -= 2;
             if (player.boundary.X >= Game1.center.X + 200 || player.boundary.X <= Game1.center.X - 200) boundary.X -= player.speedX;
             if (this.boundary.Y <= endPointY) isActive = false;
-        }
-
-        public void Draw(SpriteBatch spriteBatch)
-        {
-            spriteBatch.Draw(this.texture, this.boundary, null, Color.White);
         }
 
     }

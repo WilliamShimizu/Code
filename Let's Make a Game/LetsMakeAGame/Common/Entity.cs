@@ -56,6 +56,8 @@ namespace Common
             Artist,
             Musician,
             QA,
+            Dot,
+            Cloud,
             Enemy,
             UI,
             Tile,

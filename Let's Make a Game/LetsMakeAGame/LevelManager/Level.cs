@@ -23,11 +23,13 @@ namespace LevelManager
         private int activePlayerNumber;
 
         List<Engineer.EngineeringBlock> blocks;
+        List<Artist.Dot> dots;
 
         public Level(eContentManager.eContentManager cm, string mapPath)
         {
             this.contentManager = cm;
-            player = new Artist(new Microsoft.Xna.Framework.Rectangle(500, 500, 40, 40), cm.getTexture("Tiles/Block"));
+
+            //player = new Artist(new Microsoft.Xna.Framework.Rectangle(500, 500, 40, 40), cm.getTexture("Tiles/Block"));
             background = cm.getTexture("background");
             players = new List<Player>();
             activePlayerNumber = 0;
@@ -36,7 +38,7 @@ namespace LevelManager
             player.isActive = true;
             foreach (Player p in players)
             {
-                //if (p is Artist) dots = ((Artist)p).dots;
+                if (p is Artist) dots = ((Artist)p).dots;
                 if (p is Engineer) blocks = ((Engineer)p).blocks;
             }
         }
@@ -113,9 +115,11 @@ namespace LevelManager
                         break;
                     case "Designer":
                         player = new Designer(boundary, texture);
+                        ((Designer)player).cloudTexture = contentManager.getTexture("Cloud");
                         break;
                     case "Artist":
                         player = new Artist(boundary, texture);
+                        ((Artist)player).dotTexture = contentManager.getTexture("dot");
                         break;
                     case "Musician":
                         player = new Musician(boundary, texture);
@@ -147,11 +151,12 @@ namespace LevelManager
             return i;
         }
 
-        public void Update()
+        public void Update(GameTime gameTime)
         {
             foreach (Player p in players)
             {
-                p.Update();
+                if (p is Designer) ((Designer)p).Update(gameTime);
+                else p.Update();
             }
             foreach (Engineer.EngineeringBlock block in blocks)
             {
@@ -197,7 +202,6 @@ namespace LevelManager
                     }
                 }
             }
-            
             player.canJump = canJump;
         }
 
@@ -205,8 +209,13 @@ namespace LevelManager
         {
             if(background != null) spriteBatch.Draw(background, new Vector2(0, 0), Color.White);
             foreach (Tile t in tiles) t.Draw(spriteBatch);
-            foreach(Player p in players) p.Draw(spriteBatch);
+            foreach (Player p in players)
+            {
+                if (p is Designer) ((Designer)p).Draw(spriteBatch);
+                else p.Draw(spriteBatch);
+            }
             foreach (Engineer.EngineeringBlock block in blocks) block.Draw(spriteBatch);
+            foreach (Artist.Dot dot in dots) dot.Draw(spriteBatch);
         }
 
         public Player getActivePlayer()

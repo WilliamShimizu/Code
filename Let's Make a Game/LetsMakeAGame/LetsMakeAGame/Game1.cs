@@ -173,12 +173,19 @@ namespace LetsMakeAGame
                         if(plyr.canJump) plyr.Jump();
                         break;
                     case InputHandler.InputManager.ACTIONS.SPECIAL:
-                        plyr.Special();
+                        if (plyr is Avatar.Players.Designer)
+                        {
+                            ((Avatar.Players.Designer)plyr).Special();
+                        }
                         break;
                     case InputHandler.InputManager.ACTIONS.TOGGLE:
                         lvl.switchPlayers();
                         break;
                     case InputHandler.InputManager.ACTIONS.LEFT_CLICK_DOWN:
+                        if (plyr is Avatar.Players.Artist)
+                        {
+                            ((Avatar.Players.Artist)plyr).Special(camera.getWorldCoord(inputManager.cursorPosition));
+                        }
                         break;
                     case InputHandler.InputManager.ACTIONS.RIGHT_CLICK_DOWN:
                         break;
@@ -186,6 +193,10 @@ namespace LetsMakeAGame
                         if (plyr is Avatar.Players.Engineer)
                         {
                             ((Avatar.Players.Engineer)plyr).Special();
+                        }
+                        else if (plyr is Avatar.Players.Artist)
+                        {
+                            ((Avatar.Players.Artist)plyr).ReleaseSpecial();
                         }
                         break;
                     case InputHandler.InputManager.ACTIONS.RIGHT_CLICK:
@@ -199,7 +210,7 @@ namespace LetsMakeAGame
                 }
             }
 
-            lvl.Update();
+            lvl.Update(gameTime);
 
             tsaX = graphics.GraphicsDevice.Viewport.TitleSafeArea.Width;
             tsaY = graphics.GraphicsDevice.Viewport.TitleSafeArea.Height;

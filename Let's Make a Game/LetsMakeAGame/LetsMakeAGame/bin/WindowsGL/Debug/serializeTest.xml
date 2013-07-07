@@ -15,13 +15,13 @@
       <width>40</width>
       <textureName>Tiles/engineeringBlock</textureName>
     </Artist>
-    <Designer>
+    <QA>
       <positionX>1240</positionX>
       <positionY>320</positionY>
       <height>40</height>
       <width>40</width>
       <textureName>Tiles/tiles</textureName>
-    </Designer>
+    </QA>
   </Players>
   <Tiles>
     <Tile>
