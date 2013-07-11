@@ -10,14 +10,14 @@ namespace Common
     public class Camera
     {
         public Matrix transform;
-        Viewport view;
+        Viewport viewport;
         Vector2 center;
         int width;
         int height;
 
         public Camera(Viewport view)
         {
-            this.view = view;
+            viewport = view;
             width = view.Width / 2;
             height = view.Height / 2;
         }

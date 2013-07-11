@@ -20,9 +20,9 @@ C:\Users\Will\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LevelManager
 C:\Users\Will\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LevelManager\obj\x86\Debug\LevelManager.pdb
 C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LevelManager\bin\WindowsGL\Debug\Avatar.dll
 C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LevelManager\bin\WindowsGL\Debug\Common.dll
-C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LevelManager\bin\WindowsGL\Debug\eContentManager.dll
 C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LevelManager\bin\WindowsGL\Debug\Avatar.pdb
 C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LevelManager\bin\WindowsGL\Debug\Common.pdb
-C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LevelManager\bin\WindowsGL\Debug\eContentManager.pdb
 C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LevelManager\bin\WindowsGL\Debug\TileManager.dll
 C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LevelManager\bin\WindowsGL\Debug\TileManager.pdb
+C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LevelManager\bin\WindowsGL\Debug\UI.dll
+C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LevelManager\bin\WindowsGL\Debug\UI.pdb

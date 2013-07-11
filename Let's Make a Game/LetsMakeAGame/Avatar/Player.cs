@@ -23,5 +23,10 @@ namespace Avatar
         {
 
         }
+
+        public Player Copy(Vector2 position)
+        {
+            return new Player(new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height), texture, type);
+        }
     }
 }

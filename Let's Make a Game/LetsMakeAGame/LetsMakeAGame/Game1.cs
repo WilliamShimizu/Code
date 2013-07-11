@@ -10,9 +10,7 @@ using Microsoft.Xna.Framework.GamerServices;
 using System.Collections;
 using System.IO;
 using LevelManager;
-using LetsMakeAGame.Players;
 using Common;
-using eContentManager;
 
 #endregion
 
@@ -29,7 +27,6 @@ namespace LetsMakeAGame
         Texture2D playerTexture;
 
         public static SpriteFont font;
-        public static Player player;
         public static Vector2 center;
 
         ////////////////////////////////////////TEST
@@ -39,8 +36,8 @@ namespace LetsMakeAGame
 
         public static GraphicsDevice gd;
 
-        public static Level level;
-        public static LevelEditor le;
+        public Level level;
+        public LevelEditor le;
 
         public static Hashtable textureLookupTable;
 
@@ -60,8 +57,8 @@ namespace LetsMakeAGame
         public static MouseState previousMouseState;
 
         Camera camera;
-        LevelManager.Level lvl;
-        eContentManager.eContentManager contentManager;
+        Level lvl;
+        eContentManager contentManager;
         Avatar.Player plyr;
 
         InputHandler.InputManager inputManager;
@@ -97,7 +94,10 @@ namespace LetsMakeAGame
             this.IsMouseVisible = true;
             ground = GraphicsDevice.Viewport.TitleSafeArea.Height - 40;
             camera = new Camera(viewport);
-            contentManager = new eContentManager.eContentManager(this.Content);
+            contentManager = eContentManager.getInstance(this.Content);
+            Globals.contentManager = eContentManager.getInstance();
+            Globals.viewport = GraphicsDevice.Viewport;
+            Globals.font = contentManager.getSpriteFont("myFont");
             lvl = new LevelManager.Level(contentManager, "serializeTest.xml");
             inputManager = new InputHandler.InputManager();
             base.Initialize();
@@ -113,7 +113,7 @@ namespace LetsMakeAGame
             spriteBatch = new SpriteBatch(GraphicsDevice);
             playerTexture = Content.Load<Texture2D>("Tiles/Block");
             //DEBUG
-            font = Content.Load<SpriteFont>("myFont");
+            font = Globals.font;
             
             ///////
             cloud = Content.Load<Texture2D>("Cloud");

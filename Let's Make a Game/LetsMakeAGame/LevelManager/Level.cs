@@ -5,18 +5,18 @@ using System.Text;
 using System.Xml;
 using Avatar;
 using Avatar.Players;
-using eContentManager;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using TileManager;
 using Common;
+using UI;
 
 namespace LevelManager
 {
     public class Level
     {
         public Player player;
-        public eContentManager.eContentManager contentManager;
+        public eContentManager contentManager;
         Texture2D background;
         public List<Player> players;
         public List<Tile> tiles { get; set; }
@@ -25,9 +25,9 @@ namespace LevelManager
         List<Engineer.EngineeringBlock> blocks;
         List<Artist.Dot> dots;
 
-        public Level(eContentManager.eContentManager cm, string mapPath)
+        public Level(eContentManager cm, string mapPath)
         {
-            this.contentManager = cm;
+            contentManager = cm;
 
             //player = new Artist(new Microsoft.Xna.Framework.Rectangle(500, 500, 40, 40), cm.getTexture("Tiles/Block"));
             background = cm.getTexture("background");

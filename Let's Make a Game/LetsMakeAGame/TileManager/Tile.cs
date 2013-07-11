@@ -24,5 +24,10 @@ namespace TileManager
             Tile t = (Tile)obj;
             return (t.boundary.X == boundary.X && t.boundary.Y == boundary.Y && t.fileName == fileName);
         }
+
+        public Tile Copy(Vector2 position)
+        {
+            return new Tile(texture, position);
+        }
     }
 }

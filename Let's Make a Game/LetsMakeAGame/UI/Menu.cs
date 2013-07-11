@@ -4,45 +4,47 @@ using System.Collections.Generic;
 using System.IO;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using LetsMakeAGame;
-using LetsMakeAGame.Players;
+using Common;
+using TileManager;
 
-namespace LetsMakeAGame.UI
-{
-    class Menu
+namespace UI
+{//ToDo Make a "Common UI" class that shares font, viewport, etc. that other classes will use.
+    public class Menu : Entity
     {
         public Texture2D background { get; set; }
         public Vector2 position;
         public bool isHidden { get; set; }
-        public List<Common.Entity> tiles;
+        public List<Entity> tiles;
         public List<Button> buttons;
 
-        public Menu(Texture2D background)
+        public Menu(Texture2D background) : base (new Rectangle(0, 0, background.Width, background.Height), background, ENTITY.UI)
         {
-            Rectangle r = Game1.getRect(new Vector2(1, 1), Game1.getTexture("Tiles/engineeringBlock"));
-            r = new Rectangle(1, 1, 40, 40);
             this.background = background;
             position = new Vector2();
             isHidden = true;
-            tiles = new List<Common.Entity>();
-            tiles.Add(new Artist(r, Game1.getTexture("Tiles/engineeringBlock")));
-            tiles.Add(new Tile(Game1.getTexture("Tiles/rockTile"), new Vector2(1, 1)));
-            tiles.Add(new Tile(Game1.getTexture("Tiles/leopardTile"), new Vector2(1, 1)));
-            tiles.Add(new Tile(Game1.getTexture("Tiles/starsTile"), new Vector2(1, 1)));
-            tiles.Add(new Tile(Game1.getTexture("Tiles/spikes"), new Vector2(1, 1)));
-            tiles.Add(new Designer(r, Game1.getTexture("Tiles/tiles")));
-            tiles.Add(new QA(r, Game1.getTexture("Tiles/Block")));
+            tiles = new List<Entity>();
             buttons = new List<Button>();
-            buttons.Add(new Button(Game1.getTexture("Buttons/Button"), "Play Map"));
-            buttons.Add(new Button(Game1.getTexture("Buttons/Button"), "Save Map"));
+        }
+
+        public void LoadContent(eContentManager contentManager)
+        {
+            tiles.Add(new Tile(contentManager.getTexture("Tiles/engineeringBlock"), new Vector2(1, 1)));
+            tiles.Add(new Tile(contentManager.getTexture("Tiles/rockTile"), new Vector2(1, 1)));
+            tiles.Add(new Tile(contentManager.getTexture("Tiles/leopardTile"), new Vector2(1, 1)));
+            tiles.Add(new Tile(contentManager.getTexture("Tiles/starsTile"), new Vector2(1, 1)));
+            tiles.Add(new Tile(contentManager.getTexture("Tiles/spikes"), new Vector2(1, 1)));
+            tiles.Add(new Tile(contentManager.getTexture("Tiles/tiles"), new Vector2(1, 1)));
+            tiles.Add(new Tile(contentManager.getTexture("Tiles/Block"), new Vector2(1, 1)));
+            buttons.Add(new Button(contentManager.getTexture("Buttons/Button"), "Play Map"));
+            buttons.Add(new Button(contentManager.getTexture("Buttons/Button"), "Save Map"));
         }
 
         public void Update(GameTime gameTime, int speedX, int speedY)
         {
-            if (isHidden) position.X = Game1.viewport.Width - 20;
-            else
-            {
-                position.X = Game1.viewport.Width - background.Width;
+            //if (isHidden) position.X = viewport.Width - 20;
+            //else
+            //{
+                //ToDo share out access to Viewport position.X = Game1.viewport.Width - background.Width;
                 position.Y = 0;
                 int x = (int)this.position.X + 10;
                 int y = (int)this.position.Y + 10;
@@ -59,7 +61,7 @@ namespace LetsMakeAGame.UI
                 {
                     b.Update(gameTime, 0, 0);
                 }
-            }
+            //}
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -67,7 +69,7 @@ namespace LetsMakeAGame.UI
             spriteBatch.Draw(background, position, Color.White);
             if (!isHidden)
             {
-                foreach (Common.Entity e in tiles)
+                foreach (Entity e in tiles)
                 {
                     e.Draw(spriteBatch);
                 }
@@ -79,33 +81,33 @@ namespace LetsMakeAGame.UI
         }
     }
 
-    public class Button
+    public class Button : Entity
     {
         public Texture2D texture;
         public Rectangle boundary;
         public string text;
         private Vector2 textCenter;
         private Vector2 position;
+        SpriteFont font;
 
         public Button(Texture2D texture, string text)
+            : base(new Rectangle(0, 0, texture.Width, texture.Height), texture, ENTITY.UI)
         {
             this.texture = texture;
             this.text = text;
             this.position = new Vector2();
-            textCenter = Game1.font.MeasureString(text) / 2;
-            boundary = Game1.getRect(texture);
-            boundary.X = 0;
-            boundary.Y = 0;
+            textCenter = font.MeasureString(text) / 2;
+            boundary = new Rectangle(0, 0, texture.Width, texture.Height);
         }
 
-        public Button(Vector2 position, Texture2D texture, string text)
-        {
-            this.texture = texture;
-            this.text = text;
-            this.position = new Vector2();
-            textCenter = Game1.font.MeasureString(text) / 2;
-            boundary = Game1.getRect(position, texture);
-        }
+        //public Button(Vector2 position, Texture2D texture, string text)
+        //{
+        //    this.texture = texture;
+        //    this.text = text;
+        //    this.position = new Vector2();
+        //    textCenter = Game1.font.MeasureString(text) / 2;
+        //    boundary = Game1.getRect(position, texture);
+        //}
 
         public void Update(GameTime gameTime, int speedX, int speedY)
         {
@@ -113,13 +115,13 @@ namespace LetsMakeAGame.UI
             boundary.Y -= speedY;
             position.X = boundary.X;
             position.Y = boundary.Y;
-            textCenter = position + (Game1.font.MeasureString(text) / 2);
+            textCenter = position + (font.MeasureString(text) / 2);
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(texture, boundary, null, Color.White);
-            spriteBatch.DrawString(Game1.font, text, textCenter, Color.White);
+            spriteBatch.DrawString(font, text, textCenter, Color.White);
         }
     }
 }

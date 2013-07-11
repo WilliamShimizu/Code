@@ -4,11 +4,11 @@ using System.Collections.Generic;
 using System.IO;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using LetsMakeAGame;
+using Common;
 
-namespace LetsMakeAGame.UI
+namespace UI
 {
-    class Prompt
+    class Prompt : Entity
     {
         private string header;
         private string message;
@@ -16,13 +16,13 @@ namespace LetsMakeAGame.UI
         private Vector2 position;
         private Texture2D texture;
 
-        public Prompt(string header, string message, Texture2D texture)
+        public Prompt(string header, string message, Texture2D texture) : base(new Rectangle(0, 0, texture.Width, texture.Height), "", ENTITY.UI)
         {
             this.header = header;
             this.message = message;
             this.texture = texture;
-            int x = (Game1.viewport.Width / 2) - (texture.Width / 2);
-            int y = (Game1.viewport.Height / 2) - (texture.Height / 2);
+            int x = (Globals.viewport.Width / 2) - (texture.Width / 2);
+            int y = (Globals.viewport.Height / 2) - (texture.Height / 2);
             this.position = new Vector2(x, y);
         }
 
@@ -34,9 +34,9 @@ namespace LetsMakeAGame.UI
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(texture, position, Color.White);
-            spriteBatch.DrawString(Game1.font, header, new Vector2(position.X + 10, position.Y + 5), Color.White);
+            spriteBatch.DrawString(Globals.font, header, new Vector2(position.X + 10, position.Y + 5), Color.White);
             Vector2 v = new Vector2(position.X + (texture.Width / 2), position.Y + (texture.Height / 2));
-            spriteBatch.DrawString(Game1.font, message, v, Color.White);
+            spriteBatch.DrawString(Globals.font, message, v, Color.White);
         }
     }
 }
