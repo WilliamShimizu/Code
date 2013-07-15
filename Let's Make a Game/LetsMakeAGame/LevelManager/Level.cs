@@ -25,12 +25,12 @@ namespace LevelManager
         List<Engineer.EngineeringBlock> blocks;
         List<Artist.Dot> dots;
 
-        public Level(eContentManager cm, string mapPath)
+        public Level(string mapPath)
         {
-            contentManager = cm;
+            contentManager = Globals.contentManager;
 
             //player = new Artist(new Microsoft.Xna.Framework.Rectangle(500, 500, 40, 40), cm.getTexture("Tiles/Block"));
-            background = cm.getTexture("background");
+            background = contentManager.getTexture("background");
             players = new List<Player>();
             activePlayerNumber = 0;
             loadXML(mapPath);

@@ -132,3 +132,4 @@ C:\Users\Will\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LetsMakeAGam
 C:\Users\Will\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LetsMakeAGame\bin\WindowsGL\Debug\LevelManager.pdb
 C:\Users\Will\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LetsMakeAGame\bin\WindowsGL\Debug\TileManager.pdb
 C:\Users\Will\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LetsMakeAGame\bin\WindowsGL\Debug\UI.pdb
+C:\Users\Will Conrardy\Documents\GitHub\Code\Let's Make a Game\LetsMakeAGame\LetsMakeAGame\bin\WindowsGL\Debug\Content\Maps\serializeTest.xml

@@ -93,11 +93,12 @@ namespace UI
         public Button(Texture2D texture, string text)
             : base(new Rectangle(0, 0, texture.Width, texture.Height), texture, ENTITY.UI)
         {
+            font = Globals.font;
             this.texture = texture;
             this.text = text;
             this.position = new Vector2();
             textCenter = font.MeasureString(text) / 2;
-            boundary = new Rectangle(0, 0, texture.Width, texture.Height);
+            boundary = new Rectangle(0, 0, (int)font.MeasureString(text).X + 20, (int)font.MeasureString(text).Y + 20);
         }
 
         //public Button(Vector2 position, Texture2D texture, string text)
@@ -115,13 +116,13 @@ namespace UI
             boundary.Y -= speedY;
             position.X = boundary.X;
             position.Y = boundary.Y;
-            textCenter = position + (font.MeasureString(text) / 2);
+            textCenter = new Vector2(position.X + 10, position.Y + 10);// +(font.MeasureString(text) / 2);
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(texture, boundary, null, Color.White);
-            spriteBatch.DrawString(font, text, textCenter, Color.White);
+            spriteBatch.DrawString(font, text, textCenter, Color.Red);
         }
     }
 }

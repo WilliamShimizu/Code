@@ -11,6 +11,7 @@ using System.Collections;
 using System.IO;
 using LevelManager;
 using Common;
+using UI;
 
 #endregion
 
@@ -34,9 +35,8 @@ namespace LetsMakeAGame
         public static Texture2D engineeringBlock;
         ////////////////////////////////////////TEST
 
-        public static GraphicsDevice gd;
+        public static GraphicsDevice graphicsDevice;
 
-        public Level level;
         public LevelEditor le;
 
         public static Hashtable textureLookupTable;
@@ -57,9 +57,13 @@ namespace LetsMakeAGame
         public static MouseState previousMouseState;
 
         Camera camera;
-        Level lvl;
+        Level level;
         eContentManager contentManager;
-        Avatar.Player plyr;
+        Avatar.Player player;
+
+        Rectangle centerRectangle;
+
+        MainMenu mainMenu;
 
         InputHandler.InputManager inputManager;
 
@@ -67,7 +71,7 @@ namespace LetsMakeAGame
             : base()
         {
             graphics = new GraphicsDeviceManager(this);
-            gd = this.GraphicsDevice;
+            graphicsDevice = this.GraphicsDevice;
             Content.RootDirectory = "Content";
             Window.AllowUserResizing = false;
             viewport = this.GraphicsDevice.Viewport;
@@ -79,6 +83,7 @@ namespace LetsMakeAGame
             viewport.Height = graphics.PreferredBackBufferHeight;
             scale = (float)((double)(width * height) / (double)(1600 * 900));
             center = new Vector2(graphics.PreferredBackBufferWidth / 2, graphics.PreferredBackBufferHeight / 2);
+            centerRectangle = new Rectangle((int)center.X - 20, (int)center.Y - 20, 40, 40);
             contentMgr = this.Content;
             graphics.ToggleFullScreen();
         }
@@ -96,10 +101,11 @@ namespace LetsMakeAGame
             camera = new Camera(viewport);
             contentManager = eContentManager.getInstance(this.Content);
             Globals.contentManager = eContentManager.getInstance();
-            Globals.viewport = GraphicsDevice.Viewport;
+            Globals.viewport = viewport;
             Globals.font = contentManager.getSpriteFont("myFont");
-            lvl = new LevelManager.Level(contentManager, "serializeTest.xml");
+            //level = new Level(Content.RootDirectory + "/Maps/serializeTest.xml");
             inputManager = new InputHandler.InputManager();
+            mainMenu = new MainMenu(LevelManager.LevelManager.LEVEL_DIR);
             base.Initialize();
         }
 
@@ -144,78 +150,82 @@ namespace LetsMakeAGame
             base.Update(gameTime);
             if (Keyboard.GetState().IsKeyDown(Keys.Escape)) Exit();
 
+            Vector2 worldCoordCursorPosition = camera.getWorldCoord(inputManager.cursorPosition);
+
             //le.Update(gameTime);
 
-            plyr = lvl.getActivePlayer();
-            plyr.velocity.X = 0f;
-            HashSet<InputHandler.InputManager.ACTIONS> actions = inputManager.GetInput();
+            //player = level.getActivePlayer();
+            //player.velocity.X = 0f;
+            //HashSet<InputHandler.InputManager.ACTIONS> actions = inputManager.GetInput();
 
-            float moveSpeed = 5f;
-            float friction = 1.5f;
-            if (plyr.canJump) moveSpeed -= friction;
-            foreach (InputHandler.InputManager.ACTIONS action in actions)
-            {
-                switch (action)
-                {
-                    case InputHandler.InputManager.ACTIONS.LEFT:
-                        plyr.velocity.X = -moveSpeed;
-                        break;
-                    case InputHandler.InputManager.ACTIONS.RIGHT:
-                        plyr.velocity.X = moveSpeed;
-                        break;
-                    case InputHandler.InputManager.ACTIONS.UP:
-                        plyr.velocity.Y = -moveSpeed;
-                        break;
-                    case InputHandler.InputManager.ACTIONS.DOWN:
-                        plyr.velocity.Y = moveSpeed;
-                        break;
-                    case InputHandler.InputManager.ACTIONS.JUMP:
-                        if(plyr.canJump) plyr.Jump();
-                        break;
-                    case InputHandler.InputManager.ACTIONS.SPECIAL:
-                        if (plyr is Avatar.Players.Designer)
-                        {
-                            ((Avatar.Players.Designer)plyr).Special();
-                        }
-                        break;
-                    case InputHandler.InputManager.ACTIONS.TOGGLE:
-                        lvl.switchPlayers();
-                        break;
-                    case InputHandler.InputManager.ACTIONS.LEFT_CLICK_DOWN:
-                        if (plyr is Avatar.Players.Artist)
-                        {
-                            ((Avatar.Players.Artist)plyr).Special(camera.getWorldCoord(inputManager.cursorPosition));
-                        }
-                        break;
-                    case InputHandler.InputManager.ACTIONS.RIGHT_CLICK_DOWN:
-                        break;
-                    case InputHandler.InputManager.ACTIONS.LEFT_CLICK:
-                        if (plyr is Avatar.Players.Engineer)
-                        {
-                            ((Avatar.Players.Engineer)plyr).Special();
-                        }
-                        else if (plyr is Avatar.Players.Artist)
-                        {
-                            ((Avatar.Players.Artist)plyr).ReleaseSpecial();
-                        }
-                        break;
-                    case InputHandler.InputManager.ACTIONS.RIGHT_CLICK:
-                        if (plyr is Avatar.Players.QA)
-                        {
-                            ((Avatar.Players.QA)plyr).Special(camera.getWorldCoord(inputManager.cursorPosition), lvl.tiles);
-                        }
-                        break;
-                    default:
-                        break;
-                }
-            }
+            //float moveSpeed = 5f;
+            //float friction = 1.5f;
+            //if (player.canJump) moveSpeed -= friction;
+            //foreach (InputHandler.InputManager.ACTIONS action in actions)
+            //{
+            //    switch (action)
+            //    {
+            //        case InputHandler.InputManager.ACTIONS.LEFT:
+            //            player.velocity.X = -moveSpeed;
+            //            break;
+            //        case InputHandler.InputManager.ACTIONS.RIGHT:
+            //            player.velocity.X = moveSpeed;
+            //            break;
+            //        case InputHandler.InputManager.ACTIONS.UP:
+            //            player.velocity.Y = -moveSpeed;
+            //            break;
+            //        case InputHandler.InputManager.ACTIONS.DOWN:
+            //            player.velocity.Y = moveSpeed;
+            //            break;
+            //        case InputHandler.InputManager.ACTIONS.JUMP:
+            //            if(player.canJump) player.Jump();
+            //            break;
+            //        case InputHandler.InputManager.ACTIONS.SPECIAL:
+            //            if (player is Avatar.Players.Designer)
+            //            {
+            //                ((Avatar.Players.Designer)player).Special();
+            //            }
+            //            break;
+            //        case InputHandler.InputManager.ACTIONS.TOGGLE:
+            //            level.switchPlayers();
+            //            break;
+            //        case InputHandler.InputManager.ACTIONS.LEFT_CLICK_DOWN:
+            //            if (player is Avatar.Players.Artist)
+            //            {
+            //                ((Avatar.Players.Artist)player).Special(camera.getWorldCoord(inputManager.cursorPosition));
+            //            }
+            //            break;
+            //        case InputHandler.InputManager.ACTIONS.RIGHT_CLICK_DOWN:
+            //            break;
+            //        case InputHandler.InputManager.ACTIONS.LEFT_CLICK:
+            //            if (player is Avatar.Players.Engineer)
+            //            {
+            //                ((Avatar.Players.Engineer)player).Special();
+            //            }
+            //            else if (player is Avatar.Players.Artist)
+            //            {
+            //                ((Avatar.Players.Artist)player).ReleaseSpecial();
+            //            }
+            //            break;
+            //        case InputHandler.InputManager.ACTIONS.RIGHT_CLICK:
+            //            if (player is Avatar.Players.QA)
+            //            {
+            //                ((Avatar.Players.QA)player).Special(camera.getWorldCoord(inputManager.cursorPosition), level.tiles);
+            //            }
+            //            break;
+            //        default:
+            //            break;
+            //    }
+            //}
 
-            lvl.Update(gameTime);
+            //level.Update(gameTime);
+            //le.Update(gameTime);
+            mainMenu.Update(gameTime);
 
             tsaX = graphics.GraphicsDevice.Viewport.TitleSafeArea.Width;
             tsaY = graphics.GraphicsDevice.Viewport.TitleSafeArea.Height;
 
-            camera.Update(gameTime, plyr.boundary);
+            camera.Update(gameTime, centerRectangle);//player.boundary);
             
         }
 
@@ -227,10 +237,11 @@ namespace LetsMakeAGame
         {
             GraphicsDevice.Clear(Color.White);
             //spriteBatch.Begin();
-            //le.Draw(spriteBatch);
             base.Draw(gameTime);
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, null, null, null, camera.transform);
-            lvl.Draw(spriteBatch);
+            //level.Draw(spriteBatch);
+            //le.Draw(spriteBatch);
+            mainMenu.Draw(spriteBatch);
             spriteBatch.End();
 
             //base.Draw(gameTime);

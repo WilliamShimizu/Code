@@ -15,12 +15,15 @@ namespace Common
         private static ContentManager contentManager;
         public static Hashtable textureTable { get; set; }
 
+        public static string contentDirectory { get; set; }
+
         private static eContentManager instance;
 
         private eContentManager(ContentManager contentMgr)
         {
             contentManager = contentMgr;
             textureTable = new Hashtable();
+            contentDirectory = contentMgr.RootDirectory;
         }
 
         public static eContentManager getInstance(ContentManager contentMgr)

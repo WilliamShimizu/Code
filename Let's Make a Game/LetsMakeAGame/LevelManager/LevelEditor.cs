@@ -332,13 +332,13 @@ namespace LevelManager
                     switch (menu.buttons[i].text)
                     {
                         case "Play Map":
-                            foreach (Common.Entity e in tiles)
+                            foreach (Entity e in tiles)
                             {
                                 tempTiles.Add(e);
                             }
                             Save(true);
                             tiles.Clear();
-                            testLevel = new Level(Globals.contentManager, "serializeTest.xml");
+                            testLevel = new Level("serializeTest.xml");
                             menu.buttons[i].text = "Edit Map";
                             break;
                         case "Save Map":
