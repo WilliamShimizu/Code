@@ -218,10 +218,18 @@ namespace LetsMakeAGame
             //    }
             //}
 
-            //level.Update(gameTime);
-            //le.Update(gameTime);
-            mainMenu.Update(gameTime);
-
+            if (mainMenu != null)
+            {
+                mainMenu.Update(gameTime);
+            }
+            if (level != null)
+            {
+                level.Update(gameTime);
+            }
+            if (le != null)
+            {
+                le.Update(gameTime);
+            }
             tsaX = graphics.GraphicsDevice.Viewport.TitleSafeArea.Width;
             tsaY = graphics.GraphicsDevice.Viewport.TitleSafeArea.Height;
 
@@ -239,9 +247,18 @@ namespace LetsMakeAGame
             //spriteBatch.Begin();
             base.Draw(gameTime);
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, null, null, null, camera.transform);
-            //level.Draw(spriteBatch);
-            //le.Draw(spriteBatch);
-            mainMenu.Draw(spriteBatch);
+            if (mainMenu != null)
+            {
+                mainMenu.Draw(spriteBatch);
+            }
+            if (level != null)
+            {
+                level.Draw(spriteBatch);
+            }
+            if (le != null)
+            {
+                le.Draw(spriteBatch);
+            }
             spriteBatch.End();
 
             //base.Draw(gameTime);
